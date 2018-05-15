@@ -5,9 +5,9 @@
             "400": "Bad request.",
             "403": "No tiene permisos para acceder a la página.",
             "405": "The HTTP verb you used is not supported for this URL.",
-            "500": "Internal server error."
+            "500": "Error interno del servidor, por favor contacte con el administrador."
         },
-        "concurrencyFailure": "Another user modified this data at the same time as you. Your changes were rejected.",
-        "validation": "Validation error on the server."
+        "concurrencyFailure": "Otro usuario modificó esta información al mismo tiempo, tus cambios seran rechazados.",
+        "validation": "Error de validación en el servidor."
     }
 }
