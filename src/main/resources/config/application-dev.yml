@@ -27,14 +27,14 @@ spring:
         restart:
             enabled: true
         livereload:
-            enabled: false # we use gulp + BrowserSync for livereload
+            enabled: true # we use gulp + BrowserSync for livereload
     jackson:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:mysql://localhost:3306/MedusaTattoo?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
-        password:
+        password: Yuliamz97
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -51,10 +51,16 @@ spring:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+        host: smtp.gmail.com
+        port: 587
+        username: medusatattoobot@gmail.com
+        password: medusa2018
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            ssl.trust: smtp.gmail.com
     messages:
         cache-seconds: 1
     thymeleaf:
@@ -108,7 +114,7 @@ jhipster:
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: MedusaTattoo@localhost
+        from: medusatattoobot@gmail.com
         base-url: http://127.0.0.1:8080
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true

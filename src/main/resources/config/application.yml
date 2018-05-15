@@ -23,7 +23,7 @@ management:
             mode: full
     health:
         mail:
-            enabled: false # When using the MailService, configure an SMTP server and set this to true
+            enabled: true # When using the MailService, configure an SMTP server and set this to true
 spring:
     application:
         name: MedusaTattoo
@@ -81,16 +81,16 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: MedusaTattoo@localhost
+        from: medusatattoobot@gmail.com
     swagger:
         default-include-pattern: /api/.*
-        title: MedusaTattoo API
-        description: MedusaTattoo API documentation
+        title: API de MedusaTatto
+        description: Documentación de la API de MedusaTattoo
         version: 0.0.1
         terms-of-service-url:
         contact-name:
         contact-url:
-        contact-email:
+        contact-email: medusatattoobot@gmail.com
         license:
         license-url:
     ribbon:
