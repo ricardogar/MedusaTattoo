@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.time.Instant;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -55,6 +56,7 @@ public class PagoResource {
         if (pago.getId() != null) {
             throw new BadRequestAlertException("A new pago cannot already have an ID", ENTITY_NAME, "idexists");
         }
+		pago.setFecha(Instant.now());
         Pago result = pagoRepository.save(pago);
         return ResponseEntity.created(new URI("/api/pagos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -77,6 +79,7 @@ public class PagoResource {
         if (pago.getId() == null) {
             return createPago(pago);
         }
+		pago.setFecha(Instant.now());
         Pago result = pagoRepository.save(pago);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, pago.getId().toString()))

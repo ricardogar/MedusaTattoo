@@ -15,7 +15,10 @@
         vm.save = save;
         vm.trabajos = Trabajo.query();
         vm.inscripcions = Inscripcion.query();
-
+		if(vm.cliente.tipodocumento==null){
+			vm.cliente.tipodocumento="CEDULA";
+		}
+		
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

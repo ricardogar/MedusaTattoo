@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('TrabajoDialogController', TrabajoDialogController);
 
-    TrabajoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Trabajo', 'Pago', 'Cita', 'Foto', 'Tatuador', 'Cliente', 'Sede'];
+    TrabajoDialogController.$inject = ['$timeout', '$scope', '$log', '$stateParams', '$uibModalInstance', 'DataUtils','Principal', 'entity', 'Trabajo', 'Pago', 'Cita', 'Foto', 'Tatuador', 'Cliente', 'Sede'];
 
-    function TrabajoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Trabajo, Pago, Cita, Foto, Tatuador, Cliente, Sede) {
+    function TrabajoDialogController ($timeout, $scope, $log, $stateParams, $uibModalInstance, DataUtils, Principal, entity, Trabajo, Pago, Cita, Foto, Tatuador, Cliente, Sede) {
         var vm = this;
 
         vm.trabajo = entity;
@@ -21,7 +21,34 @@
         vm.tatuadors = Tatuador.query();
         vm.clientes = Cliente.query();
         vm.sedes = Sede.query();
+		vm.account = null;
+		getAccount();
+		if(vm.trabajo.estado==null){
+			vm.trabajo.estado="EN_PROGRESO";
+		}
+		if(vm.trabajo.tipo==null){
+			vm.trabajo.tipo="NORMAL";
+		}
 
+		function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+				if(vm.trabajo.sede==null){
+					vm.trabajo.sede=vm.account.sede;
+				}
+				
+				console.log("=================Trabajo Dialog====================");
+				console.log(vm.account);
+            });
+        }
+		
+		if(vm.trabajo.sede==null){
+			getAccount();
+			if(vm.account!==null){
+				vm.trabajo.sede=vm.account.sede;
+			}
+		}
+		
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

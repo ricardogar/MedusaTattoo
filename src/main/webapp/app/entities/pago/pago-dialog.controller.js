@@ -16,6 +16,7 @@
         vm.openCalendar = openCalendar;
         vm.save = save;
         vm.trabajos = Trabajo.query();
+		vm.pago.fecha=Date.now();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -27,6 +28,7 @@
 
         function save () {
             vm.isSaving = true;
+			vm.pago.fecha=Date.now();
             if (vm.pago.id !== null) {
                 Pago.update(vm.pago, onSaveSuccess, onSaveError);
             } else {
