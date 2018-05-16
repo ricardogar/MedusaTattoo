@@ -1,0 +1,92 @@
+entity Tatuador {
+	tipo_documento Tipo_documento required,
+	documento String required minlength(8) maxlength(10) pattern(/^[1-9][0-9]*$/),
+	nombre String required,
+	apellido String required,
+    telefono String  required minlength(10) maxlength(10) pattern(/^[0-9]*$/),
+    genero Genero required,
+    apodo String required,
+    foto ImageBlob
+}
+entity Cliente {
+	tipo_documento Tipo_documento required,
+	documento String required minlength(8) maxlength(10) pattern(/^[1-9][0-9]*$/),
+	nombre String required,
+	apellido String required,
+    telefono String required minlength(10) maxlength(10) pattern(/^[0-9]*$/),
+    genero Genero required,
+    direccion String
+}
+entity Sede {
+	nombre String required,
+	direccion String required,
+    telefono String required minlength(10) maxlength(10) pattern(/^[0-9]*$/)
+}
+
+entity Trabajo {
+    costoTotal String required minlength(5) pattern(/^[1-9][0-9]*$/),
+    totalPagado String pattern(/^[1-9][0-9]*$/),
+    estado Estado_trabajo required,
+    tipo Tipo_trabajo required,
+    foto ImageBlob
+}
+
+entity Cita {
+	fechaYHora Instant required,
+    duracion Integer required min(1) max(6)
+}
+entity Foto {
+	descripcion TextBlob,
+    imagen ImageBlob required
+}
+
+entity Pago {
+	fecha Instant required,
+    valor Integer required min(1000) max(10000000)
+}
+entity PalabraClave {
+	palabra String required
+}
+entity Rayaton {
+	fecha LocalDate required,
+    cupos Integer required max(100000),
+    valorCupo Integer required min(20000) max(10000000),
+    comentario TextBlob
+}
+entity Inscripcion {
+	estado Estado_inscripcion required
+}
+
+
+enum Estado_trabajo {
+    EN_PROGRESO, FINALIZADO, CANCELADO
+}
+enum Estado_inscripcion {
+    PRE_INSCRITO, INSCRITO
+}
+enum Tipo_trabajo {
+    NORMAL, RAYATON
+}
+
+enum Tipo_documento {
+    CEDULA, CEDULA_EXTRANJERIA, TARJETA_IDENTIDAD
+}
+enum Genero {
+    MASCULINO, FEMENINO
+}
+
+relationship ManyToMany{
+Foto{PalabraClave(palabra)} to PalabraClave{foto}
+Rayaton{Tatuador(apodo)} to Tatuador{rayatones}
+}
+relationship OneToMany {
+  Tatuador{trabajo} to Trabajo{Tatuador(apodo) required},
+  Cliente{trabajo} to Trabajo{Cliente(documento) required},
+  Sede{trabajo} to Trabajo{Sede(nombre) required},
+  Trabajo{pago} to Pago{Trabajo required},
+  Trabajo{cita} to Cita{Trabajo required},
+  Trabajo{foto} to Foto{Trabajo},
+  Rayaton{inscripcion} to Inscripcion{Rayaton(fecha)}
+  Cliente{inscripcion} to Inscripcion{Cliente(documento) required}
+}
+paginate * with infinite-scroll

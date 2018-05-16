@@ -3,6 +3,7 @@ package com.medusa.service.dto;
 import com.medusa.config.Constants;
 
 import com.medusa.domain.Authority;
+import com.medusa.domain.Sede;
 import com.medusa.domain.User;
 
 import org.hibernate.validator.constraints.Email;
@@ -35,6 +36,8 @@ public class UserDTO {
     @Size(min = 5, max = 100)
     private String email;
 
+    private Sede sede;
+
     @Size(max = 256)
     private String imageUrl;
 
@@ -63,6 +66,7 @@ public class UserDTO {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
+        this.sede=user.getSede();
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
@@ -179,6 +183,10 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
+    public Sede getSede() { return sede; }
+
+    public void setSede(Sede sede) { this.sede = sede; }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -186,6 +194,7 @@ public class UserDTO {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", sede='" + sede.getNombre() + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +

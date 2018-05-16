@@ -15,6 +15,7 @@
                 <th jh-sort-by="id"><span data-translate="global.field.id">ID</span><span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="login"><span data-translate="userManagement.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="email"><span data-translate="userManagement.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="sede.nombre"><span data-translate="userManagement.sede">Sede</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th></th>
                 <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>                <th><span data-translate="userManagement.profiles">Profiles</span></th>                <th jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="lastModifiedBy"><span data-translate="userManagement.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -27,6 +28,9 @@
                 <td><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
                 <td>{{user.login}}</td>
                 <td>{{user.email}}</td>
+                <td>
+                    <a ui-sref="sede-detail({id:user.sede.id})">{{user.sede.nombre}}</a>
+                </td>
                 <td>
                     <button class="btn btn-danger btn-xs" ng-click="vm.setActive(user, true)" ng-show="!user.activated"
                             data-translate="userManagement.deactivated">Deactivated</button>

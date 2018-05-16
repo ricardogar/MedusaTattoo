@@ -1,6 +1,7 @@
 package com.medusa.service;
 
 import com.medusa.domain.Authority;
+import com.medusa.domain.Sede;
 import com.medusa.domain.User;
 import com.medusa.repository.AuthorityRepository;
 import com.medusa.config.Constants;
@@ -111,6 +112,7 @@ public class UserService {
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
+        user.setSede(userDTO.getSede());
         user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
             user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
@@ -156,6 +158,30 @@ public class UserService {
     }
 
     /**
+     * Update basic information (first name, last name, email, language) for the current user.
+     *
+     * @param firstName first name of user
+     * @param lastName last name of user
+     * @param email email id of user
+     * @param sede sede of user
+     * @param langKey language key
+     * @param imageUrl image URL of user
+     */
+    public void updateUser(String firstName, String lastName, String email, Sede sede, String langKey, String imageUrl) {
+        SecurityUtils.getCurrentUserLogin()
+            .flatMap(userRepository::findOneByLogin)
+            .ifPresent(user -> {
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setEmail(email);
+                user.setSede(sede);
+                user.setLangKey(langKey);
+                user.setImageUrl(imageUrl);
+                log.debug("Changed Information for User: {}", user);
+            });
+    }
+
+    /**
      * Update all information for a specific user, and return the modified user.
      *
      * @param userDTO user to update
@@ -169,6 +195,7 @@ public class UserService {
                 user.setFirstName(userDTO.getFirstName());
                 user.setLastName(userDTO.getLastName());
                 user.setEmail(userDTO.getEmail());
+                user.setSede(userDTO.getSede());
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());

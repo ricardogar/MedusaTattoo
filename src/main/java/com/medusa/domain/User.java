@@ -57,6 +57,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 100, unique = true)
     private String email;
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private Sede sede;
+
     @NotNull
     @Column(nullable = false)
     private boolean activated = false;
@@ -193,6 +197,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return authorities;
     }
 
+    public Sede getSede() { return sede; }
+
+    public void setSede(Sede sede) { this.sede = sede; }
+
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }
@@ -222,6 +230,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", sede='" + sede.getNombre() + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +

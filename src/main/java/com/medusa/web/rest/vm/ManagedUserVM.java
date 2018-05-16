@@ -1,5 +1,6 @@
 package com.medusa.web.rest.vm;
 
+import com.medusa.domain.Sede;
 import com.medusa.service.dto.UserDTO;
 import javax.validation.constraints.Size;
 
