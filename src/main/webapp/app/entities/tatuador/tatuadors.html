@@ -11,6 +11,23 @@
                     </span>
                 </button>
             </div>
+			<div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.currentSearch" placeholder="Buscar...">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.currentSearch=&quot;&quot;">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <br/>
@@ -31,7 +48,7 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="tatuador in vm.tatuadors track by tatuador.id">
+                <tr ng-repeat="tatuador in vm.tatuadors|filter:vm.currentSearch track by tatuador.id">
                     <td><a ui-sref="tatuador-detail({id:tatuador.id})">{{tatuador.id}}</a></td>
                     <td data-translate="{{'medusaTattooApp.Tipo_documento.' + tatuador.tipodocumento}}">{{tatuador.tipodocumento}}</td>
                     <td>{{tatuador.documento}}</td>

@@ -11,6 +11,23 @@
                     </span>
                 </button>
             </div>
+			<div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.currentSearch" placeholder="Buscar...">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.currentSearch=&quot;&quot;">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <br/>
@@ -26,7 +43,7 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="inscripcion in vm.inscripcions track by inscripcion.id">
+                <tr ng-repeat="inscripcion in vm.inscripcions|filter:vm.currentSearch track by inscripcion.id">
                     <td><a ui-sref="inscripcion-detail({id:inscripcion.id})">{{inscripcion.id}}</a></td>
                     <td data-translate="{{'medusaTattooApp.Estado_inscripcion.' + inscripcion.estado}}">{{inscripcion.estado}}</td>
                     <td>

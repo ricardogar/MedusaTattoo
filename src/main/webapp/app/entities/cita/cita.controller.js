@@ -21,7 +21,7 @@
         vm.predicate = 'id';
         vm.reset = reset;
         vm.reverse = true;
-
+		vm.currentSearch="";
         loadAll();
 
         function loadAll () {

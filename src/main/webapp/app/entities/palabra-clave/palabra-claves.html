@@ -11,6 +11,23 @@
                     </span>
                 </button>
             </div>
+			<div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.currentSearch" placeholder="Buscar...">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.currentSearch=&quot;&quot;">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <br/>
@@ -24,7 +41,7 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="palabraClave in vm.palabraClaves track by palabraClave.id">
+                <tr ng-repeat="palabraClave in vm.palabraClaves|filter:vm.currentSearch track by palabraClave.id">
                     <td><a ui-sref="palabra-clave-detail({id:palabraClave.id})">{{palabraClave.id}}</a></td>
                     <td>{{palabraClave.palabra}}</td>
                     <td class="text-right">

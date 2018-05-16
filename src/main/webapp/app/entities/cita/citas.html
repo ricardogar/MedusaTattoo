@@ -11,8 +11,28 @@
                     </span>
                 </button>
             </div>
+			<div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.currentSearch" placeholder="Buscar...">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.currentSearch=&quot;&quot;">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+	<!--div class="row">
+		
+	</div-->
     <br/>
     <div class="table-responsive">
         <table class="jh-table table table-striped">
@@ -26,7 +46,7 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="cita in vm.citas track by cita.id">
+                <tr ng-repeat="cita in vm.citas|filter:vm.currentSearch track by cita.id">
                     <td><a ui-sref="cita-detail({id:cita.id})">{{cita.id}}</a></td>
                     <td>{{cita.fechaYHora | date:'medium'}}</td>
                     <td>{{cita.duracion}}</td>
