@@ -1,0 +1,32 @@
+
+{
+    "medusaTattooApp": {
+        "trabajo" : {
+            "home": {
+                "title": "Trabajos",
+                "createLabel": "Crear nuevo Trabajo",
+                "createOrEditLabel": "Crear o editar Trabajo"
+            },
+            "created": "Un nuevo Trabajo ha sido creado con el identificador {{ param }}",
+            "updated": "Un Trabajo ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Trabajo ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Trabajo {{ id }}?"
+            },
+            "detail": {
+                "title": "Trabajo"
+            },
+            "costoTotal": "Costo Total",
+            "totalPagado": "Total Pagado",
+            "estado": "Estado",
+            "tipo": "Tipo",
+            "foto": "Foto",
+            "pago": "Pago",
+            "cita": "Cita",
+            "foto": "Foto",
+            "tatuador": "Tatuador",
+            "cliente": "Cliente",
+            "sede": "Sede"
+        }
+    }
+}

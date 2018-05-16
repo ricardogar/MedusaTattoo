@@ -1,0 +1,9 @@
+{
+    "medusaTattooApp": {
+        "Tipo_trabajo" : {
+            "null": "",
+            "NORMAL": "NORMAL",
+            "RAYATON": "RAYATON"
+        }
+    }
+}

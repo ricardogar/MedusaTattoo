@@ -1,0 +1,128 @@
+package com.medusa.web.rest;
+
+import com.codahale.metrics.annotation.Timed;
+import com.medusa.domain.Cita;
+
+import com.medusa.repository.CitaRepository;
+import com.medusa.web.rest.errors.BadRequestAlertException;
+import com.medusa.web.rest.util.HeaderUtil;
+import com.medusa.web.rest.util.PaginationUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing Cita.
+ */
+@RestController
+@RequestMapping("/api")
+public class CitaResource {
+
+    private final Logger log = LoggerFactory.getLogger(CitaResource.class);
+
+    private static final String ENTITY_NAME = "cita";
+
+    private final CitaRepository citaRepository;
+
+    public CitaResource(CitaRepository citaRepository) {
+        this.citaRepository = citaRepository;
+    }
+
+    /**
+     * POST  /citas : Create a new cita.
+     *
+     * @param cita the cita to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new cita, or with status 400 (Bad Request) if the cita has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/citas")
+    @Timed
+    public ResponseEntity<Cita> createCita(@Valid @RequestBody Cita cita) throws URISyntaxException {
+        log.debug("REST request to save Cita : {}", cita);
+        if (cita.getId() != null) {
+            throw new BadRequestAlertException("A new cita cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        Cita result = citaRepository.save(cita);
+        return ResponseEntity.created(new URI("/api/citas/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * PUT  /citas : Updates an existing cita.
+     *
+     * @param cita the cita to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated cita,
+     * or with status 400 (Bad Request) if the cita is not valid,
+     * or with status 500 (Internal Server Error) if the cita couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PutMapping("/citas")
+    @Timed
+    public ResponseEntity<Cita> updateCita(@Valid @RequestBody Cita cita) throws URISyntaxException {
+        log.debug("REST request to update Cita : {}", cita);
+        if (cita.getId() == null) {
+            return createCita(cita);
+        }
+        Cita result = citaRepository.save(cita);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cita.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * GET  /citas : get all the citas.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of citas in body
+     */
+    @GetMapping("/citas")
+    @Timed
+    public ResponseEntity<List<Cita>> getAllCitas(Pageable pageable) {
+        log.debug("REST request to get a page of Citas");
+        Page<Cita> page = citaRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/citas");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /citas/:id : get the "id" cita.
+     *
+     * @param id the id of the cita to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the cita, or with status 404 (Not Found)
+     */
+    @GetMapping("/citas/{id}")
+    @Timed
+    public ResponseEntity<Cita> getCita(@PathVariable Long id) {
+        log.debug("REST request to get Cita : {}", id);
+        Cita cita = citaRepository.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(cita));
+    }
+
+    /**
+     * DELETE  /citas/:id : delete the "id" cita.
+     *
+     * @param id the id of the cita to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/citas/{id}")
+    @Timed
+    public ResponseEntity<Void> deleteCita(@PathVariable Long id) {
+        log.debug("REST request to delete Cita : {}", id);
+        citaRepository.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+}

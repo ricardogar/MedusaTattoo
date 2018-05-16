@@ -5,14 +5,15 @@
         .module('medusaTattooApp')
         .controller('SedeDialogController', SedeDialogController);
 
-    SedeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Sede'];
+    SedeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Sede', 'Trabajo'];
 
-    function SedeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Sede) {
+    function SedeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Sede, Trabajo) {
         var vm = this;
 
         vm.sede = entity;
         vm.clear = clear;
         vm.save = save;
+        vm.trabajos = Trabajo.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

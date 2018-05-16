@@ -6,6 +6,21 @@
 
     <include file="config/liquibase/changelog/20180516012918_added_entity_Sede.xml" relativeToChangelogFile="false"/>
 	<include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041924_added_entity_Tatuador.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041925_added_entity_Cliente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041927_added_entity_Trabajo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041928_added_entity_Cita.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041929_added_entity_Foto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041930_added_entity_Pago.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041931_added_entity_PalabraClave.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041932_added_entity_Rayaton.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041933_added_entity_Inscripcion.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20180516041927_added_entity_constraints_Trabajo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041928_added_entity_constraints_Cita.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041929_added_entity_constraints_Foto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041930_added_entity_constraints_Pago.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041932_added_entity_constraints_Rayaton.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041933_added_entity_constraints_Inscripcion.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -1,10 +1,13 @@
 package com.medusa.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -33,6 +36,10 @@ public class Sede implements Serializable {
     @Pattern(regexp = "^[0-9]*$")
     @Column(name = "telefono", length = 10, nullable = false)
     private String telefono;
+
+    @OneToMany(mappedBy = "sede")
+    @JsonIgnore
+    private Set<Trabajo> trabajos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -80,6 +87,31 @@ public class Sede implements Serializable {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public Set<Trabajo> getTrabajos() {
+        return trabajos;
+    }
+
+    public Sede trabajos(Set<Trabajo> trabajos) {
+        this.trabajos = trabajos;
+        return this;
+    }
+
+    public Sede addTrabajo(Trabajo trabajo) {
+        this.trabajos.add(trabajo);
+        trabajo.setSede(this);
+        return this;
+    }
+
+    public Sede removeTrabajo(Trabajo trabajo) {
+        this.trabajos.remove(trabajo);
+        trabajo.setSede(null);
+        return this;
+    }
+
+    public void setTrabajos(Set<Trabajo> trabajos) {
+        this.trabajos = trabajos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

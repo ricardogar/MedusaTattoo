@@ -18,7 +18,8 @@
             },
             "nombre": "Nombre",
             "direccion": "Direccion",
-            "telefono": "Telefono"
+            "telefono": "Telefono",
+            "trabajo": "Trabajo"
         }
     }
 }

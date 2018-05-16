@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Rayaton.
+    -->
+    <changeSet id="20180516041932-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="rayatons_id"
+                                 baseTableName="rayaton_tatuador"
+                                 constraintName="fk_rayaton_tatuador_rayatons_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rayaton"/>
+        <addForeignKeyConstraint baseColumnNames="tatuadors_id"
+                                 baseTableName="rayaton_tatuador"
+                                 constraintName="fk_rayaton_tatuador_tatuadors_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tatuador"/>
+        
+    </changeSet>
+</databaseChangeLog>

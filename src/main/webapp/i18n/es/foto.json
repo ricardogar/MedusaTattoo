@@ -1,0 +1,25 @@
+
+{
+    "medusaTattooApp": {
+        "foto" : {
+            "home": {
+                "title": "Fotos",
+                "createLabel": "Crear nuevo Foto",
+                "createOrEditLabel": "Crear o editar Foto"
+            },
+            "created": "Un nuevo Foto ha sido creado con el identificador {{ param }}",
+            "updated": "Un Foto ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Foto ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Foto {{ id }}?"
+            },
+            "detail": {
+                "title": "Foto"
+            },
+            "descripcion": "Descripcion",
+            "imagen": "Imagen",
+            "palabraClave": "Palabra Clave",
+            "trabajo": "Trabajo"
+        }
+    }
+}

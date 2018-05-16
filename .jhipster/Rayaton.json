@@ -1,0 +1,59 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "inscripcion",
+            "otherEntityName": "inscripcion",
+            "otherEntityRelationshipName": "rayaton"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "rayatones",
+            "relationshipName": "tatuador",
+            "otherEntityName": "tatuador",
+            "otherEntityField": "apodo",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "fecha",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "cupos",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "max"
+            ],
+            "fieldValidateRulesMax": 100000
+        },
+        {
+            "fieldName": "valorCupo",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 20000,
+            "fieldValidateRulesMax": 10000000
+        },
+        {
+            "fieldName": "comentario",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "changelogDate": "20180516041932",
+    "entityTableName": "rayaton",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

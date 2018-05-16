@@ -1,0 +1,24 @@
+
+{
+    "medusaTattooApp": {
+        "inscripcion" : {
+            "home": {
+                "title": "Inscripcions",
+                "createLabel": "Crear nuevo Inscripcion",
+                "createOrEditLabel": "Crear o editar Inscripcion"
+            },
+            "created": "Un nuevo Inscripcion ha sido creado con el identificador {{ param }}",
+            "updated": "Un Inscripcion ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Inscripcion ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Inscripcion {{ id }}?"
+            },
+            "detail": {
+                "title": "Inscripcion"
+            },
+            "estado": "Estado",
+            "rayaton": "Rayaton",
+            "cliente": "Cliente"
+        }
+    }
+}

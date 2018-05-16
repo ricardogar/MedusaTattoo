@@ -1,0 +1,23 @@
+
+{
+    "medusaTattooApp": {
+        "palabraClave" : {
+            "home": {
+                "title": "Palabra Claves",
+                "createLabel": "Crear nuevo Palabra Clave",
+                "createOrEditLabel": "Crear o editar Palabra Clave"
+            },
+            "created": "Un nuevo Palabra Clave ha sido creado con el identificador {{ param }}",
+            "updated": "Un Palabra Clave ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Palabra Clave ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Palabra Clave {{ id }}?"
+            },
+            "detail": {
+                "title": "Palabra Clave"
+            },
+            "palabra": "Palabra",
+            "foto": "Foto"
+        }
+    }
+}

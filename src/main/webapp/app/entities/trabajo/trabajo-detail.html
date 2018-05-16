@@ -1,0 +1,56 @@
+
+<div>
+    <h2><span data-translate="medusaTattooApp.trabajo.detail.title">Trabajo</span> {{vm.trabajo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="medusaTattooApp.trabajo.costoTotal">Costo Total</span></dt>
+        <dd>
+            <span>{{vm.trabajo.costoTotal}}</span>
+        </dd>
+        <dt><span data-translate="medusaTattooApp.trabajo.totalPagado">Total Pagado</span></dt>
+        <dd>
+            <span>{{vm.trabajo.totalPagado}}</span>
+        </dd>
+        <dt><span data-translate="medusaTattooApp.trabajo.estado">Estado</span></dt>
+        <dd>
+            <span data-translate="{{'medusaTattooApp.Estado_trabajo.' + vm.trabajo.estado}}">{{vm.trabajo.estado}}</span>
+        </dd>
+        <dt><span data-translate="medusaTattooApp.trabajo.tipo">Tipo</span></dt>
+        <dd>
+            <span data-translate="{{'medusaTattooApp.Tipo_trabajo.' + vm.trabajo.tipo}}">{{vm.trabajo.tipo}}</span>
+        </dd>
+        <dt><span data-translate="medusaTattooApp.trabajo.foto">Foto</span></dt>
+        <dd>
+            <div ng-if="vm.trabajo.foto">
+                <a ng-click="vm.openFile(vm.trabajo.fotoContentType, vm.trabajo.foto)">
+                    <img data-ng-src="{{'data:' + vm.trabajo.fotoContentType + ';base64,' + vm.trabajo.foto}}" style="max-width: 100%;" alt="trabajo image"/>
+                </a>
+                {{vm.trabajo.fotoContentType}}, {{vm.byteSize(vm.trabajo.foto)}}
+            </div>
+        </dd>
+        <dt><span data-translate="medusaTattooApp.trabajo.tatuador">Tatuador</span></dt>
+        <dd>
+            <a ui-sref="tatuador-detail({id:vm.trabajo.tatuador.id})">{{vm.trabajo.tatuador.apodo}}</a>
+        </dd>
+        <dt><span data-translate="medusaTattooApp.trabajo.cliente">Cliente</span></dt>
+        <dd>
+            <a ui-sref="cliente-detail({id:vm.trabajo.cliente.id})">{{vm.trabajo.cliente.documento}}</a>
+        </dd>
+        <dt><span data-translate="medusaTattooApp.trabajo.sede">Sede</span></dt>
+        <dd>
+            <a ui-sref="sede-detail({id:vm.trabajo.sede.id})">{{vm.trabajo.sede.nombre}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="trabajo-detail.edit({id:vm.trabajo.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

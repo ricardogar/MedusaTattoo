@@ -1,0 +1,140 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTrabajoLabel" data-translate="medusaTattooApp.trabajo.home.createOrEditLabel">Create or edit a Trabajo</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.trabajo.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.trabajo.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.trabajo.costoTotal" for="field_costoTotal">Costo Total</label>
+            <input type="text" class="form-control" name="costoTotal" id="field_costoTotal"
+                    ng-model="vm.trabajo.costoTotal"
+                    required ng-minlength="5" ng-pattern="/^[1-9][0-9]*$/"/>
+            <div ng-show="editForm.costoTotal.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.costoTotal.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.costoTotal.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="5">
+                    This field is required to be at least 5 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.costoTotal.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="Costo Total">
+                    This field should follow pattern for "Costo Total".
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.trabajo.totalPagado" for="field_totalPagado">Total Pagado</label>
+            <input type="text" class="form-control" name="totalPagado" id="field_totalPagado"
+                    ng-model="vm.trabajo.totalPagado"
+                    ng-pattern="/^[1-9][0-9]*$/"/>
+            <div ng-show="editForm.totalPagado.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.totalPagado.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="Total Pagado">
+                    This field should follow pattern for "Total Pagado".
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.trabajo.estado" for="field_estado">Estado</label>
+            <select class="form-control" name="estado" ng-model="vm.trabajo.estado" id="field_estado" required>
+                <option value="EN_PROGRESO" data-translate="medusaTattooApp.Estado_trabajo.EN_PROGRESO">EN_PROGRESO</option>
+                <option value="FINALIZADO" data-translate="medusaTattooApp.Estado_trabajo.FINALIZADO">FINALIZADO</option>
+                <option value="CANCELADO" data-translate="medusaTattooApp.Estado_trabajo.CANCELADO">CANCELADO</option>
+            </select>
+            <div ng-show="editForm.estado.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.estado.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.trabajo.tipo" for="field_tipo">Tipo</label>
+            <select class="form-control" name="tipo" ng-model="vm.trabajo.tipo" id="field_tipo" required>
+                <option value="NORMAL" data-translate="medusaTattooApp.Tipo_trabajo.NORMAL">NORMAL</option>
+                <option value="RAYATON" data-translate="medusaTattooApp.Tipo_trabajo.RAYATON">RAYATON</option>
+            </select>
+            <div ng-show="editForm.tipo.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.tipo.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setFoto($file, vm.trabajo)" ngf-pattern="'image/*'">
+            <label class="control-label" data-translate="medusaTattooApp.trabajo.foto" for="field_foto">Foto</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.trabajo.fotoContentType + ';base64,' + vm.trabajo.foto}}" style="max-height: 100px;" ng-if="vm.trabajo.foto" alt="trabajo image"/>
+                <div ng-if="vm.trabajo.foto" class="help-block clearfix">
+                    <span class="pull-left">{{vm.trabajo.fotoContentType}}, {{vm.byteSize(vm.trabajo.foto)}}</span>
+                    <button type="button" ng-click="vm.trabajo.foto=null;vm.trabajo.fotoContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setFoto($file, vm.trabajo)" accept="image/*" data-translate="entity.action.addimage">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="foto" id="field_foto"
+                    ng-model="vm.trabajo.foto"
+                    />
+            <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType"
+                    ng-model="vm.trabajo.fotoContentType" />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="medusaTattooApp.trabajo.tatuador" for="field_tatuador">Tatuador</label>
+            <select class="form-control" id="field_tatuador" name="tatuador" ng-model="vm.trabajo.tatuador" ng-options="tatuador as tatuador.apodo for tatuador in vm.tatuadors track by tatuador.id" required>
+            </select>
+        </div>
+        <div ng-show="editForm.tatuador.$invalid">
+            <p class="help-block"
+                ng-show="editForm.tatuador.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label data-translate="medusaTattooApp.trabajo.cliente" for="field_cliente">Cliente</label>
+            <select class="form-control" id="field_cliente" name="cliente" ng-model="vm.trabajo.cliente" ng-options="cliente as cliente.documento for cliente in vm.clientes track by cliente.id" required>
+            </select>
+        </div>
+        <div ng-show="editForm.cliente.$invalid">
+            <p class="help-block"
+                ng-show="editForm.cliente.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label data-translate="medusaTattooApp.trabajo.sede" for="field_sede">Sede</label>
+            <select class="form-control" id="field_sede" name="sede" ng-model="vm.trabajo.sede" ng-options="sede as sede.nombre for sede in vm.sedes track by sede.id" required>
+            </select>
+        </div>
+        <div ng-show="editForm.sede.$invalid">
+            <p class="help-block"
+                ng-show="editForm.sede.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

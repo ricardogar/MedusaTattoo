@@ -1,0 +1,92 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "pago",
+            "otherEntityName": "pago",
+            "otherEntityRelationshipName": "trabajo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "cita",
+            "otherEntityName": "cita",
+            "otherEntityRelationshipName": "trabajo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "foto",
+            "otherEntityName": "foto",
+            "otherEntityRelationshipName": "trabajo"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "tatuador",
+            "otherEntityName": "tatuador",
+            "otherEntityField": "apodo"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "cliente",
+            "otherEntityName": "cliente",
+            "otherEntityField": "documento"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "sede",
+            "otherEntityName": "sede",
+            "otherEntityField": "nombre"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "costoTotal",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "pattern"
+            ],
+            "fieldValidateRulesMinlength": 5,
+            "fieldValidateRulesPattern": "^[1-9][0-9]*$"
+        },
+        {
+            "fieldName": "totalPagado",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^[1-9][0-9]*$"
+        },
+        {
+            "fieldName": "estado",
+            "fieldType": "Estado_trabajo",
+            "fieldValues": "EN_PROGRESO,FINALIZADO,CANCELADO",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "tipo",
+            "fieldType": "Tipo_trabajo",
+            "fieldValues": "NORMAL,RAYATON",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "foto",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "changelogDate": "20180516041927",
+    "entityTableName": "trabajo",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

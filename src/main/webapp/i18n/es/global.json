@@ -8,6 +8,15 @@
             "entities": {
                 "main": "Entidades",
                 "sede": "Sede",
+                "tatuador": "Tatuador",
+                "cliente": "Cliente",
+                "trabajo": "Trabajo",
+                "cita": "Cita",
+                "foto": "Foto",
+                "pago": "Pago",
+                "palabraClave": "Palabra Clave",
+                "rayaton": "Rayaton",
+                "inscripcion": "Inscripcion",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

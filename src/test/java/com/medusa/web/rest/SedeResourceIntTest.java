@@ -45,7 +45,7 @@ public class SedeResourceIntTest {
     private static final String UPDATED_DIRECCION = "BBBBBBBBBB";
 
     private static final String DEFAULT_TELEFONO = "";
-    private static final String UPDATED_TELEFONO = "B";
+    private static final String UPDATED_TELEFONO = "3";
 
     @Autowired
     private SedeRepository sedeRepository;

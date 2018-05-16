@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "foto",
+            "otherEntityName": "foto",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "palabraClave"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "palabra",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180516041931",
+    "entityTableName": "palabra_clave",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

@@ -1,0 +1,95 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myRayatonLabel" data-translate="medusaTattooApp.rayaton.home.createOrEditLabel">Create or edit a Rayaton</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.rayaton.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.rayaton.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.rayaton.fecha" for="field_fecha">Fecha</label>
+                <div class="input-group">
+                    <input id="field_fecha" type="text" class="form-control" name="fecha" uib-datepicker-popup="{{dateformat}}" ng-model="vm.rayaton.fecha" is-open="vm.datePickerOpenStatus.fecha"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fecha')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.fecha.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.fecha.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.rayaton.cupos" for="field_cupos">Cupos</label>
+            <input type="number" class="form-control" name="cupos" id="field_cupos"
+                    ng-model="vm.rayaton.cupos"
+                    required max="100000"/>
+            <div ng-show="editForm.cupos.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.cupos.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.cupos.$error.max" data-translate="entity.validation.max" translate-value-max="100000">
+                    This field cannot be more than 100000.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.cupos.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.rayaton.valorCupo" for="field_valorCupo">Valor Cupo</label>
+            <input type="number" class="form-control" name="valorCupo" id="field_valorCupo"
+                    ng-model="vm.rayaton.valorCupo"
+                    required min="20000" max="10000000"/>
+            <div ng-show="editForm.valorCupo.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.valorCupo.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.valorCupo.$error.min" data-translate="entity.validation.min" translate-value-min="20000">
+                    This field should be at least 20000.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.valorCupo.$error.max" data-translate="entity.validation.max" translate-value-max="10000000">
+                    This field cannot be more than 10000000.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.valorCupo.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.rayaton.comentario" for="field_comentario">Comentario</label>
+                <textarea class="form-control" name="comentario" id="field_comentario"
+                    ng-model="vm.rayaton.comentario" ></textarea>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="medusaTattooApp.rayaton.tatuador" for="field_tatuador">Tatuador</label>
+            <select class="form-control" id="field_tatuador" multiple name="tatuador" ng-model="vm.rayaton.tatuadors" ng-options="tatuador as tatuador.apodo for tatuador in vm.tatuadors track by tatuador.id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

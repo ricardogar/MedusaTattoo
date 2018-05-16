@@ -1,0 +1,34 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "rayaton",
+            "otherEntityName": "rayaton",
+            "otherEntityField": "fecha"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "cliente",
+            "otherEntityName": "cliente",
+            "otherEntityField": "documento"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "estado",
+            "fieldType": "Estado_inscripcion",
+            "fieldValues": "PRE_INSCRITO,INSCRITO",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180516041933",
+    "entityTableName": "inscripcion",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

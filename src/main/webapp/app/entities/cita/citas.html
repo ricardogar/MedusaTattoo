@@ -1,0 +1,62 @@
+<div>
+    <h2 data-translate="medusaTattooApp.cita.home.title">Citas</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="cita.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="medusaTattooApp.cita.home.createLabel">
+                        Create new Cita
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fechaYHora"><span data-translate="medusaTattooApp.cita.fechaYHora">Fecha Y Hora</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="duracion"><span data-translate="medusaTattooApp.cita.duracion">Duracion</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="trabajo.id"><span data-translate="medusaTattooApp.cita.trabajo">Trabajo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="cita in vm.citas track by cita.id">
+                    <td><a ui-sref="cita-detail({id:cita.id})">{{cita.id}}</a></td>
+                    <td>{{cita.fechaYHora | date:'medium'}}</td>
+                    <td>{{cita.duracion}}</td>
+                    <td>
+                        <a ui-sref="trabajo-detail({id:cita.trabajo.id})">{{cita.trabajo.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="cita-detail({id:cita.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="cita.edit({id:cita.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="cita.delete({id:cita.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

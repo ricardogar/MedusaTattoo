@@ -1,0 +1,31 @@
+
+{
+    "medusaTattooApp": {
+        "tatuador" : {
+            "home": {
+                "title": "Tatuadors",
+                "createLabel": "Create a new Tatuador",
+                "createOrEditLabel": "Create or edit a Tatuador"
+            },
+            "created": "A new Tatuador is created with identifier {{ param }}",
+            "updated": "A Tatuador is updated with identifier {{ param }}",
+            "deleted": "A Tatuador is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tatuador {{ id }}?"
+            },
+            "detail": {
+                "title": "Tatuador"
+            },
+            "tipodocumento": "Tipodocumento",
+            "documento": "Documento",
+            "nombre": "Nombre",
+            "apellido": "Apellido",
+            "telefono": "Telefono",
+            "genero": "Genero",
+            "apodo": "Apodo",
+            "foto": "Foto",
+            "trabajo": "Trabajo",
+            "rayatones": "Rayatones"
+        }
+    }
+}

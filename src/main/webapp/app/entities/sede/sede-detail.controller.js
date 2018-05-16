@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('SedeDetailController', SedeDetailController);
 
-    SedeDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Sede'];
+    SedeDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Sede', 'Trabajo'];
 
-    function SedeDetailController($scope, $rootScope, $stateParams, previousState, entity, Sede) {
+    function SedeDetailController($scope, $rootScope, $stateParams, previousState, entity, Sede, Trabajo) {
         var vm = this;
 
         vm.sede = entity;
