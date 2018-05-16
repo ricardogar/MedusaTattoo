@@ -1,0 +1,7 @@
+entity Sede {
+	nombre String required,
+	direccion String required,
+    telefono String required minlength(10) maxlength(10) pattern(/^[0-9]*$/)
+}
+
+paginate * with infinite-scroll
