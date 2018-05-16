@@ -3,15 +3,16 @@
     "medusaTattooApp": {
         "inscripcion" : {
             "home": {
-                "title": "Inscripcions",
-                "createLabel": "Crear nuevo Inscripcion",
-                "createOrEditLabel": "Crear o editar Inscripcion"
+                "title": "Inscripciones",
+                "createLabel": "Crear nueva Inscripción",
+                "createOrEditLabel": "Crear o editar Inscripción",
+                "search": "Buscar Inscripción"
             },
-            "created": "Un nuevo Inscripcion ha sido creado con el identificador {{ param }}",
-            "updated": "Un Inscripcion ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Inscripcion ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Inscripción ha sido creado con el identificador {{ param }}",
+            "updated": "Una Inscripción ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Una Inscripción ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Inscripcion {{ id }}?"
+                "question": "¿Seguro que quiere eliminar esta Inscripción {{ id }}?"
             },
             "detail": {
                 "title": "Inscripcion"

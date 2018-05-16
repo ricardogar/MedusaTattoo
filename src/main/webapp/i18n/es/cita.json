@@ -4,20 +4,21 @@
         "cita" : {
             "home": {
                 "title": "Citas",
-                "createLabel": "Crear nuevo Cita",
-                "createOrEditLabel": "Crear o editar Cita"
+                "createLabel": "Crear nueva Cita",
+                "createOrEditLabel": "Crear o editar Cita",
+                "search": "Buscar Cita"
             },
-            "created": "Un nuevo Cita ha sido creado con el identificador {{ param }}",
-            "updated": "Un Cita ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Cita ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Cita ha sido creado con el identificador {{ param }}",
+            "updated": "Una Cita ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Una Cita ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Cita {{ id }}?"
+                "question": "¿Seguro que quiere eliminar la Cita {{ id }}?"
             },
             "detail": {
                 "title": "Cita"
             },
             "fechaYHora": "Fecha Y Hora",
-            "duracion": "Duracion",
+            "duracion": "Duración",
             "trabajo": "Trabajo"
         }
     }

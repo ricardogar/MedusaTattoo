@@ -4,21 +4,22 @@
         "foto" : {
             "home": {
                 "title": "Fotos",
-                "createLabel": "Crear nuevo Foto",
-                "createOrEditLabel": "Crear o editar Foto"
+                "createLabel": "Crear nueva Foto",
+                "createOrEditLabel": "Crear o editar Foto",
+                "search": "Buscar Foto"
             },
-            "created": "Un nuevo Foto ha sido creado con el identificador {{ param }}",
-            "updated": "Un Foto ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Foto ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Foto ha sido creado con el identificador {{ param }}",
+            "updated": "Una Foto ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Una Foto ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Foto {{ id }}?"
+                "question": "¿Seguro que quiere eliminar esta Foto {{ id }}?"
             },
             "detail": {
                 "title": "Foto"
             },
-            "descripcion": "Descripcion",
+            "descripcion": "Descripción",
             "imagen": "Imagen",
-            "palabraClave": "Palabra Clave",
+            "palabraClave": "Palabras Clave",
             "trabajo": "Trabajo"
         }
     }

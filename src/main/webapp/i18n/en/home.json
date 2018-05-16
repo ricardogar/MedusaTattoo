@@ -1,19 +1,18 @@
 {
     "home": {
-        "title": "Welcome, Java Hipster!",
+        "title": "Welcome to MedusaTattoo administration system!",
         "subtitle": "This is your homepage",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
         },
-        "question": "If you have any question on JHipster:",
-        "link": {
-            "homepage": "JHipster homepage",
-            "stackoverflow": "JHipster on Stack Overflow",
-            "bugtracker": "JHipster bug tracker",
-            "chat": "JHipster public chat room",
-            "follow": "follow @java_hipster on Twitter"
+        "problem": "If you have any problem to login:",
+        "suggestion": {
+            "user": "Verify your user",
+            "password": "Verify your password",
+            "mayus": "Check for MAYUS",
+            "reset": "Contact the admin"
         },
-        "like": "If you like JHipster, don't forget to give us a star on",
-        "github": "GitHub"
+        "like": " ",
+        "github": " "
     }
 }

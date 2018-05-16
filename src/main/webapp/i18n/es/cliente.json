@@ -5,26 +5,27 @@
             "home": {
                 "title": "Clientes",
                 "createLabel": "Crear nuevo Cliente",
-                "createOrEditLabel": "Crear o editar Cliente"
+                "createOrEditLabel": "Crear o editar Cliente",
+                "search": "Buscar Cliente"
             },
             "created": "Un nuevo Cliente ha sido creado con el identificador {{ param }}",
             "updated": "Un Cliente ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Cliente ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Cliente {{ id }}?"
+                "question": "¿Seguro que quiere eliminar el Cliente {{ id }}?"
             },
             "detail": {
                 "title": "Cliente"
             },
-            "tipodocumento": "Tipodocumento",
+            "tipodocumento": "Tipo de Documento",
             "documento": "Documento",
             "nombre": "Nombre",
             "apellido": "Apellido",
-            "telefono": "Telefono",
-            "genero": "Genero",
-            "direccion": "Direccion",
+            "telefono": "Teléfono",
+            "genero": "Género",
+            "direccion": "Dirección",
             "trabajo": "Trabajo",
-            "inscripcion": "Inscripcion"
+            "inscripcion": "Inscripción"
         }
     }
 }

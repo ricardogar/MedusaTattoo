@@ -27,7 +27,7 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/MedusaTattoo?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://aa1d3f7dh15phet.cvclcrp5oreo.us-east-2.rds.amazonaws.com:3306/medusatattoo?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password: Yuliamz97
         hikari:
@@ -108,7 +108,7 @@ jhipster:
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: medusatattoobot@gmail.com
-        base-url: http://my-server-url-to-change # Modify according to your server's URL
+        base-url: http://medusa.us-east-2.elasticbeanstalk.com/ # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite:

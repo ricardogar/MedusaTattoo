@@ -4,14 +4,15 @@
         "pago" : {
             "home": {
                 "title": "Pagos",
-                "createLabel": "Crear nuevo Pago",
-                "createOrEditLabel": "Crear o editar Pago"
+                "createLabel": "Registrar Pago",
+                "createOrEditLabel": "Registrar o editar Pago",
+                "search": "Buscar Pago"
             },
             "created": "Un nuevo Pago ha sido creado con el identificador {{ param }}",
             "updated": "Un Pago ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Pago ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Pago {{ id }}?"
+                "question": "¿Seguro que quiere eliminar este Pago {{ id }}?"
             },
             "detail": {
                 "title": "Pago"
