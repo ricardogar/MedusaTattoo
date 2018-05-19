@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="cita in vm.citas|filter:vm.currentSearch track by cita.id">
+                <tr ng-repeat="cita in vm.citas|filter:sedeFilter|filter:vm.currentSearch track by cita.id">
                     <td><a ui-sref="cita-detail({id:cita.id})">{{cita.id}}</a></td>
                     <td>{{cita.fechaYHora | date:'medium'}}</td>
                     <td>{{cita.duracion}}</td>

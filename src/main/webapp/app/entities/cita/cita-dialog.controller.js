@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('CitaDialogController', CitaDialogController);
 
-    CitaDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Cita', 'Trabajo'];
+    CitaDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Cita', 'Trabajo','Principal'];
 
-    function CitaDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Cita, Trabajo) {
+    function CitaDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Cita, Trabajo,Principal) {
         var vm = this;
 
         vm.cita = entity;
@@ -16,7 +16,16 @@
         vm.openCalendar = openCalendar;
         vm.save = save;
         vm.trabajos = Trabajo.query();
-
+		vm.account = null;
+		getAccount();
+		
+		function getAccount() {
+            Principal.identity().then(function(account) {
+				console.log("==========cita dialog controller=======");
+                vm.account = account;
+				console.log(vm.account);
+            });
+        }
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
@@ -49,5 +58,12 @@
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }
+		$scope.sedeFilter = function (item){
+			if(vm.account.authorities.includes("ROLE_ADMIN")){
+				return true;
+			}else{
+				return item.sede.id===vm.account.sede.id
+			}
+		};
     }
 })();

@@ -22,6 +22,7 @@
         vm.clientes = Cliente.query();
         vm.sedes = Sede.query();
 		vm.account = null;
+		vm.isAdmin=false;
 		getAccount();
 		if(vm.trabajo.estado==null){
 			vm.trabajo.estado="EN_PROGRESO";
@@ -37,8 +38,12 @@
 					vm.trabajo.sede=vm.account.sede;
 				}
 				
+				vm.isAdmin=vm.account.authorities.includes("ROLE_ADMIN");
+				
 				console.log("=================Trabajo Dialog====================");
 				console.log(vm.account);
+				console.log("isAdmin: ");
+				console.log(vm.isAdmin);
             });
         }
 		

@@ -17,7 +17,8 @@
             <label class="control-label" data-translate="medusaTattooApp.trabajo.costoTotal" for="field_costoTotal">Costo Total</label>
             <input type="text" class="form-control" name="costoTotal" id="field_costoTotal"
                     ng-model="vm.trabajo.costoTotal"
-                    required ng-minlength="5" ng-pattern="/^[1-9][0-9]*$/"/>
+                    required ng-minlength="5" ng-pattern="/^[1-9][0-9]*$/"
+					value="vm.trabajo.costoTotal | currency : "$" : 0"/>
             <div ng-show="editForm.costoTotal.$invalid">
                 <p class="help-block"
                     ng-show="editForm.costoTotal.$error.required" data-translate="entity.validation.required">
@@ -102,6 +103,17 @@
         <div ng-show="editForm.cliente.$invalid">
             <p class="help-block"
                 ng-show="editForm.cliente.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+		<div class="form-group" ng-if="vm.isAdmin">
+            <label data-translate="medusaTattooApp.trabajo.sede" for="field_sede">Sede</label>
+            <select class="form-control" id="field_sede" name="sede" ng-model="vm.trabajo.sede" ng-options="sede as sede.nombre for sede in vm.sedes track by sede.id" required>
+            </select>
+        </div>
+        <div ng-show="editForm.sede.$invalid">
+            <p class="help-block"
+                ng-show="editForm.sede.$error.required" data-translate="entity.validation.required">
                 This field is required.
             </p>
         </div>

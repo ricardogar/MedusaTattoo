@@ -19,6 +19,7 @@
             },
             "costoTotal": "Costo Total",
             "totalPagado": "Total Pagado",
+			"porPagar": "Por pagar",
             "estado": "Estado",
             "tipo": "Tipo",
             "foto": "Foto",

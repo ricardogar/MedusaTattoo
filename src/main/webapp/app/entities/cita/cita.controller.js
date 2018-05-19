@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('CitaController', CitaController);
 
-    CitaController.$inject = ['Cita', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    CitaController.$inject = ['Cita', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','$scope'];
 
-    function CitaController(Cita, ParseLinks, AlertService, paginationConstants) {
+    function CitaController(Cita, ParseLinks, AlertService, paginationConstants,Principal,$scope) {
 
         var vm = this;
 
@@ -23,6 +23,14 @@
         vm.reverse = true;
 		vm.currentSearch="";
         loadAll();
+		vm.account = null;
+		getAccount();
+		
+		function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+            });
+        }
 
         function loadAll () {
             Cita.query({
@@ -61,5 +69,14 @@
             vm.page = page;
             loadAll();
         }
+		
+		$scope.sedeFilter = function (item){
+			if(vm.account.authorities.includes("ROLE_ADMIN")){
+				return true;
+			}else{
+				return item.trabajo.sede.id===vm.account.sede.id
+			}
+		};
+		
     }
 })();

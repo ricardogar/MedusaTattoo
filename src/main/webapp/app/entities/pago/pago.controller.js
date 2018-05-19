@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('PagoController', PagoController);
 
-    PagoController.$inject = ['Pago', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    PagoController.$inject = ['Pago', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','$scope'];
 
-    function PagoController(Pago, ParseLinks, AlertService, paginationConstants) {
+    function PagoController(Pago, ParseLinks, AlertService, paginationConstants,Principal,$scope) {
 
         var vm = this;
 
@@ -23,7 +23,17 @@
         vm.reverse = true;
 
         loadAll();
-
+		vm.account = null;
+		getAccount();
+		
+		function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+				console.log("=================Pago controller====================");
+				console.log(vm.account);
+            });
+        }
+		
         function loadAll () {
             Pago.query({
                 page: vm.page,
@@ -61,5 +71,13 @@
             vm.page = page;
             loadAll();
         }
+		
+		$scope.sedeFilter = function (item){
+			if(vm.account.authorities.includes("ROLE_ADMIN")){
+				return true;
+			}else{
+				return item.trabajo.sede.id===vm.account.sede.id
+			}
+		};
     }
 })();

@@ -43,10 +43,10 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="pago in vm.pagos|filter:vm.currentSearch track by pago.id">
+                <tr ng-repeat="pago in vm.pagos|filter:sedeFilter|filter:vm.currentSearch track by pago.id">
                     <td><a ui-sref="pago-detail({id:pago.id})">{{pago.id}}</a></td>
                     <td>{{pago.fecha | date:'medium'}}</td>
-                    <td>{{pago.valor}}</td>
+                    <td>{{pago.valor | currency : "$" : 0}}</td>
                     <td>
                         <a ui-sref="trabajo-detail({id:pago.trabajo.id})">{{pago.trabajo.id}}</a>
                     </td>
