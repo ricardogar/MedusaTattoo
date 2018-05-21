@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('CitaController', CitaController);
 
-    CitaController.$inject = ['Cita', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','$scope'];
+    CitaController.$inject = ['Cita', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','$scope','filterByAccount'];
 
-    function CitaController(Cita, ParseLinks, AlertService, paginationConstants,Principal,$scope) {
+    function CitaController(Cita, ParseLinks, AlertService, paginationConstants,Principal,$scope,filterByAccount) {
 
         var vm = this;
 
@@ -22,17 +22,22 @@
         vm.reset = reset;
         vm.reverse = true;
 		vm.currentSearch="";
+        vm.account = null;
         loadAll();
-		vm.account = null;
-		getAccount();
-		
+
+
 		function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
+                console.log(vm.account)
+                filterByAccount.query({id:vm.account.id},function (data) {
+                    console.log(data)
+                });
             });
         }
 
         function loadAll () {
+            getAccount();
             Cita.query({
                 page: vm.page,
                 size: vm.itemsPerPage,
@@ -69,7 +74,7 @@
             vm.page = page;
             loadAll();
         }
-		
+
 		$scope.sedeFilter = function (item){
 			if(vm.account.authorities.includes("ROLE_ADMIN")){
 				return true;
@@ -77,6 +82,6 @@
 				return item.trabajo.sede.id===vm.account.sede.id
 			}
 		};
-		
+
     }
 })();

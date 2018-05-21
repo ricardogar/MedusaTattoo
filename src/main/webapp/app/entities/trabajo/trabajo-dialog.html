@@ -17,8 +17,7 @@
             <label class="control-label" data-translate="medusaTattooApp.trabajo.costoTotal" for="field_costoTotal">Costo Total</label>
             <input type="text" class="form-control" name="costoTotal" id="field_costoTotal"
                     ng-model="vm.trabajo.costoTotal"
-                    required ng-minlength="5" ng-pattern="/^[1-9][0-9]*$/"
-					value="vm.trabajo.costoTotal | currency : "$" : 0"/>
+                    required ng-minlength="5" ng-pattern="/^[1-9][0-9]*$/"/>
             <div ng-show="editForm.costoTotal.$invalid">
                 <p class="help-block"
                     ng-show="editForm.costoTotal.$error.required" data-translate="entity.validation.required">

@@ -5,6 +5,7 @@ import com.medusa.MedusaTattooApp;
 import com.medusa.domain.Cita;
 import com.medusa.domain.Trabajo;
 import com.medusa.repository.CitaRepository;
+import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -65,11 +66,12 @@ public class CitaResourceIntTest {
     private MockMvc restCitaMockMvc;
 
     private Cita cita;
+    private UserRepository userRepository;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CitaResource citaResource = new CitaResource(citaRepository);
+        final CitaResource citaResource = new CitaResource(citaRepository, userRepository);
         this.restCitaMockMvc = MockMvcBuilders.standaloneSetup(citaResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

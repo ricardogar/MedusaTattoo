@@ -3,7 +3,9 @@ package com.medusa.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Pago;
 
+import com.medusa.domain.User;
 import com.medusa.repository.PagoRepository;
+import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
@@ -38,8 +40,11 @@ public class PagoResource {
 
     private final PagoRepository pagoRepository;
 
-    public PagoResource(PagoRepository pagoRepository) {
+    private final UserRepository userRepository;
+
+    public PagoResource(PagoRepository pagoRepository, UserRepository userRepository) {
         this.pagoRepository = pagoRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -98,6 +103,29 @@ public class PagoResource {
         log.debug("REST request to get a page of Pagos");
         Page<Pago> page = pagoRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/pagos");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /pagos/cuenta/:id : get all the pagos filtered by sede.
+     *
+     * @param pageable the pagination information
+     * @param id the cuenta identifier
+     * @return the ResponseEntity with status 200 (OK) and the list of pagos in body
+     */
+    @GetMapping("/pagos/cuenta/{id}")
+    @Timed
+    public ResponseEntity<List<Pago>> getAllPagosByCuenta(Pageable pageable, @PathVariable Long id) {
+        log.debug("REST request to get a page of Pagos");
+        User user = userRepository.findOne(id);
+        Page<Pago> page;
+        if (user.getAuthorities().stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"))){
+            page = pagoRepository.findAll(pageable);
+        }else{
+            page = pagoRepository.findAllByCuenta(pageable,id);
+        }
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/pagos/cuenta");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

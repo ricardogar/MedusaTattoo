@@ -3,7 +3,9 @@ package com.medusa.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Trabajo;
 
+import com.medusa.domain.User;
 import com.medusa.repository.TrabajoRepository;
+import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
@@ -37,8 +39,11 @@ public class TrabajoResource {
 
     private final TrabajoRepository trabajoRepository;
 
-    public TrabajoResource(TrabajoRepository trabajoRepository) {
+    private final UserRepository userRepository;
+
+    public TrabajoResource(TrabajoRepository trabajoRepository, UserRepository userRepository) {
         this.trabajoRepository = trabajoRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -95,6 +100,29 @@ public class TrabajoResource {
         log.debug("REST request to get a page of Trabajos");
         Page<Trabajo> page = trabajoRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/trabajos");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /trabajos/cuenta/:id : get all the trabajos filtered by sede.
+     *
+     * @param pageable the pagination information
+     * @param id the cuenta identifier
+     * @return the ResponseEntity with status 200 (OK) and the list of trabajos in body
+     */
+    @GetMapping("/trabajos/cuenta/{id}")
+    @Timed
+    public ResponseEntity<List<Trabajo>> getAllTrabajosByCuenta(Pageable pageable, @PathVariable Long id) {
+        log.debug("REST request to get a page of Trabajos");
+        User user = userRepository.findOne(id);
+        Page<Trabajo> page;
+        if (user.getAuthorities().stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"))){
+            page = trabajoRepository.findAll(pageable);
+        }else{
+            page = trabajoRepository.findAllByCuenta(pageable,id);
+        }
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/trabajos/cuenta");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

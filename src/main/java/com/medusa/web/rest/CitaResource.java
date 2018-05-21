@@ -3,7 +3,9 @@ package com.medusa.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Cita;
 
+import com.medusa.domain.User;
 import com.medusa.repository.CitaRepository;
+import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
@@ -37,8 +39,10 @@ public class CitaResource {
 
     private final CitaRepository citaRepository;
 
-    public CitaResource(CitaRepository citaRepository) {
+    private final UserRepository userRepository;
+    public CitaResource(CitaRepository citaRepository, UserRepository userRepository) {
         this.citaRepository = citaRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -95,6 +99,30 @@ public class CitaResource {
         log.debug("REST request to get a page of Citas");
         Page<Cita> page = citaRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/citas");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /citas/cuenta/:id : get all the citas filter by sede.
+     *
+     * @param pageable the pagination information
+     * @param id the cuenta identifier
+     * @return the ResponseEntity with status 200 (OK) and the list of citas in body
+     */
+    @GetMapping("/citas/cuenta/{id}")
+    @Timed
+    public ResponseEntity<List<Cita>> getCitasByCuenta(Pageable pageable, @PathVariable Long id) {
+        log.debug("REST request to get a page of Citas filtered by sede");
+        User user = userRepository.findOne(id);
+
+        Page<Cita> page;
+        if (user.getAuthorities().stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"))){
+            page = citaRepository.findAll(pageable);
+        }else {
+            page = citaRepository.findAllByCuenta(pageable,id);
+        }
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/citas/cuenta");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

@@ -5,6 +5,7 @@ import com.medusa.MedusaTattooApp;
 import com.medusa.domain.Pago;
 import com.medusa.domain.Trabajo;
 import com.medusa.repository.PagoRepository;
+import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -65,11 +66,12 @@ public class PagoResourceIntTest {
     private MockMvc restPagoMockMvc;
 
     private Pago pago;
+    private UserRepository userRepository;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PagoResource pagoResource = new PagoResource(pagoRepository);
+        final PagoResource pagoResource = new PagoResource(pagoRepository, userRepository);
         this.restPagoMockMvc = MockMvcBuilders.standaloneSetup(pagoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
