@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('TrabajoController', TrabajoController);
 
-    TrabajoController.$inject = ['DataUtils', 'Trabajo', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','$scope'];
+    TrabajoController.$inject = ['DataUtils', 'Trabajo', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','$scope','filterTrabajoByCuenta'];
 
-    function TrabajoController(DataUtils, Trabajo, ParseLinks, AlertService, paginationConstants,Principal,$scope) {
+    function TrabajoController(DataUtils, Trabajo, ParseLinks, AlertService, paginationConstants,Principal,$scope,filterTrabajoByCuenta) {
 
         var vm = this;
 
@@ -25,19 +25,19 @@
         vm.byteSize = DataUtils.byteSize;
 		vm.account = null;
 		getAccount();
-		
+
 		function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
-				console.log("=================Trabajo controller====================");
-				console.log(vm.account);
+				loadAll()
             });
         }
-		
-        loadAll();
+
+        //loadAll();
 
         function loadAll () {
-            Trabajo.query({
+            filterTrabajoByCuenta.query({
+                id:vm.account.id,
                 page: vm.page,
                 size: vm.itemsPerPage,
                 sort: sort()
@@ -73,12 +73,5 @@
             vm.page = page;
             loadAll();
         }
-		$scope.sedeFilter = function (item){
-			if(vm.account.authorities.includes("ROLE_ADMIN")){
-				return true;
-			}else{
-				return item.sede.id===vm.account.sede.id
-			}
-		};
     }
 })();

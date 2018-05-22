@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('PagoController', PagoController);
 
-    PagoController.$inject = ['Pago', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','$scope'];
+    PagoController.$inject = ['Pago', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','$scope','filterPagoByCuenta'];
 
-    function PagoController(Pago, ParseLinks, AlertService, paginationConstants,Principal,$scope) {
+    function PagoController(Pago, ParseLinks, AlertService, paginationConstants,Principal,$scope,filterPagoByCuenta) {
 
         var vm = this;
 
@@ -22,20 +22,22 @@
         vm.reset = reset;
         vm.reverse = true;
 
-        loadAll();
+        //loadAll();
 		vm.account = null;
 		getAccount();
-		
+
 		function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
+                loadAll();
 				console.log("=================Pago controller====================");
 				console.log(vm.account);
             });
         }
-		
+
         function loadAll () {
-            Pago.query({
+            filterPagoByCuenta.query({
+                id: vm.account.id,
                 page: vm.page,
                 size: vm.itemsPerPage,
                 sort: sort()
@@ -71,13 +73,13 @@
             vm.page = page;
             loadAll();
         }
-		
-		$scope.sedeFilter = function (item){
+
+		/*$scope.sedeFilter = function (item){
 			if(vm.account.authorities.includes("ROLE_ADMIN")){
 				return true;
 			}else{
 				return item.trabajo.sede.id===vm.account.sede.id
 			}
-		};
+		};*/
     }
 })();

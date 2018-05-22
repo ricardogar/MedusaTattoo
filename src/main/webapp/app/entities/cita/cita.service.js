@@ -3,10 +3,10 @@
     angular
         .module('medusaTattooApp')
         .factory('Cita', Cita)
-        .factory('filterByAccount', filterByAccount);
+        .factory('filterSedeByAccount', filterSedeByAccount);
 
     Cita.$inject = ['$resource', 'DateUtils']
-    filterByAccount.$inject = ['$resource'];
+    filterSedeByAccount.$inject = ['$resource'];
 
     function Cita ($resource, DateUtils) {
         var resourceUrl =  'api/citas/:id';
@@ -26,7 +26,7 @@
             'update': { method:'PUT' }
         });
     }
-    function filterByAccount ($resource) {
+    function filterSedeByAccount ($resource) {
         var resourceUrl =  'api/citas/cuenta/:id';
 
         return $resource(resourceUrl, {}, {

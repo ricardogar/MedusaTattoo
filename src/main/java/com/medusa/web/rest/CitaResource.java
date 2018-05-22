@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -125,6 +129,58 @@ public class CitaResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/citas/cuenta");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+
+    /**
+     * GET  /citas/cuenta/:id : get all the citas filter by cuenta and after a date.
+     *
+     * @param pageable the pagination information
+     * @param id the cuenta identifier
+     * @param date the date to set initial search
+     * @return the ResponseEntity with status 200 (OK) and the list of citas in body
+     */
+    @GetMapping("/citas/cuenta/{id}/after/{date}")
+    @Timed
+    public ResponseEntity<List<Cita>> getCitasByCuentaAfterFecha(Pageable pageable, @PathVariable Long id, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
+        log.debug("REST request to get a page of Citas filtered by account and after a date");
+        User user = userRepository.findOne(id);
+
+        Page<Cita> page;
+        if (user.getAuthorities().stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"))){
+            page = citaRepository.findAllByFechaYHoraAfter(pageable,date.toInstant(ZoneOffset.UTC));
+        }else {
+            page = citaRepository.findAllByCuentaAfterDate(pageable,id,date.toInstant(ZoneOffset.UTC));
+        }
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/citas/cuenta");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /citas/cuenta/:id : get all the citas filter by cuenta and date.
+     *
+     * @param pageable the pagination information
+     * @param id the cuenta identifier
+     * @return the ResponseEntity with status 200 (OK) and the list of citas in body
+     */
+    @GetMapping("/citas/cuenta/{id}/fecha/{date}")
+    @Timed
+    public ResponseEntity<List<Cita>> getCitasByCuentaFecha(Pageable pageable, @PathVariable Long id, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
+        log.debug("REST request to get a page of Citas filtered by account and date");
+        User user = userRepository.findOne(id);
+
+        Page<Cita> page;
+        if (user.getAuthorities().stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"))){
+            page = citaRepository.findAllByFechaYHoraIsBetween(pageable,date.toInstant(ZoneOffset.UTC),date.toInstant(ZoneOffset.UTC).plus(1,ChronoUnit.DAYS));
+        }else {
+            page = citaRepository.findAllByCuentaBetweenDates(pageable,id,date.toInstant(ZoneOffset.UTC),date.toInstant(ZoneOffset.UTC).plus(1,ChronoUnit.DAYS));
+        }
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/citas/cuenta");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
 
     /**
      * GET  /citas/:id : get the "id" cita.

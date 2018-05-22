@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('CitaDialogController', CitaDialogController);
 
-    CitaDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Cita', 'Trabajo','Principal'];
+    CitaDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Cita', 'Trabajo','Principal','filterTrabajoByCuenta'];
 
-    function CitaDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Cita, Trabajo,Principal) {
+    function CitaDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Cita, Trabajo,Principal,filterTrabajoByCuenta) {
         var vm = this;
 
         vm.cita = entity;
@@ -15,15 +15,32 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.trabajos = Trabajo.query();
+        vm.minDate = new Date();
+        vm.minDate.setHours(8);
+        vm.minTime=vm.minDate;
+        vm.maxDate = new Date();
+        vm.maxDate.setFullYear(vm.maxDate.getFullYear()+1);
+        vm.maxTime=vm.maxDate;
+        vm.maxDate.setHours(18);
+        console.log(vm.minDate);
+        console.log(vm.maxDate.getHours());
+        vm.dateOptions={minDate: vm.minDate,
+                        maxDate: vm.maxDate
+        };
+        vm.timeOptions={min: new Date(vm.minDate.getFullYear(),vm.minDate.getMonth(),vm.minDate.getDay(),7,0,0,0),
+                        max: new Date(vm.minDate.getFullYear(),vm.minDate.getMonth(),vm.minDate.getDay(),18,0,0,0)
+        };
+
+        //vm.trabajos = filterTrabajoByCuenta.query({id:vm.account.id});
 		vm.account = null;
 		getAccount();
-		
+
 		function getAccount() {
             Principal.identity().then(function(account) {
 				console.log("==========cita dialog controller=======");
                 vm.account = account;
 				console.log(vm.account);
+                vm.trabajos = filterTrabajoByCuenta.query({id:vm.account.id});
             });
         }
         $timeout(function (){
@@ -58,12 +75,5 @@
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }
-		$scope.sedeFilter = function (item){
-			if(vm.account.authorities.includes("ROLE_ADMIN")){
-				return true;
-			}else{
-				return item.sede.id===vm.account.sede.id
-			}
-		};
     }
 })();

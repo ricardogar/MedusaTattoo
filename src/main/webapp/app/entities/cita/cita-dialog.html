@@ -13,10 +13,11 @@
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.cita.id" readonly />
         </div>
+        <h3>{{vm.cita.fechaYHora}}</h3>
         <div class="form-group">
             <label class="control-label" data-translate="medusaTattooApp.cita.fechaYHora" for="field_fechaYHora">Fecha Y Hora</label>
                 <div class="input-group">
-                    <input id="field_fechaYHora" type="text" class="form-control" name="fechaYHora" datetime-picker="{{dateformat}}" ng-model="vm.cita.fechaYHora" is-open="vm.datePickerOpenStatus.fechaYHora"
+                    <input id="field_fechaYHora" type="text" class="form-control" name="fechaYHora" datetime-picker="{{dateformat}}" ng-model="vm.cita.fechaYHora" is-open="vm.datePickerOpenStatus.fechaYHora" datepicker-options="vm.dateOptions" timepicker-options="vm.timeOptions" minute-step="15"
                     required/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaYHora')"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -60,7 +61,7 @@
 
         <div class="form-group">
             <label data-translate="medusaTattooApp.cita.trabajo" for="field_trabajo">Trabajo</label>
-            <select class="form-control" id="field_trabajo" name="trabajo" ng-model="vm.cita.trabajo" ng-options="trabajo as trabajo.id for trabajo in vm.trabajos|filter:sedeFilter track by trabajo.id" required>
+            <select class="form-control" id="field_trabajo" name="trabajo" ng-model="vm.cita.trabajo" ng-options="trabajo as trabajo.id for trabajo in vm.trabajos track by trabajo.id" required>
             </select>
         </div>
         <div ng-show="editForm.trabajo.$invalid">

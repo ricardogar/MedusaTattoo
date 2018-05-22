@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('PagoDialogController', PagoDialogController);
 
-    PagoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Pago', 'Trabajo','Principal'];
+    PagoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Pago', 'Trabajo','Principal','filterTrabajoByCuenta'];
 
-    function PagoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Pago, Trabajo, Principal) {
+    function PagoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Pago, Trabajo, Principal,filterTrabajoByCuenta) {
         var vm = this;
 
         vm.pago = entity;
@@ -15,16 +15,17 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.trabajos = Trabajo.query();
+        //vm.trabajos = Trabajo.query({id:vm.account.id});
 		vm.pago.fecha=Date.now();
 		vm.account = null;
 		getAccount();
-		
+
 		function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
 				console.log("=================Pago dialog controller====================");
 				console.log(vm.account);
+                vm.trabajos = filterTrabajoByCuenta.query({id:vm.account.id});
             });
         }
 
@@ -61,13 +62,13 @@
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }
-		
-		$scope.sedeFilter = function (item){
+
+		/*$scope.sedeFilter = function (item){
 			if(vm.account.authorities.includes("ROLE_ADMIN")){
 				return true;
 			}else{
 				return item.sede.id===vm.account.sede.id
 			}
-		};
+		};*/
     }
 })();

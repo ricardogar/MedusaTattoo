@@ -2,9 +2,19 @@
     'use strict';
     angular
         .module('medusaTattooApp')
-        .factory('Pago', Pago);
+        .factory('Pago', Pago)
+        .factory('filterPagoByCuenta', filterPagoByCuenta);
 
     Pago.$inject = ['$resource', 'DateUtils'];
+    filterPagoByCuenta.$inject = ['$resource', 'DateUtils'];
+
+    function filterPagoByCuenta ($resource) {
+        var resourceUrl =  'api/pagos/cuenta/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true}
+        });
+    }
 
     function Pago ($resource, DateUtils) {
         var resourceUrl =  'api/pagos/:id';

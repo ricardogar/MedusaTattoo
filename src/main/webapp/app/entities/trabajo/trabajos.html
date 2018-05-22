@@ -49,7 +49,7 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="trabajo in vm.trabajos|filter:sedeFilter|filter:vm.currentSearch track by trabajo.id">
+                <tr ng-repeat="trabajo in vm.trabajos|filter:vm.currentSearch track by trabajo.id">
                     <td><a ui-sref="trabajo-detail({id:trabajo.id})">{{trabajo.id}}</a></td>
                     <td>{{trabajo.costoTotal | currency : "$" : 0}}</td>
                     <td>{{trabajo.totalPagado | currency : "$" : 0}}</td>
