@@ -7,15 +7,42 @@
             "otherEntityName": "rayaton",
             "otherEntityField": "fecha"
         },
-        {
+		{
             "relationshipType": "many-to-one",
-            "relationshipValidateRules": "required",
-            "relationshipName": "cliente",
-            "otherEntityName": "cliente",
-            "otherEntityField": "documento"
+            "relationshipName": "sede",
+            "otherEntityName": "sede",
+            "otherEntityField": "nombre"
         }
     ],
     "fields": [
+		{
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+		{
+            "fieldName": "telefono",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength",
+                "pattern"
+            ],
+            "fieldValidateRulesMinlength": 10,
+            "fieldValidateRulesMaxlength": 10,
+            "fieldValidateRulesPattern": "^[0-9]*$"
+        },
+		{
+            "fieldName": "imagen",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
         {
             "fieldName": "estado",
             "fieldType": "Estado_inscripcion",

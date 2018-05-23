@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('InscripcionController', InscripcionController);
 
-    InscripcionController.$inject = ['DataUtils', 'Inscripcion', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    InscripcionController.$inject = ['Inscripcion', 'ParseLinks', 'AlertService', 'paginationConstants'];
 
-    function InscripcionController(DataUtils, Inscripcion, ParseLinks, AlertService, paginationConstants) {
+    function InscripcionController(Inscripcion, ParseLinks, AlertService, paginationConstants) {
 
         var vm = this;
 
@@ -21,8 +21,6 @@
         vm.predicate = 'id';
         vm.reset = reset;
         vm.reverse = true;
-        vm.openFile = DataUtils.openFile;
-        vm.byteSize = DataUtils.byteSize;
 
         loadAll();
 

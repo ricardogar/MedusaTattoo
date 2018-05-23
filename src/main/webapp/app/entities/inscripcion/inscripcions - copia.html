@@ -36,32 +36,21 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="nombre"><span data-translate="medusaTattooApp.inscripcion.nombre">Nombre</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="telefono"><span data-translate="medusaTattooApp.inscripcion.telefono">Telefono</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="imagen"><span data-translate="medusaTattooApp.inscripcion.imagen">Imagen</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="estado"><span data-translate="medusaTattooApp.inscripcion.estado">Estado</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="rayaton.fecha"><span data-translate="medusaTattooApp.inscripcion.rayaton">Rayaton</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sede.nombre"><span data-translate="medusaTattooApp.inscripcion.sede">Sede</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cliente.documento"><span data-translate="medusaTattooApp.inscripcion.cliente">Cliente</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="inscripcion in vm.inscripcions|filter:vm.currentSearch track by inscripcion.id">
                     <td><a ui-sref="inscripcion-detail({id:inscripcion.id})">{{inscripcion.id}}</a></td>
-                    <td>{{inscripcion.nombre}}</td>
-                    <td>{{inscripcion.telefono}}</td>
-                    <td>
-                        <a ng-if="inscripcion.imagen" ng-click="vm.openFile(inscripcion.imagenContentType, inscripcion.imagen)">
-                            <img data-ng-src="{{'data:' + inscripcion.imagenContentType + ';base64,' + inscripcion.imagen}}" style="max-height: 30px;" alt="inscripcion image"/>
-                        </a>
-                        <span ng-if="inscripcion.imagen">{{inscripcion.imagenContentType}}, {{vm.byteSize(inscripcion.imagen)}}</span>
-                    </td>
                     <td data-translate="{{'medusaTattooApp.Estado_inscripcion.' + inscripcion.estado}}">{{inscripcion.estado}}</td>
                     <td>
                         <a ui-sref="rayaton-detail({id:inscripcion.rayaton.id})">{{inscripcion.rayaton.fecha}}</a>
                     </td>
                     <td>
-                        <a ui-sref="sede-detail({id:inscripcion.sede.id})">{{inscripcion.sede.nombre}}</a>
+                        <a ui-sref="cliente-detail({id:inscripcion.cliente.id})">{{inscripcion.cliente.documento}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

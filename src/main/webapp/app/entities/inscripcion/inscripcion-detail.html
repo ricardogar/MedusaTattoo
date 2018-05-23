@@ -4,6 +4,23 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="medusaTattooApp.inscripcion.nombre">Nombre</span></dt>
+        <dd>
+            <span>{{vm.inscripcion.nombre}}</span>
+        </dd>
+        <dt><span data-translate="medusaTattooApp.inscripcion.telefono">Telefono</span></dt>
+        <dd>
+            <span>{{vm.inscripcion.telefono}}</span>
+        </dd>
+        <dt><span data-translate="medusaTattooApp.inscripcion.imagen">Imagen</span></dt>
+        <dd>
+            <div ng-if="vm.inscripcion.imagen">
+                <a ng-click="vm.openFile(vm.inscripcion.imagenContentType, vm.inscripcion.imagen)">
+                    <img data-ng-src="{{'data:' + vm.inscripcion.imagenContentType + ';base64,' + vm.inscripcion.imagen}}" style="max-width: 100%;" alt="inscripcion image"/>
+                </a>
+                {{vm.inscripcion.imagenContentType}}, {{vm.byteSize(vm.inscripcion.imagen)}}
+            </div>
+        </dd>
         <dt><span data-translate="medusaTattooApp.inscripcion.estado">Estado</span></dt>
         <dd>
             <span data-translate="{{'medusaTattooApp.Estado_inscripcion.' + vm.inscripcion.estado}}">{{vm.inscripcion.estado}}</span>
@@ -12,9 +29,9 @@
         <dd>
             <a ui-sref="rayaton-detail({id:vm.inscripcion.rayaton.id})">{{vm.inscripcion.rayaton.fecha}}</a>
         </dd>
-        <dt><span data-translate="medusaTattooApp.inscripcion.cliente">Cliente</span></dt>
+        <dt><span data-translate="medusaTattooApp.inscripcion.sede">Sede</span></dt>
         <dd>
-            <a ui-sref="cliente-detail({id:vm.inscripcion.cliente.id})">{{vm.inscripcion.cliente.documento}}</a>
+            <a ui-sref="sede-detail({id:vm.inscripcion.sede.id})">{{vm.inscripcion.sede.nombre}}</a>
         </dd>
     </dl>
 

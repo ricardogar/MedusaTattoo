@@ -5,16 +5,18 @@
         .module('medusaTattooApp')
         .controller('InscripcionDialogController', InscripcionDialogController);
 
-    InscripcionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Inscripcion', 'Rayaton', 'Cliente'];
+    InscripcionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Inscripcion', 'Rayaton', 'Sede'];
 
-    function InscripcionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Inscripcion, Rayaton, Cliente) {
+    function InscripcionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Inscripcion, Rayaton, Sede) {
         var vm = this;
 
         vm.inscripcion = entity;
         vm.clear = clear;
+        vm.byteSize = DataUtils.byteSize;
+        vm.openFile = DataUtils.openFile;
         vm.save = save;
         vm.rayatons = Rayaton.query();
-        vm.clientes = Cliente.query();
+        vm.sedes = Sede.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -43,6 +45,20 @@
             vm.isSaving = false;
         }
 
+
+        vm.setImagen = function ($file, inscripcion) {
+            if ($file && $file.$error === 'pattern') {
+                return;
+            }
+            if ($file) {
+                DataUtils.toBase64($file, function(base64Data) {
+                    $scope.$apply(function() {
+                        inscripcion.imagen = base64Data;
+                        inscripcion.imagenContentType = $file.type;
+                    });
+                });
+            }
+        };
 
     }
 })();

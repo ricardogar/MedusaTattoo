@@ -4,15 +4,14 @@
         "sede" : {
             "home": {
                 "title": "Sedes",
-                "createLabel": "Crear nueva Sede",
-                "createOrEditLabel": "Crear o editar Sede",
-                "search": "Buscar Sede"
+                "createLabel": "Crear nuevA Sede",
+                "createOrEditLabel": "Crear o editar Sede"
             },
-            "created": "Una nueva Sede ha sido creado con el identificador {{ param }}",
-            "updated": "Una Sede ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Una Sede ha sido eliminado con el identificador {{ param }}",
+            "created": "Un nuevo Sede ha sido creado con el identificador {{ param }}",
+            "updated": "Un Sede ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Sede ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar esta Sede {{ id }}?"
+                "question": "¿Seguro que quiere eliminar la Sede {{ id }}?"
             },
             "detail": {
                 "title": "Sede"
@@ -20,7 +19,8 @@
             "nombre": "Nombre",
             "direccion": "Dirección",
             "telefono": "Teléfono",
-            "trabajo": "Trabajo"
+            "trabajo": "Trabajo",
+            "inscripcion": "Inscripción"
         }
     }
 }

@@ -5,8 +5,7 @@
             "home": {
                 "title": "Clientes",
                 "createLabel": "Crear nuevo Cliente",
-                "createOrEditLabel": "Crear o editar Cliente",
-                "search": "Buscar Cliente"
+                "createOrEditLabel": "Crear o editar Cliente"
             },
             "created": "Un nuevo Cliente ha sido creado con el identificador {{ param }}",
             "updated": "Un Cliente ha sido actualizado con el identificador {{ param }}",
@@ -17,15 +16,14 @@
             "detail": {
                 "title": "Cliente"
             },
-            "tipodocumento": "Tipo de Documento",
+            "tipodocumento": "Tipo de documento",
             "documento": "Documento",
             "nombre": "Nombre",
             "apellido": "Apellido",
             "telefono": "Teléfono",
-            "genero": "Género",
+            "genero": "Gpenero",
             "direccion": "Dirección",
-            "trabajo": "Trabajo",
-            "inscripcion": "Inscripción"
+            "trabajo": "Trabajo"
         }
     }
 }

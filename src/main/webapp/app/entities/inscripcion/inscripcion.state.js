@@ -106,6 +106,10 @@
                     resolve: {
                         entity: function () {
                             return {
+                                nombre: null,
+                                telefono: null,
+                                imagen: null,
+                                imagenContentType: null,
                                 estado: null,
                                 id: null
                             };

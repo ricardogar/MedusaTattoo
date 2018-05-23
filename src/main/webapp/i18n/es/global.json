@@ -17,6 +17,8 @@
                 "palabraClave": "Tags",
                 "rayaton": "Rayatónes",
                 "inscripcion": "Inscripciones",
+                "sede": "Sedes",
+                "cliente": "Clientes",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

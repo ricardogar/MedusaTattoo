@@ -16,9 +16,12 @@
             "detail": {
                 "title": "Inscripcion"
             },
+            "nombre": "Nombre",
+            "telefono": "Telefono",
+            "imagen": "Imagen",
             "estado": "Estado",
             "rayaton": "Rayaton",
-            "cliente": "Cliente"
+            "sede": "Sede"
         }
     }
 }

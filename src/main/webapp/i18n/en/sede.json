@@ -19,7 +19,8 @@
             "nombre": "Nombre",
             "direccion": "Direccion",
             "telefono": "Telefono",
-            "trabajo": "Trabajo"
+            "trabajo": "Trabajo",
+            "inscripcion": "Inscripcion"
         }
     }
 }

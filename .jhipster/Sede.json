@@ -6,6 +6,12 @@
             "relationshipName": "trabajo",
             "otherEntityName": "trabajo",
             "otherEntityRelationshipName": "sede"
+        },
+		{
+            "relationshipType": "one-to-many",
+            "relationshipName": "inscripcion",
+            "otherEntityName": "inscripcion",
+            "otherEntityRelationshipName": "sede"
         }
     ],
     "fields": [

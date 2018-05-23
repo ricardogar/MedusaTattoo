@@ -14,11 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="rayaton"/>
 
-        <addForeignKeyConstraint baseColumnNames="cliente_id"
+        <addForeignKeyConstraint baseColumnNames="sede_id"
                                  baseTableName="inscripcion"
-                                 constraintName="fk_inscripcion_cliente_id"
+                                 constraintName="fk_inscripcion_sede_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="cliente"/>
+                                 referencedTableName="sede"/>
 
     </changeSet>
 </databaseChangeLog>

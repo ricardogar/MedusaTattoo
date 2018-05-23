@@ -6,12 +6,6 @@
             "relationshipName": "trabajo",
             "otherEntityName": "trabajo",
             "otherEntityRelationshipName": "cliente"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "relationshipName": "inscripcion",
-            "otherEntityName": "inscripcion",
-            "otherEntityRelationshipName": "cliente"
         }
     ],
     "fields": [

@@ -22,7 +22,7 @@
         vm.clientes = Cliente.query();
         vm.sedes = Sede.query();
 		vm.account = null;
-		vm.isAdmin=false;
+		getAccount();
 		if(vm.trabajo.estado==null){
 			vm.trabajo.estado="EN_PROGRESO";
 		}
@@ -30,7 +30,7 @@
 			vm.trabajo.tipo="NORMAL";
 		}
 
-		/*function getAccount() {
+		function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
 				if(vm.trabajo.sede==null){
@@ -51,7 +51,7 @@
 			if(vm.account!==null){
 				vm.trabajo.sede=vm.account.sede;
 			}
-		}*/
+		}
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

@@ -3,7 +3,7 @@
         "Tipo_documento" : {
             "null": "",
             "CEDULA": "CÉDULA",
-            "CEDULA_EXTRANJERIA": "CÉDULA DE EXTRANJERIA",
+            "CEDULA_EXTRANJERIA": "CÉDULA DE EXTRANJERÍA",
             "TARJETA_IDENTIDAD": "TARJETA DE IDENTIDAD"
         }
     }

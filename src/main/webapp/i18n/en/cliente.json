@@ -23,8 +23,7 @@
             "telefono": "Telefono",
             "genero": "Genero",
             "direccion": "Direccion",
-            "trabajo": "Trabajo",
-            "inscripcion": "Inscripcion"
+            "trabajo": "Trabajo"
         }
     }
 }
