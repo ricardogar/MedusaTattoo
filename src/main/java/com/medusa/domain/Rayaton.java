@@ -47,6 +47,10 @@ public class Rayaton implements Serializable {
     @JsonIgnore
     private Set<Inscripcion> inscripcions = new HashSet<>();
 
+    @OneToMany(mappedBy = "rayaton")
+    @JsonIgnore
+    private Set<Trabajo> trabajos = new HashSet<>();
+
     @ManyToMany
     @JoinTable(name = "rayaton_tatuador",
                joinColumns = @JoinColumn(name="rayatons_id", referencedColumnName="id"),
@@ -137,6 +141,31 @@ public class Rayaton implements Serializable {
 
     public void setInscripcions(Set<Inscripcion> inscripcions) {
         this.inscripcions = inscripcions;
+    }
+
+    public Set<Trabajo> getTrabajos() {
+        return trabajos;
+    }
+
+    public Rayaton trabajos(Set<Trabajo> trabajos) {
+        this.trabajos = trabajos;
+        return this;
+    }
+
+    public Rayaton addTrabajo(Trabajo trabajo) {
+        this.trabajos.add(trabajo);
+        trabajo.setRayaton(this);
+        return this;
+    }
+
+    public Rayaton removeTrabajo(Trabajo trabajo) {
+        this.trabajos.remove(trabajo);
+        trabajo.setRayaton(null);
+        return this;
+    }
+
+    public void setTrabajos(Set<Trabajo> trabajos) {
+        this.trabajos = trabajos;
     }
 
     public Set<Tatuador> getTatuadors() {

@@ -3,26 +3,26 @@
     "medusaTattooApp": {
         "rayaton" : {
             "home": {
-                "title": "Rayatones",
-                "createLabel": "Crear nueva Rayatón",
-                "createOrEditLabel": "Crear o editar Rayatón",
-                "search": "Buscar Rayatón"
+                "title": "Rayatons",
+                "createLabel": "Crear nuevo Rayaton",
+                "createOrEditLabel": "Crear o editar Rayaton"
             },
-            "created": "Una nueva Rayatón ha sido creado con el identificador {{ param }}",
-            "updated": "Una Rayatón ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Una Rayatón ha sido eliminado con el identificador {{ param }}",
+            "created": "Un nuevo Rayaton ha sido creado con el identificador {{ param }}",
+            "updated": "Un Rayaton ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Rayaton ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar esta Rayatón {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Rayaton {{ id }}?"
             },
             "detail": {
-                "title": "Rayatón"
+                "title": "Rayaton"
             },
             "fecha": "Fecha",
             "cupos": "Cupos",
             "valorCupo": "Valor Cupo",
             "comentario": "Comentario",
-            "inscripcion": "Inscripción",
-            "tatuador": "Tatuadores"
+            "inscripcion": "Inscripcion",
+            "trabajo": "Trabajo",
+            "tatuador": "Tatuador"
         }
     }
 }

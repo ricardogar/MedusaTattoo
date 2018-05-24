@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('Rayaton Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockRayaton, MockInscripcion, MockTatuador;
+        var MockEntity, MockPreviousState, MockRayaton, MockInscripcion, MockTrabajo, MockTatuador;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -14,6 +14,7 @@ describe('Controller Tests', function() {
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockRayaton = jasmine.createSpy('MockRayaton');
             MockInscripcion = jasmine.createSpy('MockInscripcion');
+            MockTrabajo = jasmine.createSpy('MockTrabajo');
             MockTatuador = jasmine.createSpy('MockTatuador');
             
 
@@ -24,6 +25,7 @@ describe('Controller Tests', function() {
                 'previousState': MockPreviousState,
                 'Rayaton': MockRayaton,
                 'Inscripcion': MockInscripcion,
+                'Trabajo': MockTrabajo,
                 'Tatuador': MockTatuador
             };
             createController = function() {
