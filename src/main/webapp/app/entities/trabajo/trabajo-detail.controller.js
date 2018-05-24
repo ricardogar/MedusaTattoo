@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('TrabajoDetailController', TrabajoDetailController);
 
-    TrabajoDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Trabajo', 'Pago', 'Cita', 'Foto', 'Tatuador', 'Cliente', 'Sede'];
+    TrabajoDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Trabajo', 'Rayaton', 'Pago', 'Cita', 'Foto', 'Tatuador', 'Cliente', 'Sede'];
 
-    function TrabajoDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Trabajo, Pago, Cita, Foto, Tatuador, Cliente, Sede) {
+    function TrabajoDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Trabajo, Rayaton, Pago, Cita, Foto, Tatuador, Cliente, Sede) {
         var vm = this;
 
         vm.trabajo = entity;

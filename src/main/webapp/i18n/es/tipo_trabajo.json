@@ -3,7 +3,7 @@
         "Tipo_trabajo" : {
             "null": "",
             "NORMAL": "NORMAL",
-            "RAYATON": "RAYATÓN"
+            "RAYATON": "RAYATON"
         }
     }
 }

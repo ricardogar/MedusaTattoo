@@ -2,7 +2,7 @@
     "medusaTattooApp": {
         "Estado_trabajo" : {
             "null": "",
-            "EN_PROGRESO": "EN PROGRESO",
+            "EN_PROGRESO": "EN_PROGRESO",
             "FINALIZADO": "FINALIZADO",
             "CANCELADO": "CANCELADO"
         }

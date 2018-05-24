@@ -108,6 +108,7 @@
                     resolve: {
                         entity: function () {
                             return {
+                                nombre: null,
                                 costoTotal: null,
                                 totalPagado: null,
                                 estado: null,

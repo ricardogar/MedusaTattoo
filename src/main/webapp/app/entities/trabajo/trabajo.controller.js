@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('TrabajoController', TrabajoController);
 
-    TrabajoController.$inject = ['DataUtils', 'Trabajo', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','$scope','filterTrabajoByCuenta'];
+    TrabajoController.$inject = ['DataUtils', 'Trabajo', 'ParseLinks', 'AlertService', 'paginationConstants'];
 
-    function TrabajoController(DataUtils, Trabajo, ParseLinks, AlertService, paginationConstants,Principal,$scope,filterTrabajoByCuenta) {
+    function TrabajoController(DataUtils, Trabajo, ParseLinks, AlertService, paginationConstants) {
 
         var vm = this;
 
@@ -23,21 +23,11 @@
         vm.reverse = true;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
-		vm.account = null;
-		getAccount();
 
-		function getAccount() {
-            Principal.identity().then(function(account) {
-                vm.account = account;
-				loadAll()
-            });
-        }
-
-        //loadAll();
+        loadAll();
 
         function loadAll () {
-            filterTrabajoByCuenta.query({
-                id:vm.account.id,
+            Trabajo.query({
                 page: vm.page,
                 size: vm.itemsPerPage,
                 sort: sort()

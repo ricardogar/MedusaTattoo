@@ -28,6 +28,10 @@ public class Trabajo implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
+
+    @NotNull
     @Size(min = 5)
     @Pattern(regexp = "^[1-9][0-9]*$")
     @Column(name = "costo_total", nullable = false)
@@ -53,6 +57,9 @@ public class Trabajo implements Serializable {
 
     @Column(name = "foto_content_type")
     private String fotoContentType;
+
+    @ManyToOne
+    private Rayaton rayaton;
 
     @OneToMany(mappedBy = "trabajo")
     @JsonIgnore
@@ -85,6 +92,19 @@ public class Trabajo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Trabajo nombre(String nombre) {
+        this.nombre = nombre;
+        return this;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getCostoTotal() {
@@ -163,6 +183,19 @@ public class Trabajo implements Serializable {
 
     public void setFotoContentType(String fotoContentType) {
         this.fotoContentType = fotoContentType;
+    }
+
+    public Rayaton getRayaton() {
+        return rayaton;
+    }
+
+    public Trabajo rayaton(Rayaton rayaton) {
+        this.rayaton = rayaton;
+        return this;
+    }
+
+    public void setRayaton(Rayaton rayaton) {
+        this.rayaton = rayaton;
     }
 
     public Set<Pago> getPagos() {
@@ -304,6 +337,7 @@ public class Trabajo implements Serializable {
     public String toString() {
         return "Trabajo{" +
             "id=" + getId() +
+            ", nombre='" + getNombre() + "'" +
             ", costoTotal='" + getCostoTotal() + "'" +
             ", totalPagado='" + getTotalPagado() + "'" +
             ", estado='" + getEstado() + "'" +

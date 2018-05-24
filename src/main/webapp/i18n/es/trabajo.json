@@ -5,24 +5,24 @@
             "home": {
                 "title": "Trabajos",
                 "createLabel": "Crear nuevo Trabajo",
-                "createOrEditLabel": "Crear o editar Trabajo",
-                "search": "Buscar Trabajo"
+                "createOrEditLabel": "Crear o editar Trabajo"
             },
             "created": "Un nuevo Trabajo ha sido creado con el identificador {{ param }}",
             "updated": "Un Trabajo ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Trabajo ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar este Trabajo {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Trabajo {{ id }}?"
             },
             "detail": {
                 "title": "Trabajo"
             },
+            "nombre": "Nombre",
             "costoTotal": "Costo Total",
             "totalPagado": "Total Pagado",
-			"porPagar": "Por pagar",
             "estado": "Estado",
             "tipo": "Tipo",
             "foto": "Foto",
+            "rayaton": "Rayaton",
             "pago": "Pago",
             "cita": "Cita",
             "foto": "Foto",

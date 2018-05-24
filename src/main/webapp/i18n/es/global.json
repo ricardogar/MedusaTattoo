@@ -21,6 +21,7 @@
                 "cliente": "Clientes",
                 "cliente": "Cliente",
                 "tatuador": "Tatuador",
+                "trabajo": "Trabajo",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

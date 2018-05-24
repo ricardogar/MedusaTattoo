@@ -7,7 +7,6 @@ import com.medusa.domain.Tatuador;
 import com.medusa.domain.Cliente;
 import com.medusa.domain.Sede;
 import com.medusa.repository.TrabajoRepository;
-import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -45,6 +44,9 @@ import com.medusa.domain.enumeration.Tipo_trabajo;
 @SpringBootTest(classes = MedusaTattooApp.class)
 public class TrabajoResourceIntTest {
 
+    private static final String DEFAULT_NOMBRE = "AAAAAAAAAA";
+    private static final String UPDATED_NOMBRE = "BBBBBBBBBB";
+
     private static final String DEFAULT_COSTO_TOTAL = "5";
     private static final String UPDATED_COSTO_TOTAL = "2";
 
@@ -80,12 +82,11 @@ public class TrabajoResourceIntTest {
     private MockMvc restTrabajoMockMvc;
 
     private Trabajo trabajo;
-    private UserRepository userRepository;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TrabajoResource trabajoResource = new TrabajoResource(trabajoRepository, userRepository);
+        final TrabajoResource trabajoResource = new TrabajoResource(trabajoRepository);
         this.restTrabajoMockMvc = MockMvcBuilders.standaloneSetup(trabajoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -101,6 +102,7 @@ public class TrabajoResourceIntTest {
      */
     public static Trabajo createEntity(EntityManager em) {
         Trabajo trabajo = new Trabajo()
+            .nombre(DEFAULT_NOMBRE)
             .costoTotal(DEFAULT_COSTO_TOTAL)
             .totalPagado(DEFAULT_TOTAL_PAGADO)
             .estado(DEFAULT_ESTADO)
@@ -145,6 +147,7 @@ public class TrabajoResourceIntTest {
         List<Trabajo> trabajoList = trabajoRepository.findAll();
         assertThat(trabajoList).hasSize(databaseSizeBeforeCreate + 1);
         Trabajo testTrabajo = trabajoList.get(trabajoList.size() - 1);
+        assertThat(testTrabajo.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testTrabajo.getCostoTotal()).isEqualTo(DEFAULT_COSTO_TOTAL);
         assertThat(testTrabajo.getTotalPagado()).isEqualTo(DEFAULT_TOTAL_PAGADO);
         assertThat(testTrabajo.getEstado()).isEqualTo(DEFAULT_ESTADO);
@@ -170,6 +173,24 @@ public class TrabajoResourceIntTest {
         // Validate the Trabajo in the database
         List<Trabajo> trabajoList = trabajoRepository.findAll();
         assertThat(trabajoList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    public void checkNombreIsRequired() throws Exception {
+        int databaseSizeBeforeTest = trabajoRepository.findAll().size();
+        // set the field null
+        trabajo.setNombre(null);
+
+        // Create the Trabajo, which fails.
+
+        restTrabajoMockMvc.perform(post("/api/trabajos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(trabajo)))
+            .andExpect(status().isBadRequest());
+
+        List<Trabajo> trabajoList = trabajoRepository.findAll();
+        assertThat(trabajoList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -237,6 +258,7 @@ public class TrabajoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(trabajo.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].costoTotal").value(hasItem(DEFAULT_COSTO_TOTAL.toString())))
             .andExpect(jsonPath("$.[*].totalPagado").value(hasItem(DEFAULT_TOTAL_PAGADO.toString())))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())))
@@ -256,6 +278,7 @@ public class TrabajoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(trabajo.getId().intValue()))
+            .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.costoTotal").value(DEFAULT_COSTO_TOTAL.toString()))
             .andExpect(jsonPath("$.totalPagado").value(DEFAULT_TOTAL_PAGADO.toString()))
             .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.toString()))
@@ -284,6 +307,7 @@ public class TrabajoResourceIntTest {
         // Disconnect from session so that the updates on updatedTrabajo are not directly saved in db
         em.detach(updatedTrabajo);
         updatedTrabajo
+            .nombre(UPDATED_NOMBRE)
             .costoTotal(UPDATED_COSTO_TOTAL)
             .totalPagado(UPDATED_TOTAL_PAGADO)
             .estado(UPDATED_ESTADO)
@@ -300,6 +324,7 @@ public class TrabajoResourceIntTest {
         List<Trabajo> trabajoList = trabajoRepository.findAll();
         assertThat(trabajoList).hasSize(databaseSizeBeforeUpdate);
         Trabajo testTrabajo = trabajoList.get(trabajoList.size() - 1);
+        assertThat(testTrabajo.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testTrabajo.getCostoTotal()).isEqualTo(UPDATED_COSTO_TOTAL);
         assertThat(testTrabajo.getTotalPagado()).isEqualTo(UPDATED_TOTAL_PAGADO);
         assertThat(testTrabajo.getEstado()).isEqualTo(UPDATED_ESTADO);
