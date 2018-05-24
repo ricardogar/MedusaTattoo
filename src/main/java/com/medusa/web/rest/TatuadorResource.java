@@ -55,6 +55,7 @@ public class TatuadorResource {
         if (tatuador.getId() != null) {
             throw new BadRequestAlertException("A new tatuador cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        tatuador.setEstado(true);
         Tatuador result = tatuadorRepository.save(tatuador);
         return ResponseEntity.created(new URI("/api/tatuadors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

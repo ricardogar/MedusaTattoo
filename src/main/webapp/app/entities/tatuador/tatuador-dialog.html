@@ -146,10 +146,9 @@
             <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType"
                     ng-model="vm.tatuador.fotoContentType" />
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="vm.showEstado">
             <label class="control-label" data-translate="medusaTattooApp.tatuador.estado" for="field_estado">Estado</label>
-                <input type="checkbox" name="estado" id="field_estado"
-                          ng-model="vm.tatuador.estado"/>
+                <input type="checkbox" name="estado" id="field_estado"ng-model="vm.tatuador.estado"/>
         </div>
 
     </div>

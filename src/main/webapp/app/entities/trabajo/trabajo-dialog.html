@@ -73,7 +73,7 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="medusaTattooApp.trabajo.tipo" for="field_tipo">Tipo</label>
-            <select class="form-control" name="tipo" ng-model="vm.trabajo.tipo" id="field_tipo" required>
+            <select class="form-control" name="tipo" ng-model="vm.trabajo.tipo" ng-change="change()" id="field_tipo" required>
                 <option value="NORMAL" data-translate="medusaTattooApp.Tipo_trabajo.NORMAL">NORMAL</option>
                 <option value="RAYATON" data-translate="medusaTattooApp.Tipo_trabajo.RAYATON">RAYATON</option>
             </select>
@@ -83,6 +83,12 @@
                     This field is required.
                 </p>
             </div>
+        </div>
+		<div class="form-group" ng-if="vm.showRayaton">
+            <label data-translate="medusaTattooApp.trabajo.rayaton" for="field_rayaton">Rayaton</label>
+            <select class="form-control" id="field_rayaton" name="rayaton" ng-model="vm.trabajo.rayaton" ng-options="rayaton as rayaton.fecha for rayaton in vm.rayatons track by rayaton.id">
+                <option value=""></option>
+            </select>
         </div>
         <div class="form-group" ngf-drop ngf-change="vm.setFoto($file, vm.trabajo)" ngf-pattern="'image/*'">
             <label class="control-label" data-translate="medusaTattooApp.trabajo.foto" for="field_foto">Foto</label>
@@ -108,12 +114,6 @@
         </div>
 
         <div class="form-group">
-            <label data-translate="medusaTattooApp.trabajo.rayaton" for="field_rayaton">Rayaton</label>
-            <select class="form-control" id="field_rayaton" name="rayaton" ng-model="vm.trabajo.rayaton" ng-options="rayaton as rayaton.fecha for rayaton in vm.rayatons track by rayaton.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
             <label data-translate="medusaTattooApp.trabajo.tatuador" for="field_tatuador">Tatuador</label>
             <select class="form-control" id="field_tatuador" name="tatuador" ng-model="vm.trabajo.tatuador" ng-options="tatuador as tatuador.apodo for tatuador in vm.tatuadors track by tatuador.id" required>
             </select>
@@ -135,7 +135,7 @@
                 This field is required.
             </p>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="vm.isAdmin">
             <label data-translate="medusaTattooApp.trabajo.sede" for="field_sede">Sede</label>
             <select class="form-control" id="field_sede" name="sede" ng-model="vm.trabajo.sede" ng-options="sede as sede.nombre for sede in vm.sedes track by sede.id" required>
             </select>

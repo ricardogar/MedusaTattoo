@@ -22,6 +22,39 @@
         vm.tatuadors = Tatuador.query();
         vm.clientes = Cliente.query();
         vm.sedes = Sede.query();
+		vm.account = null;
+		vm.showRayaton=false;
+		getAccount();
+		if(vm.trabajo.estado==null){
+			vm.trabajo.estado="EN_PROGRESO";
+		}
+		if(vm.trabajo.tipo==null){
+			vm.trabajo.tipo="NORMAL";
+			vm.showRayaton=false;
+		}
+		$scope.change = function() {
+			vm.showRayaton=vm.trabajo.tipo==="RAYATON"
+		};
+
+		function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+				if(vm.trabajo.sede==null){
+					vm.trabajo.sede=vm.account.sede;
+				}
+
+				vm.isAdmin=vm.account.authorities.includes("ROLE_ADMIN");
+				console.log("isAdmin: ");
+				console.log(vm.isAdmin);
+            });
+        }
+
+		if(vm.trabajo.sede==null){
+			getAccount();
+			if(vm.account!==null){
+				vm.trabajo.sede=vm.account.sede;
+			}
+		}
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

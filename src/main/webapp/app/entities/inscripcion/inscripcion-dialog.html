@@ -77,9 +77,9 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="vm.isAdmin">
             <label class="control-label" data-translate="medusaTattooApp.inscripcion.estado" for="field_estado">Estado</label>
-            <select class="form-control" name="estado" ng-model="vm.inscripcion.estado" id="field_estado" required>
+            <select class="form-control" name="estado" ng-model="vm.inscripcion.estado" id="field_estado">
                 <option value="PRE_INSCRITO" data-translate="medusaTattooApp.Estado_inscripcion.PRE_INSCRITO">PRE_INSCRITO</option>
                 <option value="INSCRITO" data-translate="medusaTattooApp.Estado_inscripcion.INSCRITO">INSCRITO</option>
             </select>
@@ -91,13 +91,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <!--div class="form-group" ng-if="vm.isAdmin">
             <label data-translate="medusaTattooApp.inscripcion.rayaton" for="field_rayaton">Rayaton</label>
             <select class="form-control" id="field_rayaton" name="rayaton" ng-model="vm.inscripcion.rayaton" ng-options="rayaton as rayaton.fecha for rayaton in vm.rayatons track by rayaton.id">
                 <option value=""></option>
             </select>
-        </div>
-        <div class="form-group">
+        </div-->
+        <div class="form-group" ng-if="vm.isAdmin">
             <label data-translate="medusaTattooApp.inscripcion.sede" for="field_sede">Sede</label>
             <select class="form-control" id="field_sede" name="sede" ng-model="vm.inscripcion.sede" ng-options="sede as sede.nombre for sede in vm.sedes track by sede.id">
                 <option value=""></option>

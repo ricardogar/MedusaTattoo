@@ -11,6 +11,23 @@
                     </span>
                 </button>
             </div>
+			<div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.currentSearch" placeholder="Buscar...">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.currentSearch=&quot;&quot;">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <br/>
@@ -22,6 +39,7 @@
                     <th jh-sort-by="nombre"><span data-translate="medusaTattooApp.trabajo.nombre">Nombre</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="costoTotal"><span data-translate="medusaTattooApp.trabajo.costoTotal">Costo Total</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="totalPagado"><span data-translate="medusaTattooApp.trabajo.totalPagado">Total Pagado</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="porPagar"><span data-translate="medusaTattooApp.trabajo.porPagar">Por pagar</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="estado"><span data-translate="medusaTattooApp.trabajo.estado">Estado</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="tipo"><span data-translate="medusaTattooApp.trabajo.tipo">Tipo</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="foto"><span data-translate="medusaTattooApp.trabajo.foto">Foto</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -33,11 +51,12 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="trabajo in vm.trabajos track by trabajo.id">
+                <tr ng-repeat="trabajo in vm.trabajos|filter:vm.currentSearch track by trabajo.id">
                     <td><a ui-sref="trabajo-detail({id:trabajo.id})">{{trabajo.id}}</a></td>
                     <td>{{trabajo.nombre}}</td>
-                    <td>{{trabajo.costoTotal}}</td>
-                    <td>{{trabajo.totalPagado}}</td>
+                    <td>{{trabajo.costoTotal | currency : "$" : 0}}</td>
+                    <td>{{trabajo.totalPagado | currency : "$" : 0}}</td>
+					<td>{{trabajo.costoTotal-trabajo.totalPagado | currency : "$" : 0}}</td>
                     <td data-translate="{{'medusaTattooApp.Estado_trabajo.' + trabajo.estado}}">{{trabajo.estado}}</td>
                     <td data-translate="{{'medusaTattooApp.Tipo_trabajo.' + trabajo.tipo}}">{{trabajo.tipo}}</td>
                     <td>

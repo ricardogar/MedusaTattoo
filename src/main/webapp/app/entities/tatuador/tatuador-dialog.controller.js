@@ -17,6 +17,12 @@
         vm.save = save;
         vm.trabajos = Trabajo.query();
         vm.rayatons = Rayaton.query();
+		vm.showEstado=false;
+		if(vm.tatuador.tipodocumento==null){
+			vm.tatuador.tipodocumento="CEDULA";
+		}else{
+			vm.showEstado=true;
+		}
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
