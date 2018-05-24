@@ -67,6 +67,9 @@ public class TatuadorResourceIntTest {
     private static final String DEFAULT_FOTO_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_FOTO_CONTENT_TYPE = "image/png";
 
+    private static final Boolean DEFAULT_ESTADO = false;
+    private static final Boolean UPDATED_ESTADO = true;
+
     @Autowired
     private TatuadorRepository tatuadorRepository;
 
@@ -113,7 +116,8 @@ public class TatuadorResourceIntTest {
             .genero(DEFAULT_GENERO)
             .apodo(DEFAULT_APODO)
             .foto(DEFAULT_FOTO)
-            .fotoContentType(DEFAULT_FOTO_CONTENT_TYPE);
+            .fotoContentType(DEFAULT_FOTO_CONTENT_TYPE)
+            .estado(DEFAULT_ESTADO);
         return tatuador;
     }
 
@@ -146,6 +150,7 @@ public class TatuadorResourceIntTest {
         assertThat(testTatuador.getApodo()).isEqualTo(DEFAULT_APODO);
         assertThat(testTatuador.getFoto()).isEqualTo(DEFAULT_FOTO);
         assertThat(testTatuador.getFotoContentType()).isEqualTo(DEFAULT_FOTO_CONTENT_TYPE);
+        assertThat(testTatuador.isEstado()).isEqualTo(DEFAULT_ESTADO);
     }
 
     @Test
@@ -312,7 +317,8 @@ public class TatuadorResourceIntTest {
             .andExpect(jsonPath("$.[*].genero").value(hasItem(DEFAULT_GENERO.toString())))
             .andExpect(jsonPath("$.[*].apodo").value(hasItem(DEFAULT_APODO.toString())))
             .andExpect(jsonPath("$.[*].fotoContentType").value(hasItem(DEFAULT_FOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].foto").value(hasItem(Base64Utils.encodeToString(DEFAULT_FOTO))));
+            .andExpect(jsonPath("$.[*].foto").value(hasItem(Base64Utils.encodeToString(DEFAULT_FOTO))))
+            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.booleanValue())));
     }
 
     @Test
@@ -334,7 +340,8 @@ public class TatuadorResourceIntTest {
             .andExpect(jsonPath("$.genero").value(DEFAULT_GENERO.toString()))
             .andExpect(jsonPath("$.apodo").value(DEFAULT_APODO.toString()))
             .andExpect(jsonPath("$.fotoContentType").value(DEFAULT_FOTO_CONTENT_TYPE))
-            .andExpect(jsonPath("$.foto").value(Base64Utils.encodeToString(DEFAULT_FOTO)));
+            .andExpect(jsonPath("$.foto").value(Base64Utils.encodeToString(DEFAULT_FOTO)))
+            .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.booleanValue()));
     }
 
     @Test
@@ -365,7 +372,8 @@ public class TatuadorResourceIntTest {
             .genero(UPDATED_GENERO)
             .apodo(UPDATED_APODO)
             .foto(UPDATED_FOTO)
-            .fotoContentType(UPDATED_FOTO_CONTENT_TYPE);
+            .fotoContentType(UPDATED_FOTO_CONTENT_TYPE)
+            .estado(UPDATED_ESTADO);
 
         restTatuadorMockMvc.perform(put("/api/tatuadors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -385,6 +393,7 @@ public class TatuadorResourceIntTest {
         assertThat(testTatuador.getApodo()).isEqualTo(UPDATED_APODO);
         assertThat(testTatuador.getFoto()).isEqualTo(UPDATED_FOTO);
         assertThat(testTatuador.getFotoContentType()).isEqualTo(UPDATED_FOTO_CONTENT_TYPE);
+        assertThat(testTatuador.isEstado()).isEqualTo(UPDATED_ESTADO);
     }
 
     @Test

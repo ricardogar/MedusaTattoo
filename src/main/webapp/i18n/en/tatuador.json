@@ -24,6 +24,7 @@
             "genero": "Genero",
             "apodo": "Apodo",
             "foto": "Foto",
+            "estado": "Estado",
             "trabajo": "Trabajo",
             "rayatones": "Rayatones"
         }

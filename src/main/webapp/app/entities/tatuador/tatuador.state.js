@@ -117,6 +117,7 @@
                                 apodo: null,
                                 foto: null,
                                 fotoContentType: null,
+                                estado: null,
                                 id: null
                             };
                         }

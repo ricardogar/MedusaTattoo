@@ -68,6 +68,9 @@ public class Tatuador implements Serializable {
     @Column(name = "foto_content_type")
     private String fotoContentType;
 
+    @Column(name = "estado")
+    private Boolean estado;
+
     @OneToMany(mappedBy = "tatuador")
     @JsonIgnore
     private Set<Trabajo> trabajos = new HashSet<>();
@@ -202,6 +205,19 @@ public class Tatuador implements Serializable {
         this.fotoContentType = fotoContentType;
     }
 
+    public Boolean isEstado() {
+        return estado;
+    }
+
+    public Tatuador estado(Boolean estado) {
+        this.estado = estado;
+        return this;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
     public Set<Trabajo> getTrabajos() {
         return trabajos;
     }
@@ -286,6 +302,7 @@ public class Tatuador implements Serializable {
             ", apodo='" + getApodo() + "'" +
             ", foto='" + getFoto() + "'" +
             ", fotoContentType='" + getFotoContentType() + "'" +
+            ", estado='" + isEstado() + "'" +
             "}";
     }
 }
