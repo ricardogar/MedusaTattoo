@@ -83,6 +83,10 @@
             "fieldName": "foto",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "image"
+        },
+		{
+            "fieldName": "estado",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20180516041924",

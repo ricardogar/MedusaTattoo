@@ -5,20 +5,16 @@
         .module('medusaTattooApp')
         .controller('ClienteDialogController', ClienteDialogController);
 
-    ClienteDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Cliente', 'Trabajo', 'Inscripcion'];
+    ClienteDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Cliente', 'Trabajo'];
 
-    function ClienteDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Cliente, Trabajo, Inscripcion) {
+    function ClienteDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Cliente, Trabajo) {
         var vm = this;
 
         vm.cliente = entity;
         vm.clear = clear;
         vm.save = save;
         vm.trabajos = Trabajo.query();
-        vm.inscripcions = Inscripcion.query();
-		if(vm.cliente.tipodocumento==null){
-			vm.cliente.tipodocumento="CEDULA";
-		}
-		
+
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

@@ -114,7 +114,7 @@
                                 apellido: null,
                                 telefono: null,
                                 genero: null,
-                                direccion: null,
+                                email: null,
                                 id: null
                             };
                         }

@@ -58,8 +58,8 @@ public class ClienteResourceIntTest {
     private static final Genero DEFAULT_GENERO = Genero.MASCULINO;
     private static final Genero UPDATED_GENERO = Genero.FEMENINO;
 
-    private static final String DEFAULT_DIRECCION = "AAAAAAAAAA";
-    private static final String UPDATED_DIRECCION = "BBBBBBBBBB";
+    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -105,7 +105,7 @@ public class ClienteResourceIntTest {
             .apellido(DEFAULT_APELLIDO)
             .telefono(DEFAULT_TELEFONO)
             .genero(DEFAULT_GENERO)
-            .direccion(DEFAULT_DIRECCION);
+            .email(DEFAULT_EMAIL);
         return cliente;
     }
 
@@ -135,7 +135,7 @@ public class ClienteResourceIntTest {
         assertThat(testCliente.getApellido()).isEqualTo(DEFAULT_APELLIDO);
         assertThat(testCliente.getTelefono()).isEqualTo(DEFAULT_TELEFONO);
         assertThat(testCliente.getGenero()).isEqualTo(DEFAULT_GENERO);
-        assertThat(testCliente.getDireccion()).isEqualTo(DEFAULT_DIRECCION);
+        assertThat(testCliente.getEmail()).isEqualTo(DEFAULT_EMAIL);
     }
 
     @Test
@@ -282,7 +282,7 @@ public class ClienteResourceIntTest {
             .andExpect(jsonPath("$.[*].apellido").value(hasItem(DEFAULT_APELLIDO.toString())))
             .andExpect(jsonPath("$.[*].telefono").value(hasItem(DEFAULT_TELEFONO.toString())))
             .andExpect(jsonPath("$.[*].genero").value(hasItem(DEFAULT_GENERO.toString())))
-            .andExpect(jsonPath("$.[*].direccion").value(hasItem(DEFAULT_DIRECCION.toString())));
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
     }
 
     @Test
@@ -302,7 +302,7 @@ public class ClienteResourceIntTest {
             .andExpect(jsonPath("$.apellido").value(DEFAULT_APELLIDO.toString()))
             .andExpect(jsonPath("$.telefono").value(DEFAULT_TELEFONO.toString()))
             .andExpect(jsonPath("$.genero").value(DEFAULT_GENERO.toString()))
-            .andExpect(jsonPath("$.direccion").value(DEFAULT_DIRECCION.toString()));
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()));
     }
 
     @Test
@@ -331,7 +331,7 @@ public class ClienteResourceIntTest {
             .apellido(UPDATED_APELLIDO)
             .telefono(UPDATED_TELEFONO)
             .genero(UPDATED_GENERO)
-            .direccion(UPDATED_DIRECCION);
+            .email(UPDATED_EMAIL);
 
         restClienteMockMvc.perform(put("/api/clientes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -348,7 +348,7 @@ public class ClienteResourceIntTest {
         assertThat(testCliente.getApellido()).isEqualTo(UPDATED_APELLIDO);
         assertThat(testCliente.getTelefono()).isEqualTo(UPDATED_TELEFONO);
         assertThat(testCliente.getGenero()).isEqualTo(UPDATED_GENERO);
-        assertThat(testCliente.getDireccion()).isEqualTo(UPDATED_DIRECCION);
+        assertThat(testCliente.getEmail()).isEqualTo(UPDATED_EMAIL);
     }
 
     @Test

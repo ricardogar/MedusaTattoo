@@ -22,7 +22,7 @@
             "apellido": "Apellido",
             "telefono": "Telefono",
             "genero": "Genero",
-            "direccion": "Direccion",
+            "email": "Email",
             "trabajo": "Trabajo"
         }
     }

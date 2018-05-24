@@ -1,6 +1,12 @@
 {
     "fluentMethods": true,
     "relationships": [
+		{	
+            "relationshipType": "many-to-one",
+            "relationshipName": "rayaton",
+            "otherEntityName": "rayaton",
+            "otherEntityField": "fecha"
+        },
         {
             "relationshipType": "one-to-many",
             "relationshipName": "pago",
@@ -42,6 +48,13 @@
         }
     ],
     "fields": [
+		{
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
         {
             "fieldName": "costoTotal",
             "fieldType": "String",

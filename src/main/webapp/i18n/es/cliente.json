@@ -11,18 +11,18 @@
             "updated": "Un Cliente ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Cliente ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar el Cliente {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Cliente {{ id }}?"
             },
             "detail": {
                 "title": "Cliente"
             },
-            "tipodocumento": "Tipo de documento",
+            "tipodocumento": "Tipodocumento",
             "documento": "Documento",
             "nombre": "Nombre",
             "apellido": "Apellido",
-            "telefono": "Teléfono",
-            "genero": "Gpenero",
-            "direccion": "Dirección",
+            "telefono": "Telefono",
+            "genero": "Genero",
+            "email": "Email",
             "trabajo": "Trabajo"
         }
     }

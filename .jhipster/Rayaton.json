@@ -7,6 +7,12 @@
             "otherEntityName": "inscripcion",
             "otherEntityRelationshipName": "rayaton"
         },
+		{
+            "relationshipType": "one-to-many",
+            "relationshipName": "trabajo",
+            "otherEntityName": "trabajo",
+            "otherEntityRelationshipName": "rayaton"
+        },
         {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "rayatones",

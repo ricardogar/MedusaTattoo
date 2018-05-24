@@ -57,8 +57,8 @@ public class Cliente implements Serializable {
     @Column(name = "genero", nullable = false)
     private Genero genero;
 
-    @Column(name = "direccion")
-    private String direccion;
+    @Column(name = "email")
+    private String email;
 
     @OneToMany(mappedBy = "cliente")
     @JsonIgnore
@@ -151,17 +151,17 @@ public class Cliente implements Serializable {
         this.genero = genero;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getEmail() {
+        return email;
     }
 
-    public Cliente direccion(String direccion) {
-        this.direccion = direccion;
+    public Cliente email(String email) {
+        this.email = email;
         return this;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<Trabajo> getTrabajos() {
@@ -220,7 +220,7 @@ public class Cliente implements Serializable {
             ", apellido='" + getApellido() + "'" +
             ", telefono='" + getTelefono() + "'" +
             ", genero='" + getGenero() + "'" +
-            ", direccion='" + getDireccion() + "'" +
+            ", email='" + getEmail() + "'" +
             "}";
     }
 }

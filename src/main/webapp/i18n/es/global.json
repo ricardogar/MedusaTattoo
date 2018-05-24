@@ -19,6 +19,7 @@
                 "inscripcion": "Inscripciones",
                 "sede": "Sedes",
                 "cliente": "Clientes",
+                "cliente": "Cliente",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
