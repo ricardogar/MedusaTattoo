@@ -21,16 +21,16 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
 
 
 
-    @Query("SELECT c FROM Cita c JOIN c.trabajo t JOIN t.sede s WHERE s.id=(SELECT a.id FROM User u JOIN u.sede a WHERE u.id=?1)")
-    Page<Cita> findAllByCuenta(Pageable pageable, Long id);
+    //@Query("SELECT c FROM Cita c JOIN c.trabajo t JOIN t.sede s WHERE s.id=(SELECT a.id FROM User u JOIN u.sede a WHERE u.id=?1)")
+    Page<Cita> findAllByTrabajo_Sede_Id(Pageable pageable, Long id);
 
     Page<Cita> findAllByFechaYHoraIsBetween(Pageable pageable,Instant date1,Instant date2);
 
-    @Query("SELECT c FROM Cita c JOIN c.trabajo t JOIN t.sede s WHERE s.id=(SELECT a.id FROM User u JOIN u.sede a WHERE u.id= :id) AND c.fechaYHora BETWEEN :date AND :maxDate")
-    Page<Cita> findAllByCuentaBetweenDates(Pageable pageable, @Param("id") Long id, @Param("date") Instant date, @Param("maxDate") Instant maxDate);
+    //@Query("SELECT c FROM Cita c JOIN c.trabajo t JOIN t.sede s WHERE s.id=(SELECT a.id FROM User u JOIN u.sede a WHERE u.id= :id) AND c.fechaYHora BETWEEN :date AND :maxDate")
+    Page<Cita> findAllByTrabajo_Sede_IdAndFechaYHoraBetween(Pageable pageable, Long id, Instant date, Instant maxDate);
 
     Page<Cita> findAllByFechaYHoraAfter(Pageable pageable,Instant date);
 
-    @Query("SELECT c FROM Cita c JOIN c.trabajo t JOIN t.sede s WHERE s.id=(SELECT a.id FROM User u JOIN u.sede a WHERE u.id= :id) AND c.fechaYHora > :date")
-    Page<Cita> findAllByCuentaAfterDate(Pageable pageable,@Param("id") Long id,@Param("date") Instant date);
+    //@Query("SELECT c FROM Cita c JOIN c.trabajo t JOIN t.sede s WHERE s.id=(SELECT a.id FROM User u JOIN u.sede a WHERE u.id= :id) AND c.fechaYHora > :date")
+    Page<Cita> findAllByTrabajo_Sede_IdAndFechaYHoraAfter(Pageable pageable, Long id, Instant date);
 }

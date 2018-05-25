@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('CitaController', CitaController);
 
-    CitaController.$inject = ['Principal','$scope','filterSedeByAccount','Cita', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    CitaController.$inject = ['Principal','$scope','CitaByAccount','Cita', 'ParseLinks', 'AlertService', 'paginationConstants'];
 
-    function CitaController(Principal,$scope,filterSedeByAccount,Cita, ParseLinks, AlertService, paginationConstants) {
+    function CitaController(Principal,$scope,CitaByAccount,Cita, ParseLinks, AlertService, paginationConstants) {
 
         var vm = this;
 
@@ -37,7 +37,7 @@
         }
 
         function loadAll () {
-            filterSedeByAccount.query({
+            CitaByAccount.query({
                 id:vm.account.id,
                 page: vm.page,
                 size: vm.itemsPerPage,

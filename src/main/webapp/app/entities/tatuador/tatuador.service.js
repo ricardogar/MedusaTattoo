@@ -4,11 +4,13 @@
         .module('medusaTattooApp')
         .factory('Tatuador', Tatuador)
         .factory('TatuadorByCuenta', TatuadorByCuenta)
-        .factory('TatuadorActivoByCuenta', TatuadorActivoByCuenta);
+        .factory('TatuadorActivoByCuenta', TatuadorActivoByCuenta)
+        .factory('TatuadorBySede', TatuadorBySede);
 
     Tatuador.$inject = ['$resource'];
     TatuadorByCuenta.$inject = ['$resource'];
     TatuadorActivoByCuenta.$inject = ['$resource'];
+    TatuadorBySede.$inject = ['$resource'];
 
     function Tatuador ($resource) {
         var resourceUrl =  'api/tatuadors/:id';
@@ -36,6 +38,13 @@
     }
     function TatuadorActivoByCuenta ($resource) {
         var resourceUrl =  'api/tatuadors/activo/cuenta/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true}
+        });
+    }
+    function TatuadorBySede ($resource) {
+        var resourceUrl =  'api/tatuadors/sede/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true}
