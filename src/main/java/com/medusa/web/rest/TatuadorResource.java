@@ -26,6 +26,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 
@@ -132,26 +133,17 @@ public class TatuadorResource {
     /**
      * GET  /tatuadors/cuenta/:id : get all the tatuadors filtering by account.
      *
-     * @param pageable the pagination information
-     * @param id the account identifier
      * @return the ResponseEntity with status 200 (OK) and the list of tatuadors in body
      */
-    @GetMapping("/tatuadors/cuenta/{id}")
+    @GetMapping("/tatuadors/money/{minDate}/{maxDate}")
     @Timed
-    public ResponseEntity<List<Tatuador>> moneyByTatuadorsByCuentaBetweenDates(Pageable pageable,
-                                                                               @PathVariable("id") Long id,
-                                                                               @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
-                                                                               @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
+    public ResponseEntity<List<Object[]>> moneyByTatuadorsBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
+                                                                       @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
         log.debug("REST request to get a page of Tatuadors");
-        User user = userRepository.findOne(id);
-        Page<Tatuador> page;
-        if (user.isAdmin()){
-            page = tatuadorRepository.findAll(pageable);
-        }else{
-            page = tatuadorRepository.findAllBySede_Id(pageable, user.getSede().getId());
-        }
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tatuadors");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        List<Object[]> objects;
+         objects = tatuadorRepository.TatuadoraAndMoneyBetweenDates(minDate.toInstant(ZoneOffset.UTC),
+                                                                maxDate.toInstant(ZoneOffset.UTC));
+        return new ResponseEntity<>(objects, HttpStatus.OK);
     }
 
 

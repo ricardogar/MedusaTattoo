@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('CitaDialogController', CitaDialogController);
 
-    CitaDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Cita', 'Trabajo','Principal','filterTrabajoByCuenta'];
+    CitaDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Cita', 'Trabajo','Principal','TrabajosByAccountAndStatus'];
 
-    function CitaDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Cita, Trabajo,Principal,filterTrabajoByCuenta) {
+    function CitaDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Cita, Trabajo,Principal,TrabajosByAccountAndStatus) {
         var vm = this;
 
         vm.cita = entity;
@@ -31,7 +31,7 @@
                         max: new Date(vm.minDate.getFullYear(),vm.minDate.getMonth(),vm.minDate.getDay(),18,0,0,0)
         };
 
-        //vm.trabajos = filterTrabajoByCuenta.query({id:vm.account.id});
+        //vm.trabajos = TrabajosByAccountAndStatus.query({id:vm.account.id});
 		vm.account = null;
 		getAccount();
 
@@ -40,7 +40,7 @@
 				console.log("==========cita dialog controller=======");
                 vm.account = account;
 				console.log(vm.account);
-                vm.trabajos = filterTrabajoByCuenta.query({id:vm.account.id});
+                vm.trabajos = TrabajosByAccountAndStatus.query({id:vm.account.id,status:"EN_PROGRESO"});
             });
         }
         $timeout(function (){
