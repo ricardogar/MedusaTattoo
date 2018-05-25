@@ -4,10 +4,10 @@
         "refresh.button": "Refrescar",
         "stacktrace": "Stacktrace",
         "details": {
-            "details": "Details",
-            "properties": "Properties",
-            "name": "Name",
-            "value": "Value",
+            "details": "Detalles",
+            "properties": "Propiedades",
+            "name": "Nombre",
+            "value": "Valor",
             "error": "Error"
         },
         "indicator": {
@@ -20,7 +20,7 @@
             "status": "Estado"
         },
         "status": {
-            "UP": "LEVANTADO",
+            "UP": "FUNCIONANDO",
             "DOWN": "CAÍDO"
         }
     }

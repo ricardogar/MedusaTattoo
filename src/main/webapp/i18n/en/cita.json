@@ -3,22 +3,22 @@
     "medusaTattooApp": {
         "cita" : {
             "home": {
-                "title": "Citas",
-                "createLabel": "Create a new Cita",
-                "createOrEditLabel": "Create or edit a Cita"
+                "title": "Appointment",
+                "createLabel": "Create a new appointment",
+                "createOrEditLabel": "Create or edit a appointment"
             },
-            "created": "A new Cita is created with identifier {{ param }}",
-            "updated": "A Cita is updated with identifier {{ param }}",
-            "deleted": "A Cita is deleted with identifier {{ param }}",
+            "created": "A new appointment is created with identifier {{ param }}",
+            "updated": "A appointment is updated with identifier {{ param }}",
+            "deleted": "A appointment is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Cita {{ id }}?"
+                "question": "Are you sure you want to delete appointment {{ id }}?"
             },
             "detail": {
-                "title": "Cita"
+                "title": "appointment"
             },
-            "fechaYHora": "Fecha Y Hora",
-            "duracion": "Duracion",
-            "trabajo": "Trabajo"
+            "fechaYHora": "Date & Time",
+            "duracion": "Duration",
+            "trabajo": "Work"
         }
     }
 }

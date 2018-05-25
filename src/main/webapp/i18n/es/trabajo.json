@@ -11,7 +11,7 @@
             "updated": "Un Trabajo ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Trabajo ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Trabajo {{ id }}?"
+                "question": "¿Seguro que quiere eliminar el Trabajo {{ id }}?"
             },
             "detail": {
                 "title": "Trabajo"

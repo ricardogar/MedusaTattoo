@@ -2,9 +2,9 @@
     "medusaTattooApp": {
         "Tipo_documento" : {
             "null": "",
-            "CEDULA": "CEDULA",
-            "CEDULA_EXTRANJERIA": "CEDULA_EXTRANJERIA",
-            "TARJETA_IDENTIDAD": "TARJETA_IDENTIDAD"
+            "CEDULA": "DNI",
+            "CEDULA_EXTRANJERIA": "FOREIGN_DNI",
+            "TARJETA_IDENTIDAD": "IDENTITY_CARD"
         }
     }
 }

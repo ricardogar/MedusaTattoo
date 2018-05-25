@@ -3,13 +3,21 @@
     angular
         .module('medusaTattooApp')
         .factory('Trabajo', Trabajo)
-        .factory('filterTrabajoByCuenta', filterTrabajoByCuenta);
+        .factory('TrabajoByAccount', TrabajoByAccount)
+        .factory('TrabajosByAccountAndStatus', TrabajosByAccountAndStatus);
 
     Trabajo.$inject = ['$resource'];
-    filterTrabajoByCuenta.$inject = ['$resource'];
-
-    function filterTrabajoByCuenta ($resource) {
+    TrabajoByAccount.$inject = ['$resource'];
+    TrabajosByAccountAndStatus.$inject = ['$resource'];
+    function TrabajoByAccount ($resource) {
         var resourceUrl =  'api/trabajos/cuenta/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true}
+        });
+    }
+    function TrabajosByAccountAndStatus ($resource) {
+        var resourceUrl =  'api/trabajos/cuenta/:id/estado/:status';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true}

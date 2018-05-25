@@ -3,30 +3,30 @@
     "medusaTattooApp": {
         "tatuador" : {
             "home": {
-                "title": "Tatuadors",
-                "createLabel": "Create a new Tatuador",
-                "createOrEditLabel": "Create or edit a Tatuador"
+                "title": "Tattooists",
+                "createLabel": "Create a new tattooist",
+                "createOrEditLabel": "Create or edit a tattooist"
             },
-            "created": "A new Tatuador is created with identifier {{ param }}",
-            "updated": "A Tatuador is updated with identifier {{ param }}",
-            "deleted": "A Tatuador is deleted with identifier {{ param }}",
+            "created": "A new tattooist is created with identifier {{ param }}",
+            "updated": "A tattooist is updated with identifier {{ param }}",
+            "deleted": "A tattooist is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Tatuador {{ id }}?"
+                "question": "Are you sure you want to delete tattooist {{ id }}?"
             },
             "detail": {
-                "title": "Tatuador"
+                "title": "tattooist"
             },
-            "tipodocumento": "Tipodocumento",
-            "documento": "Documento",
-            "nombre": "Nombre",
-            "apellido": "Apellido",
-            "telefono": "Telefono",
-            "genero": "Genero",
-            "apodo": "Apodo",
-            "foto": "Foto",
-            "estado": "Estado",
-            "trabajo": "Trabajo",
-            "sede": "Sede",
+            "tipodocumento": "Document Type",
+            "documento": "Document",
+            "nombre": "Name",
+            "apellido": "Lastname",
+            "telefono": "Phone",
+            "genero": "Gender",
+            "apodo": "Nick",
+            "foto": "Photo",
+            "estado": "State",
+            "trabajo": "Work",
+            "sede": "Studio",
             "rayatones": "Rayatones"
         }
     }

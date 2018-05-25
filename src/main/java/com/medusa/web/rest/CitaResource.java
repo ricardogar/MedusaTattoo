@@ -116,7 +116,7 @@ public class CitaResource {
      */
     @GetMapping("/citas/cuenta/{id}")
     @Timed
-    public ResponseEntity<List<Cita>> getCitasByCuenta(Pageable pageable, @PathVariable Long id) {
+    public ResponseEntity<List<Cita>> getCitasByAccount(Pageable pageable, @PathVariable Long id) {
         log.debug("REST request to get a page of Citas filtered by sede");
         User user = userRepository.findOne(id);
 
@@ -142,7 +142,7 @@ public class CitaResource {
      */
     @GetMapping("/citas/cuenta/{id}/after/{date}")
     @Timed
-    public ResponseEntity<List<Cita>> getCitasByCuentaAfterFecha(Pageable pageable, @PathVariable Long id,
+    public ResponseEntity<List<Cita>> getCitasByAccountAfterDate(Pageable pageable, @PathVariable Long id,
                                                                  @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
         log.debug("REST request to get a page of Citas filtered by account and after a date");
         User user = userRepository.findOne(id);
@@ -167,7 +167,7 @@ public class CitaResource {
      */
     @GetMapping("/citas/cuenta/{id}/in/{date}")
     @Timed
-    public ResponseEntity<List<Cita>> getCitasByCuentaInFecha(Pageable pageable, @PathVariable Long id,
+    public ResponseEntity<List<Cita>> getCitasByAccountInDate(Pageable pageable, @PathVariable Long id,
                                                               @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
         log.debug("REST request to get a page of Citas filtered by account and date");
         User user = userRepository.findOne(id);
@@ -199,9 +199,9 @@ public class CitaResource {
      */
     @GetMapping("/citas/cuenta/{id}/between/{minDate}/{maxDate}")
     @Timed
-    public ResponseEntity<List<Cita>> getCitasByCuentaBetweenDates(Pageable pageable, @PathVariable Long id,
-                                                                   @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
-                                                                   @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
+    public ResponseEntity<List<Cita>> getCitasByAccountBetweenDates(Pageable pageable, @PathVariable Long id,
+                                                                    @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
+                                                                    @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
         log.debug("REST request to get a page of Citas filtered by account and date");
         User user = userRepository.findOne(id);
         Instant minInstant=minDate.toInstant(ZoneOffset.UTC);

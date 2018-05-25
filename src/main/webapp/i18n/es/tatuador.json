@@ -11,7 +11,7 @@
             "updated": "Un Tatuador ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Tatuador ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere Inhabilitar Tatuador {{ id }}?",
+                "question": "¿Seguro que quiere Inhabilitar el Tatuador {{ id }}?",
                 "title": "Confirmación"
             },
             "detail": {

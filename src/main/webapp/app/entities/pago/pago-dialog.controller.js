@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('PagoDialogController', PagoDialogController);
 
-    PagoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Pago', 'Trabajo','Principal','filterTrabajoByCuenta'];
+    PagoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Pago', 'Trabajo','Principal','TrabajoByAccount'];
 
-    function PagoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Pago, Trabajo, Principal,filterTrabajoByCuenta) {
+    function PagoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Pago, Trabajo, Principal,TrabajoByAccount) {
         var vm = this;
 
         vm.pago = entity;
@@ -18,6 +18,7 @@
         //vm.trabajos = Trabajo.query({id:vm.account.id});
 		vm.pago.fecha=Date.now();
 		vm.account = null;
+        vm.maxValue = 0;
 		getAccount();
 
 		function getAccount() {
@@ -25,8 +26,11 @@
                 vm.account = account;
 				console.log("=================Pago dialog controller====================");
 				console.log(vm.account);
-                vm.trabajos = filterTrabajoByCuenta.query({id:vm.account.id});
+                vm.trabajos = TrabajoByAccount.query({id:vm.account.id});
             });
+        }
+        $scope.setMaxValue = function () {
+            vm.maxValue = vm.pago.trabajo.costoTotal - vm.pago.trabajo.totalPagado;
         }
 
         $timeout(function (){

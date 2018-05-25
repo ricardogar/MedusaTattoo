@@ -12,7 +12,7 @@
             "updated": "Un Pago ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Pago ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar este Pago {{ id }}?"
+                "question": "¿Seguro que quiere eliminar el Pago {{ id }}?"
             },
             "detail": {
                 "title": "Pago"

@@ -3,7 +3,7 @@
     "medusaTattooApp": {
         "rayaton" : {
             "home": {
-                "title": "Rayatons",
+                "title": "Rayaton",
                 "createLabel": "Create a new Rayaton",
                 "createOrEditLabel": "Create or edit a Rayaton"
             },
@@ -16,13 +16,13 @@
             "detail": {
                 "title": "Rayaton"
             },
-            "fecha": "Fecha",
-            "cupos": "Cupos",
-            "valorCupo": "Valor Cupo",
-            "comentario": "Comentario",
-            "inscripcion": "Inscripcion",
-            "trabajo": "Trabajo",
-            "tatuador": "Tatuador"
+            "fecha": "Date",
+            "cupos": "quota",
+            "valorCupo": "cost quota",
+            "comentario": "Coment",
+            "inscripcion": "Inscription",
+            "trabajo": "Work",
+            "tatuador": "Tattooist"
         }
     }
 }

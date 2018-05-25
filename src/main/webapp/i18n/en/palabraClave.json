@@ -3,21 +3,21 @@
     "medusaTattooApp": {
         "palabraClave" : {
             "home": {
-                "title": "Palabra Claves",
-                "createLabel": "Create a new Palabra Clave",
-                "createOrEditLabel": "Create or edit a Palabra Clave"
+                "title": "Tags",
+                "createLabel": "Create a new tag",
+                "createOrEditLabel": "Create or edit a tag"
             },
-            "created": "A new Palabra Clave is created with identifier {{ param }}",
-            "updated": "A Palabra Clave is updated with identifier {{ param }}",
-            "deleted": "A Palabra Clave is deleted with identifier {{ param }}",
+            "created": "A new tag is created with identifier {{ param }}",
+            "updated": "A tag is updated with identifier {{ param }}",
+            "deleted": "A tag is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Palabra Clave {{ id }}?"
+                "question": "Are you sure you want to delete tag {{ id }}?"
             },
             "detail": {
-                "title": "Palabra Clave"
+                "title": "Tag"
             },
-            "palabra": "Palabra",
-            "foto": "Foto"
+            "palabra": "word",
+            "foto": "Photo"
         }
     }
 }

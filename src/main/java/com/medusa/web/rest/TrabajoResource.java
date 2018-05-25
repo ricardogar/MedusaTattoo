@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Trabajo;
 
 import com.medusa.domain.User;
+import com.medusa.domain.enumeration.Estado_trabajo;
 import com.medusa.repository.TrabajoRepository;
 import com.medusa.repository.UserRepository;
 
@@ -26,6 +27,8 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.medusa.domain.enumeration.Estado_trabajo.*;
 
 /**
  * REST controller for managing Trabajo.
@@ -107,7 +110,7 @@ public class TrabajoResource {
 
 
 	/**
-     * GET  /trabajos/cuenta/:id : get all the trabajos filtered by sede.
+     * GET  /trabajos/cuenta/:id : get all the trabajos filtered by account.
      *
      * @param pageable the pagination information
      * @param id the cuenta identifier
@@ -115,21 +118,44 @@ public class TrabajoResource {
      */
     @GetMapping("/trabajos/cuenta/{id}")
     @Timed
-    public ResponseEntity<List<Trabajo>> getAllTrabajosByCuenta(Pageable pageable, @PathVariable Long id) {
+    public ResponseEntity<List<Trabajo>> getTrabajosByAccount(Pageable pageable, @PathVariable Long id) {
         log.debug("REST request to get a page of Trabajos");
         User user = userRepository.findOne(id);
         Page<Trabajo> page;
         if (user.isAdmin()){
             page = trabajoRepository.findAll(pageable);
         }else{
-            page = trabajoRepository.findAllByCuenta(pageable,id);
+            page = trabajoRepository.findAllBySede_Id(pageable,user.getSede().getId());
         }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/trabajos/cuenta");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /trabajos/cuenta/:id/estado/:status : get all the trabajos filtered by account and status.
+     *
+     * @param pageable the pagination information
+     * @param id the cuenta identifier
+     * @param status the
+     * @return the ResponseEntity with status 200 (OK) and the list of trabajos in body
+     */
+    @GetMapping("/trabajos/cuenta/{id}/estado/{status}")
+    @Timed
+    public ResponseEntity<List<Trabajo>> getTrabajosByAccountAndStatus(Pageable pageable, @PathVariable Long id, @PathVariable("status") String status) {
+        log.debug("REST request to get a page of Trabajos");
+        log.debug(valueOf(status).toString());
+        User user = userRepository.findOne(id);
+        Page<Trabajo> page;
+        if (user.isAdmin()){
+            page = trabajoRepository.findAllByEstadoLike(pageable,valueOf(status));
+        }else{
+            page = trabajoRepository.findAllBySede_IdAndEstadoLike(pageable,user.getSede().getId(),valueOf(status));
+        }
 
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/trabajos/cuenta");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /trabajos/:id : get the "id" trabajo.

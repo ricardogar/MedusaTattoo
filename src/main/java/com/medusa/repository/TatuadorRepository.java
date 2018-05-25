@@ -18,4 +18,5 @@ public interface TatuadorRepository extends JpaRepository<Tatuador, Long> {
     Page<Tatuador> findAllBySede_Id(Pageable pageable, Long idSede);
     Page<Tatuador> findAllByEstadoIsTrue(Pageable pageable);
     Page<Tatuador> findAllBySede_IdAndEstadoIsTrue(Pageable pageable, Long idSede);
+
 }

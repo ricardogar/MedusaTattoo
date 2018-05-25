@@ -3,32 +3,32 @@
     "medusaTattooApp": {
         "trabajo" : {
             "home": {
-                "title": "Trabajos",
-                "createLabel": "Create a new Trabajo",
-                "createOrEditLabel": "Create or edit a Trabajo"
+                "title": "Works",
+                "createLabel": "Create a new work",
+                "createOrEditLabel": "Create or edit a work"
             },
-            "created": "A new Trabajo is created with identifier {{ param }}",
-            "updated": "A Trabajo is updated with identifier {{ param }}",
-            "deleted": "A Trabajo is deleted with identifier {{ param }}",
+            "created": "A new work is created with identifier {{ param }}",
+            "updated": "A work is updated with identifier {{ param }}",
+            "deleted": "A work is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Trabajo {{ id }}?"
+                "question": "Are you sure you want to delete work {{ id }}?"
             },
             "detail": {
-                "title": "Trabajo"
+                "title": "work"
             },
-            "nombre": "Nombre",
-            "costoTotal": "Costo Total",
-            "totalPagado": "Total Pagado",
-            "estado": "Estado",
-            "tipo": "Tipo",
-            "foto": "Foto",
+            "nombre": "Name",
+            "costoTotal": "Total cost",
+            "totalPagado": "Total payments",
+            "estado": "States",
+            "tipo": "Type",
+            "foto": "Photo",
             "rayaton": "Rayaton",
-            "pago": "Pago",
-            "cita": "Cita",
-            "foto": "Foto",
-            "tatuador": "Tatuador",
-            "cliente": "Cliente",
-            "sede": "Sede"
+            "pago": "Payment",
+            "cita": "Appointment",
+            "foto": "Photo",
+            "tatuador": "Tattoist",
+            "cliente": "Client",
+            "sede": "Studio"
         }
     }
 }

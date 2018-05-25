@@ -8,9 +8,9 @@
                 "createOrEditLabel": "Crear o editar Palabra Clave",
                 "search": "Buscar Palabras Clave"
             },
-            "created": "Una nueva Palabra Clave ha sido creado con el identificador {{ param }}",
-            "updated": "Una Palabra Clave ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Una Palabra Clave ha sido eliminado con el identificador {{ param }}",
+            "created": "Una nueva Palabra Clave ha sido creada con el identificador {{ param }}",
+            "updated": "Una Palabra Clave ha sido actualizada con el identificador {{ param }}",
+            "deleted": "Una Palabra Clave ha sido eliminada con el identificador {{ param }}",
             "delete": {
                 "question": "¿Seguro que quiere eliminar esta Palabra Clave {{ id }}?"
             },

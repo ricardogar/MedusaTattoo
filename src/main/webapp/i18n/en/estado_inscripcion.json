@@ -2,8 +2,8 @@
     "medusaTattooApp": {
         "Estado_inscripcion" : {
             "null": "",
-            "PRE_INSCRITO": "PRE_INSCRITO",
-            "INSCRITO": "INSCRITO"
+            "PRE_INSCRITO": "PRE_REGISTERED",
+            "INSCRITO": "REGISTERED"
         }
     }
 }

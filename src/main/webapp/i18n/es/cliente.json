@@ -16,7 +16,7 @@
             "detail": {
                 "title": "Cliente"
             },
-            "tipodocumento": "Tipodocumento",
+            "tipodocumento": "Tipo de documento",
             "documento": "Documento",
             "nombre": "Nombre",
             "apellido": "Apellido",

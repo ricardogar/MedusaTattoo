@@ -2,8 +2,8 @@
     "medusaTattooApp": {
         "Genero" : {
             "null": "",
-            "MASCULINO": "MASCULINO",
-            "FEMENINO": "FEMENINO"
+            "MASCULINO": "MALE",
+            "FEMENINO": "FEMALE"
         }
     }
 }

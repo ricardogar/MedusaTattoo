@@ -3,23 +3,23 @@
     "medusaTattooApp": {
         "foto" : {
             "home": {
-                "title": "Fotos",
-                "createLabel": "Create a new Foto",
-                "createOrEditLabel": "Create or edit a Foto"
+                "title": "Gallery",
+                "createLabel": "Create a new Photo",
+                "createOrEditLabel": "Create or edit a Photo"
             },
-            "created": "A new Foto is created with identifier {{ param }}",
-            "updated": "A Foto is updated with identifier {{ param }}",
-            "deleted": "A Foto is deleted with identifier {{ param }}",
+            "created": "A new Photo is created with identifier {{ param }}",
+            "updated": "A Photo is updated with identifier {{ param }}",
+            "deleted": "A Photo is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Foto {{ id }}?"
+                "question": "Are you sure you want to delete Photo {{ id }}?"
             },
             "detail": {
-                "title": "Foto"
+                "title": "Gallery"
             },
-            "descripcion": "Descripcion",
-            "imagen": "Imagen",
-            "palabraClave": "Palabra Clave",
-            "trabajo": "Trabajo"
+            "descripcion": "Description",
+            "imagen": "Image",
+            "palabraClave": "Tags",
+            "trabajo": "Word"
         }
     }
 }

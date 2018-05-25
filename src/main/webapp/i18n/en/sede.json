@@ -3,25 +3,25 @@
     "medusaTattooApp": {
         "sede" : {
             "home": {
-                "title": "Sedes",
-                "createLabel": "Create a new Sede",
-                "createOrEditLabel": "Create or edit a Sede"
+                "title": "Studios",
+                "createLabel": "Create a new studio",
+                "createOrEditLabel": "Create or edit a studio"
             },
-            "created": "A new Sede is created with identifier {{ param }}",
-            "updated": "A Sede is updated with identifier {{ param }}",
-            "deleted": "A Sede is deleted with identifier {{ param }}",
+            "created": "A new studio is created with identifier {{ param }}",
+            "updated": "A studio is updated with identifier {{ param }}",
+            "deleted": "A studio is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Sede {{ id }}?"
+                "question": "Are you sure you want to delete studio {{ id }}?"
             },
             "detail": {
-                "title": "Sede"
+                "title": "studio"
             },
-            "nombre": "Nombre",
-            "direccion": "Direccion",
-            "telefono": "Telefono",
-            "trabajo": "Trabajo",
-            "tatuador": "Tatuador",
-            "inscripcion": "Inscripcion"
+            "nombre": "Name",
+            "direccion": "Direction",
+            "telefono": "Phone",
+            "trabajo": "Work",
+            "tatuador": "Tattooist",
+            "inscripcion": "Inscription"
         }
     }
 }

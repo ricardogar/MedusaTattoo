@@ -3,25 +3,25 @@
     "medusaTattooApp": {
         "inscripcion" : {
             "home": {
-                "title": "Inscripcions",
-                "createLabel": "Create a new Inscripcion",
-                "createOrEditLabel": "Create or edit a Inscripcion"
+                "title": "Inscriptions",
+                "createLabel": "Create a new Inscriptions",
+                "createOrEditLabel": "Create or edit a Inscriptions"
             },
-            "created": "A new Inscripcion is created with identifier {{ param }}",
-            "updated": "A Inscripcion is updated with identifier {{ param }}",
-            "deleted": "A Inscripcion is deleted with identifier {{ param }}",
+            "created": "A new Inscriptions is created with identifier {{ param }}",
+            "updated": "A Inscription is updated with identifier {{ param }}",
+            "deleted": "A Inscription is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Inscripcion {{ id }}?"
+                "question": "Are you sure you want to delete Inscription {{ id }}?"
             },
             "detail": {
-                "title": "Inscripcion"
+                "title": "Inscription"
             },
-            "nombre": "Nombre",
-            "telefono": "Telefono",
-            "imagen": "Imagen",
-            "estado": "Estado",
+            "nombre": "Name",
+            "telefono": "Phone",
+            "imagen": "Image",
+            "estado": "State",
             "rayaton": "Rayaton",
-            "sede": "Sede"
+            "sede": "Studio"
         }
     }
 }

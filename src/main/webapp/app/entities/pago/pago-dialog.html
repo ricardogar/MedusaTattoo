@@ -34,10 +34,22 @@
             </div>
         </div-->
         <div class="form-group">
+            <label data-translate="medusaTattooApp.pago.trabajo" for="field_trabajo">Trabajo</label>
+            <select ng-change="setMaxValue()" class="form-control" id="field_trabajo" name="trabajo" ng-model="vm.pago.trabajo" ng-options="trabajo as trabajo.id for trabajo in vm.trabajos|filter:sedeFilter track by trabajo.id" required>
+            </select>
+        </div>
+        <div ng-show="editForm.trabajo.$invalid">
+            <p class="help-block"
+               ng-show="editForm.trabajo.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+
+        <div class="form-group">
             <label class="control-label" data-translate="medusaTattooApp.pago.valor" for="field_valor">Valor</label>
             <input type="number" class="form-control" name="valor" id="field_valor"
                     ng-model="vm.pago.valor"
-                    required min="1000" max="10000000"/>
+                    required min="1000" max={{vm.maxValue}}/>
             <div ng-show="editForm.valor.$invalid">
                 <p class="help-block"
                     ng-show="editForm.valor.$error.required" data-translate="entity.validation.required">
@@ -48,8 +60,8 @@
                     This field should be at least 1000.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.valor.$error.max" data-translate="entity.validation.max" translate-value-max="10000000">
-                    This field cannot be more than 10000000.
+                    ng-show="editForm.valor.$error.max" data-translate="entity.validation.max" translate-value-max={{vm.maxValue}}>
+                    This field cannot be more than {{vm.maxValue}}.
                 </p>
                 <p class="help-block"
                     ng-show="editForm.valor.$error.number" data-translate="entity.validation.number">
@@ -58,17 +70,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label data-translate="medusaTattooApp.pago.trabajo" for="field_trabajo">Trabajo</label>
-            <select class="form-control" id="field_trabajo" name="trabajo" ng-model="vm.pago.trabajo" ng-options="trabajo as trabajo.id for trabajo in vm.trabajos|filter:sedeFilter track by trabajo.id" required>
-            </select>
-        </div>
-        <div ng-show="editForm.trabajo.$invalid">
-            <p class="help-block"
-                ng-show="editForm.trabajo.$error.required" data-translate="entity.validation.required">
-                This field is required.
-            </p>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
