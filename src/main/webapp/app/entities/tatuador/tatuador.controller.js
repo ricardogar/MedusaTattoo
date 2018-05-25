@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('TatuadorController', TatuadorController);
 
-    TatuadorController.$inject = ['DataUtils', 'Tatuador', 'ParseLinks', 'AlertService', 'paginationConstants','Auth', 'Principal'];
+    TatuadorController.$inject = ['DataUtils', 'Tatuador', 'ParseLinks', 'AlertService', 'paginationConstants','Auth', 'Principal','TatuadorByCuenta'];
 
-    function TatuadorController(DataUtils, Tatuador, ParseLinks, AlertService, paginationConstants,Auth, Principal) {
+    function TatuadorController(DataUtils, Tatuador, ParseLinks, AlertService, paginationConstants,Auth, Principal,TatuadorByCuenta) {
 
         var vm = this;
 
@@ -23,11 +23,18 @@
         vm.reverse = true;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
-
-        loadAll();
+        getAccount();
+        function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+                loadAll();
+            });
+        }
+        //loadAll();
 
         function loadAll () {
-            Tatuador.query({
+            TatuadorByCuenta.query({
+                id: vm.account.id,
                 page: vm.page,
                 size: vm.itemsPerPage,
                 sort: sort()

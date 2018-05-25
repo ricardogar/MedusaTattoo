@@ -120,7 +120,7 @@ public class CitaResource {
         User user = userRepository.findOne(id);
 
         Page<Cita> page;
-        if (user.getAuthorities().stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"))){
+        if (user.isAdmin()){
             page = citaRepository.findAll(pageable);
         }else {
             page = citaRepository.findAllByCuenta(pageable,id);
@@ -146,7 +146,7 @@ public class CitaResource {
         User user = userRepository.findOne(id);
 
         Page<Cita> page;
-        if (user.getAuthorities().stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"))){
+        if (user.isAdmin()){
             page = citaRepository.findAllByFechaYHoraAfter(pageable,date.toInstant(ZoneOffset.UTC));
         }else {
             page = citaRepository.findAllByCuentaAfterDate(pageable,id,date.toInstant(ZoneOffset.UTC));
@@ -170,7 +170,7 @@ public class CitaResource {
         User user = userRepository.findOne(id);
 
         Page<Cita> page;
-        if (user.getAuthorities().stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"))){
+        if (user.isAdmin()){
             page = citaRepository.findAllByFechaYHoraIsBetween(pageable,date.toInstant(ZoneOffset.UTC),date.toInstant(ZoneOffset.UTC).plus(1,ChronoUnit.DAYS));
         }else {
             page = citaRepository.findAllByCuentaBetweenDates(pageable,id,date.toInstant(ZoneOffset.UTC),date.toInstant(ZoneOffset.UTC).plus(1,ChronoUnit.DAYS));

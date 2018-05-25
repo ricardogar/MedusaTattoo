@@ -119,7 +119,7 @@ public class PagoResource {
         log.debug("REST request to get a page of Pagos");
         User user = userRepository.findOne(id);
         Page<Pago> page;
-        if (user.getAuthorities().stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"))){
+        if (user.isAdmin()){
             page = pagoRepository.findAll(pageable);
         }else{
             page = pagoRepository.findAllByCuenta(pageable,id);

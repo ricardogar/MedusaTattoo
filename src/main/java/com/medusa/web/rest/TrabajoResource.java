@@ -119,7 +119,7 @@ public class TrabajoResource {
         log.debug("REST request to get a page of Trabajos");
         User user = userRepository.findOne(id);
         Page<Trabajo> page;
-        if (user.getAuthorities().stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"))){
+        if (user.isAdmin()){
             page = trabajoRepository.findAll(pageable);
         }else{
             page = trabajoRepository.findAllByCuenta(pageable,id);

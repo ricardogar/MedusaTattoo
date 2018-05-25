@@ -3,7 +3,9 @@ package com.medusa.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Tatuador;
 
+import com.medusa.domain.User;
 import com.medusa.repository.TatuadorRepository;
+import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
@@ -15,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,8 +40,11 @@ public class TatuadorResource {
 
     private final TatuadorRepository tatuadorRepository;
 
-    public TatuadorResource(TatuadorRepository tatuadorRepository) {
+    private final UserRepository userRepository;
+
+    public TatuadorResource(TatuadorRepository tatuadorRepository, UserRepository userRepository) {
         this.tatuadorRepository = tatuadorRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -98,6 +104,69 @@ public class TatuadorResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tatuadors");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    /**
+     * GET  /tatuadors/cuenta/:id : get all the tatuadors filtering by account.
+     *
+     * @param pageable the pagination information
+     * @param id the account identifier
+     * @return the ResponseEntity with status 200 (OK) and the list of tatuadors in body
+     */
+    @GetMapping("/tatuadors/cuenta/{id}")
+    @Timed
+    public ResponseEntity<List<Tatuador>> getAllTatuadorsByCuenta(Pageable pageable, @PathVariable("id") Long id) {
+        log.debug("REST request to get a page of Tatuadors");
+        User user = userRepository.findOne(id);
+        Page<Tatuador> page;
+        if (user.isAdmin()){
+            page = tatuadorRepository.findAll(pageable);
+        }else{
+            page = tatuadorRepository.findAllBySede_Id(pageable, user.getSede().getId());
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tatuadors");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /tatuadors/sede/:id : get all the tatuadors filtering by sede.
+     *
+     * @param pageable the pagination information
+     * @param id the sede identifier
+     * @return the ResponseEntity with status 200 (OK) and the list of tatuadors in body
+     */
+    @GetMapping("/tatuadors/sede/{id}")
+    @Timed
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<List<Tatuador>> getAllTatuadorsBySede(Pageable pageable, @PathVariable("id") Long id) {
+        log.debug("REST request to get a page of Tatuadors");
+        Page<Tatuador> page = tatuadorRepository.findAllBySede_Id(pageable, id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tatuadors");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /tatuadors/cuenta/:id : get all the tatuadors filtering by account and only with active state.
+     *
+     * @param pageable the pagination information
+     * @param id the account identifier
+     * @return the ResponseEntity with status 200 (OK) and the list of tatuadors in body
+     */
+    @GetMapping("/tatuadors/activo/cuenta/{id}/")
+    @Timed
+    public ResponseEntity<List<Tatuador>> getAllActiveTatuadorsByCuenta(Pageable pageable, @PathVariable("id") Long id) {
+        log.debug("REST request to get a page of Tatuadors");
+        User user = userRepository.findOne(id);
+        Page<Tatuador> page;
+        if (user.isAdmin()){
+            page = tatuadorRepository.findAllByEstadoIsTrue(pageable);
+        }else{
+            page = tatuadorRepository.findAllBySede_IdAndEstadoIsTrue(pageable, user.getSede().getId());
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tatuadors");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
 
     /**
      * GET  /tatuadors/:id : get the "id" tatuador.
