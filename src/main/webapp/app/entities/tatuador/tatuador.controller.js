@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('TatuadorController', TatuadorController);
 
-    TatuadorController.$inject = ['DataUtils', 'Tatuador', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    TatuadorController.$inject = ['DataUtils', 'Tatuador', 'ParseLinks', 'AlertService', 'paginationConstants','Auth', 'Principal'];
 
-    function TatuadorController(DataUtils, Tatuador, ParseLinks, AlertService, paginationConstants) {
+    function TatuadorController(DataUtils, Tatuador, ParseLinks, AlertService, paginationConstants,Auth, Principal) {
 
         var vm = this;
 

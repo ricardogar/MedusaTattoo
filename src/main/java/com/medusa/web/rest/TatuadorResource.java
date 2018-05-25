@@ -123,7 +123,10 @@ public class TatuadorResource {
     @Timed
     public ResponseEntity<Void> deleteTatuador(@PathVariable Long id) {
         log.debug("REST request to delete Tatuador : {}", id);
-        tatuadorRepository.delete(id);
+        Tatuador tatuador = tatuadorRepository.findOne(id);
+        tatuador.setEstado(false);
+        tatuadorRepository.save(tatuador);
+        //tatuadorRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }
