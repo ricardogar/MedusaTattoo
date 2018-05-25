@@ -43,6 +43,10 @@ public class Sede implements Serializable {
 
     @OneToMany(mappedBy = "sede")
     @JsonIgnore
+    private Set<Tatuador> tatuadors = new HashSet<>();
+
+    @OneToMany(mappedBy = "sede")
+    @JsonIgnore
     private Set<Inscripcion> inscripcions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -116,6 +120,31 @@ public class Sede implements Serializable {
 
     public void setTrabajos(Set<Trabajo> trabajos) {
         this.trabajos = trabajos;
+    }
+
+    public Set<Tatuador> getTatuadors() {
+        return tatuadors;
+    }
+
+    public Sede tatuadors(Set<Tatuador> tatuadors) {
+        this.tatuadors = tatuadors;
+        return this;
+    }
+
+    public Sede addTatuador(Tatuador tatuador) {
+        this.tatuadors.add(tatuador);
+        tatuador.setSede(this);
+        return this;
+    }
+
+    public Sede removeTatuador(Tatuador tatuador) {
+        this.tatuadors.remove(tatuador);
+        tatuador.setSede(null);
+        return this;
+    }
+
+    public void setTatuadors(Set<Tatuador> tatuadors) {
+        this.tatuadors = tatuadors;
     }
 
     public Set<Inscripcion> getInscripcions() {

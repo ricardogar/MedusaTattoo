@@ -9,6 +9,12 @@
         },
 		{
             "relationshipType": "one-to-many",
+            "relationshipName": "tatuador",
+            "otherEntityName": "tatuador",
+            "otherEntityRelationshipName": "sede"
+        },
+		{
+            "relationshipType": "one-to-many",
             "relationshipName": "inscripcion",
             "otherEntityName": "inscripcion",
             "otherEntityRelationshipName": "sede"

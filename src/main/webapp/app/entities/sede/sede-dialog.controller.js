@@ -5,15 +5,16 @@
         .module('medusaTattooApp')
         .controller('SedeDialogController', SedeDialogController);
 
-    SedeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Sede', 'Trabajo', 'Inscripcion'];
+    SedeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Sede', 'Trabajo', 'Tatuador', 'Inscripcion'];
 
-    function SedeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Sede, Trabajo, Inscripcion) {
+    function SedeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Sede, Trabajo, Tatuador, Inscripcion) {
         var vm = this;
 
         vm.sede = entity;
         vm.clear = clear;
         vm.save = save;
         vm.trabajos = Trabajo.query();
+        vm.tatuadors = Tatuador.query();
         vm.inscripcions = Inscripcion.query();
 
         $timeout(function (){

@@ -22,5 +22,6 @@
     <include file="config/liquibase/changelog/20180516041930_added_entity_constraints_Pago.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180516041932_added_entity_constraints_Rayaton.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180516041933_added_entity_constraints_Inscripcion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180516041924_added_entity_constraints_Tatuador.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

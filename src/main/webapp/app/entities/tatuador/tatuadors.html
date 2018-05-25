@@ -45,6 +45,7 @@
                     <th jh-sort-by="apodo"><span data-translate="medusaTattooApp.tatuador.apodo">Apodo</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="foto"><span data-translate="medusaTattooApp.tatuador.foto">Foto</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="estado"><span data-translate="medusaTattooApp.tatuador.estado">Estado</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sede.nombre"><span data-translate="medusaTattooApp.tatuador.sede">Sede</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -62,9 +63,12 @@
                         <a ng-if="tatuador.foto" ng-click="vm.openFile(tatuador.fotoContentType, tatuador.foto)">
                             <img data-ng-src="{{'data:' + tatuador.fotoContentType + ';base64,' + tatuador.foto}}" style="max-height: 30px;" alt="tatuador image"/>
                         </a>
-                        <!--span ng-if="tatuador.foto">{{tatuador.fotoContentType}}, {{vm.byteSize(tatuador.foto)}}</span-->
+                        <span ng-if="tatuador.foto">{{tatuador.fotoContentType}}, {{vm.byteSize(tatuador.foto)}}</span>
                     </td>
                     <td>{{tatuador.estado?"Activo":"Inactivo"}}</td>
+                    <td>
+                        <a ui-sref="sede-detail({id:tatuador.sede.id})">{{tatuador.sede.nombre}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

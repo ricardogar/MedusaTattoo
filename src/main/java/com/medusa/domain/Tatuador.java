@@ -75,6 +75,10 @@ public class Tatuador implements Serializable {
     @JsonIgnore
     private Set<Trabajo> trabajos = new HashSet<>();
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private Sede sede;
+
     @ManyToMany(mappedBy = "tatuadors")
     @JsonIgnore
     private Set<Rayaton> rayatones = new HashSet<>();
@@ -241,6 +245,19 @@ public class Tatuador implements Serializable {
 
     public void setTrabajos(Set<Trabajo> trabajos) {
         this.trabajos = trabajos;
+    }
+
+    public Sede getSede() {
+        return sede;
+    }
+
+    public Tatuador sede(Sede sede) {
+        this.sede = sede;
+        return this;
+    }
+
+    public void setSede(Sede sede) {
+        this.sede = sede;
     }
 
     public Set<Rayaton> getRayatones() {

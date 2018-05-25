@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('TatuadorDetailController', TatuadorDetailController);
 
-    TatuadorDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Tatuador', 'Trabajo', 'Rayaton'];
+    TatuadorDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Tatuador', 'Trabajo', 'Sede', 'Rayaton'];
 
-    function TatuadorDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Tatuador, Trabajo, Rayaton) {
+    function TatuadorDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Tatuador, Trabajo, Sede, Rayaton) {
         var vm = this;
 
         vm.tatuador = entity;

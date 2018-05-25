@@ -3,6 +3,7 @@ package com.medusa.web.rest;
 import com.medusa.MedusaTattooApp;
 
 import com.medusa.domain.Tatuador;
+import com.medusa.domain.Sede;
 import com.medusa.repository.TatuadorRepository;
 import com.medusa.web.rest.errors.ExceptionTranslator;
 
@@ -118,6 +119,11 @@ public class TatuadorResourceIntTest {
             .foto(DEFAULT_FOTO)
             .fotoContentType(DEFAULT_FOTO_CONTENT_TYPE)
             .estado(DEFAULT_ESTADO);
+        // Add required entity
+        Sede sede = SedeResourceIntTest.createEntity(em);
+        em.persist(sede);
+        em.flush();
+        tatuador.setSede(sede);
         return tatuador;
     }
 

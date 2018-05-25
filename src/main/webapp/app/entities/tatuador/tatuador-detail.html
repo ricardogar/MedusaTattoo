@@ -45,6 +45,10 @@
         <dd>
             <span>{{vm.tatuador.estado}}</span>
         </dd>
+        <dt><span data-translate="medusaTattooApp.tatuador.sede">Sede</span></dt>
+        <dd>
+            <a ui-sref="sede-detail({id:vm.tatuador.sede.id})">{{vm.tatuador.sede.nombre}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

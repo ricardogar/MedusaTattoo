@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('TatuadorDialogController', TatuadorDialogController);
 
-    TatuadorDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Tatuador', 'Trabajo', 'Rayaton'];
+    TatuadorDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Tatuador', 'Trabajo', 'Sede', 'Rayaton','Principal'];
 
-    function TatuadorDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Tatuador, Trabajo, Rayaton) {
+    function TatuadorDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Tatuador, Trabajo, Sede, Rayaton,Principal) {
         var vm = this;
 
         vm.tatuador = entity;
@@ -16,13 +16,30 @@
         vm.openFile = DataUtils.openFile;
         vm.save = save;
         vm.trabajos = Trabajo.query();
+        vm.sedes = Sede.query();
         vm.rayatons = Rayaton.query();
+		vm.account = null;
 		vm.showEstado=false;
 		if(vm.tatuador.tipodocumento==null){
 			vm.tatuador.tipodocumento="CEDULA";
 		}else{
 			vm.showEstado=true;
 		}
+		getAccount();
+
+		function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+				vm.isAdmin=vm.account.authorities.includes("ROLE_ADMIN");
+				if (vm.tatuador.sede == null) {
+                    vm.tatuador.sede=vm.account.sede;
+                }
+            });
+        }
+
+
+
+
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
