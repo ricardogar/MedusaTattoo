@@ -19,6 +19,15 @@
                 "inscripcion": "Inscripciones",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
+			 "report": {
+                "main": "Reportes",
+                "rayaton": "Rayatónes",
+                "password": "Password",
+                "sessions": "Sessions",
+                "login": "Sign in",
+                "logout": "Sign out",
+                "register": "Register"
+            },
             "account": {
                 "main": "Cuenta",
                 "settings": "Ajustes",

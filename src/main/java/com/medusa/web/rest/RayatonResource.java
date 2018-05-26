@@ -108,12 +108,12 @@ public class RayatonResource {
      */
     @GetMapping("/rayatons/money/{minDate}/{maxDate}")
     @Timed
-    public ResponseEntity<List<Object[]>> moneyBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
+    public List<Object[]> moneyBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
                                                         @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
         log.debug("REST request to get a page of Rayatons");
         List<Object[]> objects = rayatonRepository.moneyBetweenDates(minDate.toInstant(ZoneOffset.UTC),
                                                                     maxDate.toInstant(ZoneOffset.UTC));
-        return new ResponseEntity<>(objects, HttpStatus.OK);
+        return objects;
     }
 
     /**

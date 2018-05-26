@@ -1,0 +1,14 @@
+{
+  "name": "angular-scroll-events",
+  "homepage": "https://github.com/g1eb/angular-scroll-events",
+  "version": "0.0.2",
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.2",
+    "commit": "145fd48a67997bd035c02595bdee11aadcb6d925"
+  },
+  "_source": "https://github.com/g1eb/angular-scroll-events.git",
+  "_target": "^0.0.2",
+  "_originalSource": "angular-scroll-events"
+}

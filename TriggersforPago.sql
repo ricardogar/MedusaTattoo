@@ -85,7 +85,7 @@ select e.id, e.fecha, count(e.tf) from (
 	select r.id,r.fecha,p.id as tf from trabajo p 
 		join rayaton r on p.rayaton_id=r.id
 		join cita c on c.trabajo_id=p.id
-		where p.estado='FINALIZADO' and c.fecha_y_hora between '2018-05-1' and '2018-06-10'
+		where p.estado='FINALIZADO' and c.fecha_y_hora between '2017-05-1' and '2019-06-10'
 		group by r.id, p.id) e
 group by e.id, e.fecha   
 

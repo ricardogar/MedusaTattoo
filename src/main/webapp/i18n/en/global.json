@@ -28,6 +28,15 @@
                 "logout": "Sign out",
                 "register": "Register"
             },
+			 "report": {
+                "main": "Reportes",
+                "settings": "Settings",
+                "password": "Password",
+                "sessions": "Sessions",
+                "login": "Sign in",
+                "logout": "Sign out",
+                "register": "Register"
+            },
             "admin": {
                 "main": "Administration",
                 "userManagement": "User management",
