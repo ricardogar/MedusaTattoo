@@ -20,6 +20,15 @@
         <dd>
             <span>{{vm.rayaton.comentario}}</span>
         </dd>
+        <dt><span data-translate="medusaTattooApp.rayaton.imagen">Imagen</span></dt>
+        <dd>
+            <div ng-if="vm.rayaton.imagen">
+                <a ng-click="vm.openFile(vm.rayaton.imagenContentType, vm.rayaton.imagen)">
+                    <img data-ng-src="{{'data:' + vm.rayaton.imagenContentType + ';base64,' + vm.rayaton.imagen}}" style="max-width: 100%;" alt="rayaton image"/>
+                </a>
+                {{vm.rayaton.imagenContentType}}, {{vm.byteSize(vm.rayaton.imagen)}}
+            </div>
+        </dd>
         <dt><span data-translate="medusaTattooApp.rayaton.tatuador">Tatuador</span></dt>
         <dd>
             <span ng-repeat="tatuador in vm.rayaton.tatuadors">

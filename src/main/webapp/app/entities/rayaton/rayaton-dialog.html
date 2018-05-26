@@ -78,6 +78,28 @@
                 <textarea class="form-control" name="comentario" id="field_comentario"
                     ng-model="vm.rayaton.comentario" ></textarea>
         </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setImagen($file, vm.rayaton)" ngf-pattern="'image/*'">
+            <label class="control-label" data-translate="medusaTattooApp.rayaton.imagen" for="field_imagen">Imagen</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.rayaton.imagenContentType + ';base64,' + vm.rayaton.imagen}}" style="max-height: 100px;" ng-if="vm.rayaton.imagen" alt="rayaton image"/>
+                <div ng-if="vm.rayaton.imagen" class="help-block clearfix">
+                    <span class="pull-left">{{vm.rayaton.imagenContentType}}, {{vm.byteSize(vm.rayaton.imagen)}}</span>
+                    <button type="button" ng-click="vm.rayaton.imagen=null;vm.rayaton.imagenContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setImagen($file, vm.rayaton)" accept="image/*" data-translate="entity.action.addimage">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="imagen" id="field_imagen"
+                    ng-model="vm.rayaton.imagen"
+                    />
+            <input type="hidden" class="form-control" name="imagenContentType" id="field_imagenContentType"
+                    ng-model="vm.rayaton.imagenContentType" />
+        </div>
 
         <div class="form-group">
             <label data-translate="medusaTattooApp.rayaton.tatuador" for="field_tatuador">Tatuador</label>

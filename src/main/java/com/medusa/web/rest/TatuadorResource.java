@@ -3,8 +3,10 @@ package com.medusa.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Tatuador;
 
+import com.medusa.domain.Trabajo;
 import com.medusa.domain.User;
 import com.medusa.repository.TatuadorRepository;
+import com.medusa.repository.TrabajoRepository;
 import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
@@ -45,9 +47,12 @@ public class TatuadorResource {
 
     private final UserRepository userRepository;
 
-    public TatuadorResource(TatuadorRepository tatuadorRepository, UserRepository userRepository) {
+    private  final TrabajoRepository trabajoRepository;
+
+    public TatuadorResource(TatuadorRepository tatuadorRepository, UserRepository userRepository, TrabajoRepository trabajoRepository) {
         this.tatuadorRepository = tatuadorRepository;
         this.userRepository = userRepository;
+        this.trabajoRepository = trabajoRepository;
     }
 
     /**
@@ -141,8 +146,25 @@ public class TatuadorResource {
                                                                        @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
         log.debug("REST request to get a page of Tatuadors");
         List<Object[]> objects;
-         objects = tatuadorRepository.TatuadoraAndMoneyBetweenDates(minDate.toInstant(ZoneOffset.UTC),
-                                                                maxDate.toInstant(ZoneOffset.UTC));
+         objects = tatuadorRepository.MoneyBetweenDates(minDate.toInstant(ZoneOffset.UTC),
+                                                        maxDate.toInstant(ZoneOffset.UTC));
+        return new ResponseEntity<>(objects, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /tatuadors/cuenta/:id : get all the tatuadors filtering by account.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of tatuadors in body
+     */
+    @GetMapping("/tatuadors/works/{minDate}/{maxDate}")
+    @Timed
+    public ResponseEntity<List<Object[]>> worksBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
+                                                            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
+        log.debug("REST request to get a page of Tatuadors");
+
+
+        List<Object[]> objects= tatuadorRepository.WorksBetweenDates(minDate.toInstant(ZoneOffset.UTC),
+            maxDate.toInstant(ZoneOffset.UTC));
         return new ResponseEntity<>(objects, HttpStatus.OK);
     }
 

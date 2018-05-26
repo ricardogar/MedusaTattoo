@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,6 +100,40 @@ public class SedeResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/sedes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    /**
+     * GET  /sedes : get all the sedes.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of sedes in body
+     */
+    @GetMapping("/sedes/money/{minDate}/{maxDate}")
+    @Timed
+    public ResponseEntity<List<Object[]>> moneyBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
+                                                            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
+        log.debug("REST request to get a page of Sedes");
+        List<Object[]> objects = sedeRepository.moneyBetweenDates(minDate.toInstant(ZoneOffset.UTC),
+                                                                maxDate.toInstant(ZoneOffset.UTC));
+        //HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(objects, "/api/sedes");
+        return new ResponseEntity<>(objects, HttpStatus.OK);
+    }
+
+
+    /**
+     * GET  /sedes : get all the sedes.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of sedes in body
+     */
+    @GetMapping("/sedes/works/{minDate}/{maxDate}")
+    @Timed
+    public ResponseEntity<List<Object[]>> worksBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
+                                                            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
+        log.debug("REST request to get a page of Sedes");
+        List<Object[]> objects = sedeRepository.worksBetweenDates(minDate.toInstant(ZoneOffset.UTC),
+            maxDate.toInstant(ZoneOffset.UTC));
+        return new ResponseEntity<>(objects, HttpStatus.OK);
+    }
+
+
 
     /**
      * GET  /sedes/:id : get the "id" sede.

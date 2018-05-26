@@ -21,9 +21,10 @@ UPDATE trabajo t SET t.total_pagado=(select cast(sum(p.valor)as char) from pago 
 
 
 -- Dinero recibido por trabajos realizados por tatuador entre dos fechas
-select tt.apodo,sum(p.valor) from pago p 
+select tt.apodo,s.nombre,sum(p.valor) from pago p 
 	join trabajo t on p.trabajo_id=t.id 
-	join tatuador tt on t.tatuador_id=tt.id 
+	join tatuador tt on t.tatuador_id=tt.id
+    join sede s on tt.sede_id=s.id
 	where p.fecha between '2018-05-20' and '2018-05-30' 
 	group by tt.id;
 
@@ -42,15 +43,51 @@ select r.fecha,sum(p.valor) from pago p
 	where p.fecha between '2018-06-1' and '2018-09-2' 
 	group by r.id;
     
- -- trabajos realizados por tatuador  por acabar
-select tt.apodo,sum(p.valor) from trabajo p 
-	join trabajo t on p.trabajo_id=t.id 
-	join tatuador tt on t.tatuador_id=tt.id 
-	where p.fecha between '2018-05-20' and '2018-05-30' 
-	group by tt.id;
+ -- trabajos realizados por tatuador entre dos fechas
+ -- and min(c.fecha_y_hora) between '2018-05-1' and '2018-06-20' 
+ -- and max(c.fecha_y_hora) between '2018-05-1' and '2018-06-20' 
+ -- having min(c.fecha_y_hora) between '2018-05-1' and '2018-06-20'
+ 
+ select e.id, e.apodo, count(e.tf) from (
+select t.id,t.apodo,p.id as tf from trabajo p 
+	join tatuador t on p.tatuador_id=t.id
+    join cita c on c.trabajo_id=p.id
+    where p.estado='FINALIZADO'
+    group by t.id, p.id
+    having min(c.fecha_y_hora) between '2018-05-1' and '2018-06-10'
+    and max(c.fecha_y_hora) between '2018-05-1' and '2018-06-10') e
+    group by e.id, e.apodo
+    
+    -- lo mismo pero depurado
+;
+    
+select e.id, e.apodo, count(e.tf) from (
+	select t.id,t.apodo,p.id as tf from trabajo p 
+		join tatuador t on p.tatuador_id=t.id
+		join cita c on c.trabajo_id=p.id
+		where p.estado='FINALIZADO' and c.fecha_y_hora between '2018-05-1' and '2018-06-10'
+		group by t.id, p.id) e
+group by e.id, e.apodo   ;
 
+-- lo mismo pero para sedes
 
+select e.id, e.nombre, count(e.tf) from (
+	select s.id,s.nombre,p.id as tf from trabajo p 
+		join sede s on p.sede_id=s.id
+		join cita c on c.trabajo_id=p.id
+		where p.estado='FINALIZADO' and c.fecha_y_hora between '2018-05-1' and '2018-06-10'
+		group by s.id, p.id) e
+group by e.id, e.nombre   ;
 
+-- lo mismo pero para rayatones 
+
+select e.id, e.fecha, count(e.tf) from (
+	select r.id,r.fecha,p.id as tf from trabajo p 
+		join rayaton r on p.rayaton_id=r.id
+		join cita c on c.trabajo_id=p.id
+		where p.estado='FINALIZADO' and c.fecha_y_hora between '2018-05-1' and '2018-06-10'
+		group by r.id, p.id) e
+group by e.id, e.fecha   
 
 
 

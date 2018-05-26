@@ -108,6 +108,8 @@
                                 cupos: null,
                                 valorCupo: null,
                                 comentario: null,
+                                imagen: null,
+                                imagenContentType: null,
                                 id: null
                             };
                         }

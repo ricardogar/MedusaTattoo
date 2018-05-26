@@ -5,6 +5,7 @@ import com.medusa.MedusaTattooApp;
 import com.medusa.domain.Tatuador;
 import com.medusa.domain.Sede;
 import com.medusa.repository.TatuadorRepository;
+import com.medusa.repository.TrabajoRepository;
 import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.ExceptionTranslator;
 
@@ -91,11 +92,12 @@ public class TatuadorResourceIntTest {
 
     private Tatuador tatuador;
     private UserRepository userRepository;
+    private TrabajoRepository trabajoRepository;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TatuadorResource tatuadorResource = new TatuadorResource(tatuadorRepository, userRepository);
+        final TatuadorResource tatuadorResource = new TatuadorResource(tatuadorRepository, userRepository, trabajoRepository);
         this.restTatuadorMockMvc = MockMvcBuilders.standaloneSetup(tatuadorResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

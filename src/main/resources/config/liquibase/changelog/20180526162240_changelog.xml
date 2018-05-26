@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Yuliamz (generated)" id="1527351771441-1">
+        <addColumn tableName="rayaton">
+            <column name="imagen" type="longblob"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Yuliamz (generated)" id="1527351771441-2">
+        <addColumn tableName="rayaton">
+            <column name="imagen_content_type" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Yuliamz (generated)" id="1527351771441-3">
+        <dropColumn columnName="foto" tableName="rayaton"/>
+    </changeSet>
+    <changeSet author="Yuliamz (generated)" id="1527351771441-4">
+        <dropColumn columnName="foto_content_type" tableName="rayaton"/>
+    </changeSet>
+</databaseChangeLog>

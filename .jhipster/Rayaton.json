@@ -54,6 +54,11 @@
             "fieldName": "comentario",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "text"
+        },
+		 {
+            "fieldName": "imagen",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         }
     ],
     "changelogDate": "20180516041932",

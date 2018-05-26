@@ -40,6 +40,7 @@
                     <th jh-sort-by="cupos"><span data-translate="medusaTattooApp.rayaton.cupos">Cupos</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="valorCupo"><span data-translate="medusaTattooApp.rayaton.valorCupo">Valor Cupo</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="comentario"><span data-translate="medusaTattooApp.rayaton.comentario">Comentario</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="imagen"><span data-translate="medusaTattooApp.rayaton.imagen">Imagen</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -48,8 +49,14 @@
                     <td><a ui-sref="rayaton-detail({id:rayaton.id})">{{rayaton.id}}</a></td>
                         <td>{{rayaton.fecha | date:'mediumDate'}}</td>
                     <td>{{rayaton.cupos}}</td>
-                    <td>{{rayaton.valorCupo| currency :"$":0}}</td>
+                    <td>{{rayaton.valorCupo}}</td>
                     <td>{{rayaton.comentario}}</td>
+                    <td>
+                        <a ng-if="rayaton.imagen" ng-click="vm.openFile(rayaton.imagenContentType, rayaton.imagen)">
+                            <img data-ng-src="{{'data:' + rayaton.imagenContentType + ';base64,' + rayaton.imagen}}" style="max-height: 30px;" alt="rayaton image"/>
+                        </a>
+                        <span ng-if="rayaton.imagen">{{rayaton.imagenContentType}}, {{vm.byteSize(rayaton.imagen)}}</span>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

@@ -43,6 +43,13 @@ public class Rayaton implements Serializable {
     @Column(name = "comentario")
     private String comentario;
 
+    @Lob
+    @Column(name = "imagen")
+    private byte[] imagen;
+
+    @Column(name = "imagen_content_type")
+    private String imagenContentType;
+
     @OneToMany(mappedBy = "rayaton")
     @JsonIgnore
     private Set<Inscripcion> inscripcions = new HashSet<>();
@@ -116,6 +123,32 @@ public class Rayaton implements Serializable {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public Rayaton imagen(byte[] imagen) {
+        this.imagen = imagen;
+        return this;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getImagenContentType() {
+        return imagenContentType;
+    }
+
+    public Rayaton imagenContentType(String imagenContentType) {
+        this.imagenContentType = imagenContentType;
+        return this;
+    }
+
+    public void setImagenContentType(String imagenContentType) {
+        this.imagenContentType = imagenContentType;
     }
 
     public Set<Inscripcion> getInscripcions() {
@@ -222,6 +255,8 @@ public class Rayaton implements Serializable {
             ", cupos=" + getCupos() +
             ", valorCupo=" + getValorCupo() +
             ", comentario='" + getComentario() + "'" +
+            ", imagen='" + getImagen() + "'" +
+            ", imagenContentType='" + getImagenContentType() + "'" +
             "}";
     }
 }

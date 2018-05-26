@@ -50,6 +50,20 @@
 
         vm.datePickerOpenStatus.fecha = false;
 
+        vm.setImagen = function ($file, rayaton) {
+            if ($file && $file.$error === 'pattern') {
+                return;
+            }
+            if ($file) {
+                DataUtils.toBase64($file, function(base64Data) {
+                    $scope.$apply(function() {
+                        rayaton.imagen = base64Data;
+                        rayaton.imagenContentType = $file.type;
+                    });
+                });
+            }
+        };
+
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }

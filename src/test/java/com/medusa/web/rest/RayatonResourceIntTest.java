@@ -53,6 +53,11 @@ public class RayatonResourceIntTest {
     private static final String DEFAULT_COMENTARIO = "AAAAAAAAAA";
     private static final String UPDATED_COMENTARIO = "BBBBBBBBBB";
 
+    private static final byte[] DEFAULT_IMAGEN = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGEN = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_IMAGEN_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGEN_CONTENT_TYPE = "image/png";
+
     @Autowired
     private RayatonRepository rayatonRepository;
 
@@ -94,7 +99,9 @@ public class RayatonResourceIntTest {
             .fecha(DEFAULT_FECHA)
             .cupos(DEFAULT_CUPOS)
             .valorCupo(DEFAULT_VALOR_CUPO)
-            .comentario(DEFAULT_COMENTARIO);
+            .comentario(DEFAULT_COMENTARIO)
+            .imagen(DEFAULT_IMAGEN)
+            .imagenContentType(DEFAULT_IMAGEN_CONTENT_TYPE);
         return rayaton;
     }
 
@@ -122,6 +129,8 @@ public class RayatonResourceIntTest {
         assertThat(testRayaton.getCupos()).isEqualTo(DEFAULT_CUPOS);
         assertThat(testRayaton.getValorCupo()).isEqualTo(DEFAULT_VALOR_CUPO);
         assertThat(testRayaton.getComentario()).isEqualTo(DEFAULT_COMENTARIO);
+        assertThat(testRayaton.getImagen()).isEqualTo(DEFAULT_IMAGEN);
+        assertThat(testRayaton.getImagenContentType()).isEqualTo(DEFAULT_IMAGEN_CONTENT_TYPE);
     }
 
     @Test
@@ -211,7 +220,9 @@ public class RayatonResourceIntTest {
             .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())))
             .andExpect(jsonPath("$.[*].cupos").value(hasItem(DEFAULT_CUPOS)))
             .andExpect(jsonPath("$.[*].valorCupo").value(hasItem(DEFAULT_VALOR_CUPO)))
-            .andExpect(jsonPath("$.[*].comentario").value(hasItem(DEFAULT_COMENTARIO.toString())));
+            .andExpect(jsonPath("$.[*].comentario").value(hasItem(DEFAULT_COMENTARIO.toString())))
+            .andExpect(jsonPath("$.[*].imagenContentType").value(hasItem(DEFAULT_IMAGEN_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].imagen").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGEN))));
     }
 
     @Test
@@ -228,7 +239,9 @@ public class RayatonResourceIntTest {
             .andExpect(jsonPath("$.fecha").value(DEFAULT_FECHA.toString()))
             .andExpect(jsonPath("$.cupos").value(DEFAULT_CUPOS))
             .andExpect(jsonPath("$.valorCupo").value(DEFAULT_VALOR_CUPO))
-            .andExpect(jsonPath("$.comentario").value(DEFAULT_COMENTARIO.toString()));
+            .andExpect(jsonPath("$.comentario").value(DEFAULT_COMENTARIO.toString()))
+            .andExpect(jsonPath("$.imagenContentType").value(DEFAULT_IMAGEN_CONTENT_TYPE))
+            .andExpect(jsonPath("$.imagen").value(Base64Utils.encodeToString(DEFAULT_IMAGEN)));
     }
 
     @Test
@@ -254,7 +267,9 @@ public class RayatonResourceIntTest {
             .fecha(UPDATED_FECHA)
             .cupos(UPDATED_CUPOS)
             .valorCupo(UPDATED_VALOR_CUPO)
-            .comentario(UPDATED_COMENTARIO);
+            .comentario(UPDATED_COMENTARIO)
+            .imagen(UPDATED_IMAGEN)
+            .imagenContentType(UPDATED_IMAGEN_CONTENT_TYPE);
 
         restRayatonMockMvc.perform(put("/api/rayatons")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -269,6 +284,8 @@ public class RayatonResourceIntTest {
         assertThat(testRayaton.getCupos()).isEqualTo(UPDATED_CUPOS);
         assertThat(testRayaton.getValorCupo()).isEqualTo(UPDATED_VALOR_CUPO);
         assertThat(testRayaton.getComentario()).isEqualTo(UPDATED_COMENTARIO);
+        assertThat(testRayaton.getImagen()).isEqualTo(UPDATED_IMAGEN);
+        assertThat(testRayaton.getImagenContentType()).isEqualTo(UPDATED_IMAGEN_CONTENT_TYPE);
     }
 
     @Test
