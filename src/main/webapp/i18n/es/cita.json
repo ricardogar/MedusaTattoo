@@ -19,6 +19,9 @@
             },
             "fechaYHora": "Fecha Y Hora",
             "duracion": "Duración",
+            "query": "Ingrese su documento",
+            "consulta": "Consulta de citas",
+            "sede": "Sede",
             "trabajo": "Trabajo"
         }
     }

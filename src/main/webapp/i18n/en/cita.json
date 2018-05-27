@@ -18,6 +18,9 @@
             },
             "fechaYHora": "Date & Time",
             "duracion": "Duration",
+            "query": "Type your DNI",
+            "consulta": "Look for Appoinments",
+            "sede": "Studio",
             "trabajo": "Work"
         }
     }

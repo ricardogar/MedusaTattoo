@@ -108,6 +108,21 @@ public class CitaResource {
     }
 
     /**
+     * GET  /citas/cliente/:documento : get all citas filtered by client document.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of citas in body
+     */
+    @GetMapping("/citas/cliente/{documento}")
+    @Timed
+    public ResponseEntity<List<Cita>> getCitasByClienteDocumento(Pageable pageable,@PathVariable String documento) {
+        log.debug("REST request to get a page of Citas");
+        Page<Cita> page = citaRepository.findAllByTrabajo_Cliente_Documento(pageable,documento);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/citas");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * GET  /citas/cuenta/:id : get all the citas filter by sede.
      *
      * @param pageable the pagination information

@@ -35,4 +35,6 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
     //@Query("SELECT c FROM Cita c JOIN c.trabajo t JOIN t.sede s WHERE s.id=(SELECT a.id FROM User u JOIN u.sede a WHERE u.id= :id) AND c.fechaYHora > :date")
     Page<Cita> findAllByTrabajo_Sede_IdAndFechaYHoraAfter(Pageable pageable, Long id, Instant date);
 
+    Page<Cita> findAllByTrabajo_Cliente_Documento(Pageable pageable,String documento);
+
 }
