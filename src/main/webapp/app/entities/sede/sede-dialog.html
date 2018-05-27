@@ -61,6 +61,10 @@
                 </p>
             </div>
         </div>
+        <div class="form-group" ng-if="vm.showEstado">
+            <label class="control-label" data-translate="medusaTattooApp.sede.estado" for="field_estado">Estado</label>
+                <input type="checkbox" name="estado" id="field_estado" ng-model="vm.sede.estado"/>
+        </div>
 
     </div>
     <div class="modal-footer">

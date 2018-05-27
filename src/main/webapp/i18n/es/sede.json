@@ -16,7 +16,7 @@
 			"close": {
 				"title": "Cerrar Sede",
 				"action": "Cerrar",
-                "question": "¿Seguro que quiere cerrar la Sede {{ id }}?"
+                "question": "¿Seguro que quiere cerrar la Sede {{ nombre }}?"
             },
             "detail": {
                 "title": "Sede"
@@ -26,6 +26,7 @@
             "telefono": "Telefono",
             "trabajo": "Trabajo",
             "tatuador": "Tatuador",
+			"estado": "Estado",
             "inscripcion": "Inscripcion"
         }
     }

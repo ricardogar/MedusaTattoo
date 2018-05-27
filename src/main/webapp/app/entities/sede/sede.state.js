@@ -107,6 +107,7 @@
                                 nombre: null,
                                 direccion: null,
                                 telefono: null,
+                                estado: true,
                                 id: null
                             };
                         }

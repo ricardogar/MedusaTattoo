@@ -16,6 +16,7 @@
         vm.trabajos = Trabajo.query();
         vm.tatuadors = Tatuador.query();
         vm.inscripcions = Inscripcion.query();
+        vm.showEstado=vm.sede.id!=null;
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

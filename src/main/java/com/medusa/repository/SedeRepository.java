@@ -1,6 +1,8 @@
 package com.medusa.repository;
 
 import com.medusa.domain.Sede;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -39,4 +41,6 @@ public interface SedeRepository extends JpaRepository<Sede, Long> {
         "group by s.id, p.id) e " +
         "group by e.id, e.nombre",nativeQuery = true)
     List<Object[]> worksBetweenDates(@Param("minDate") Instant minDate, @Param("maxDate") Instant maxDate);
+
+    Page<Sede> findAllByEstadoIsTrue(Pageable pageable);
 }

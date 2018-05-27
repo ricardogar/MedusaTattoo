@@ -4,6 +4,9 @@ import com.medusa.MedusaTattooApp;
 
 import com.medusa.domain.Sede;
 import com.medusa.repository.SedeRepository;
+import com.medusa.repository.TatuadorRepository;
+import com.medusa.repository.TrabajoRepository;
+import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -47,6 +50,9 @@ public class SedeResourceIntTest {
     private static final String DEFAULT_TELEFONO = "";
     private static final String UPDATED_TELEFONO = "3";
 
+    private static final Boolean DEFAULT_ESTADO = false;
+    private static final Boolean UPDATED_ESTADO = true;
+
     @Autowired
     private SedeRepository sedeRepository;
 
@@ -65,11 +71,14 @@ public class SedeResourceIntTest {
     private MockMvc restSedeMockMvc;
 
     private Sede sede;
+    private TatuadorRepository tatuadorRepository;
+    private UserRepository userRepository;
+    private TrabajoRepository trabajoRepository;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final SedeResource sedeResource = new SedeResource(sedeRepository);
+        final SedeResource sedeResource = new SedeResource(sedeRepository, tatuadorRepository, userRepository, trabajoRepository);
         this.restSedeMockMvc = MockMvcBuilders.standaloneSetup(sedeResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -87,7 +96,8 @@ public class SedeResourceIntTest {
         Sede sede = new Sede()
             .nombre(DEFAULT_NOMBRE)
             .direccion(DEFAULT_DIRECCION)
-            .telefono(DEFAULT_TELEFONO);
+            .telefono(DEFAULT_TELEFONO)
+            .estado(DEFAULT_ESTADO);
         return sede;
     }
 
@@ -114,6 +124,7 @@ public class SedeResourceIntTest {
         assertThat(testSede.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testSede.getDireccion()).isEqualTo(DEFAULT_DIRECCION);
         assertThat(testSede.getTelefono()).isEqualTo(DEFAULT_TELEFONO);
+        assertThat(testSede.isEstado()).isEqualTo(DEFAULT_ESTADO);
     }
 
     @Test
@@ -202,7 +213,8 @@ public class SedeResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(sede.getId().intValue())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].direccion").value(hasItem(DEFAULT_DIRECCION.toString())))
-            .andExpect(jsonPath("$.[*].telefono").value(hasItem(DEFAULT_TELEFONO.toString())));
+            .andExpect(jsonPath("$.[*].telefono").value(hasItem(DEFAULT_TELEFONO.toString())))
+            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.booleanValue())));
     }
 
     @Test
@@ -218,7 +230,8 @@ public class SedeResourceIntTest {
             .andExpect(jsonPath("$.id").value(sede.getId().intValue()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.direccion").value(DEFAULT_DIRECCION.toString()))
-            .andExpect(jsonPath("$.telefono").value(DEFAULT_TELEFONO.toString()));
+            .andExpect(jsonPath("$.telefono").value(DEFAULT_TELEFONO.toString()))
+            .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.booleanValue()));
     }
 
     @Test
@@ -243,7 +256,8 @@ public class SedeResourceIntTest {
         updatedSede
             .nombre(UPDATED_NOMBRE)
             .direccion(UPDATED_DIRECCION)
-            .telefono(UPDATED_TELEFONO);
+            .telefono(UPDATED_TELEFONO)
+            .estado(UPDATED_ESTADO);
 
         restSedeMockMvc.perform(put("/api/sedes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -257,6 +271,7 @@ public class SedeResourceIntTest {
         assertThat(testSede.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testSede.getDireccion()).isEqualTo(UPDATED_DIRECCION);
         assertThat(testSede.getTelefono()).isEqualTo(UPDATED_TELEFONO);
+        assertThat(testSede.isEstado()).isEqualTo(UPDATED_ESTADO);
     }
 
     @Test

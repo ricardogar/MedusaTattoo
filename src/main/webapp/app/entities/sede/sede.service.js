@@ -2,9 +2,11 @@
     'use strict';
     angular
         .module('medusaTattooApp')
-        .factory('Sede', Sede);
+        .factory('Sede', Sede)
+        .factory('OpenSedes', OpenSedes);
 
     Sede.$inject = ['$resource'];
+    OpenSedes.$inject = ['$resource'];
 
     function Sede ($resource) {
         var resourceUrl =  'api/sedes/:id';
@@ -21,6 +23,14 @@
                 }
             },
             'update': { method:'PUT' }
+        });
+    }
+
+    function OpenSedes ($resource) {
+        var resourceUrl =  'api/sedes/abierta';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true},
         });
     }
 })();

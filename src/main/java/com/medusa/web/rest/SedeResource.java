@@ -4,6 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Sede;
 
 import com.medusa.repository.SedeRepository;
+import com.medusa.repository.TatuadorRepository;
+import com.medusa.repository.TrabajoRepository;
+import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
@@ -39,9 +42,15 @@ public class SedeResource {
     private static final String ENTITY_NAME = "sede";
 
     private final SedeRepository sedeRepository;
+    private final TatuadorRepository tatuadorRepository;
+    private final UserRepository userRepository;
+    private final TrabajoRepository trabajoRepository;
 
-    public SedeResource(SedeRepository sedeRepository) {
+    public SedeResource(SedeRepository sedeRepository, TatuadorRepository tatuadorRepository, UserRepository userRepository, TrabajoRepository trabajoRepository) {
         this.sedeRepository = sedeRepository;
+        this.tatuadorRepository = tatuadorRepository;
+        this.userRepository = userRepository;
+        this.trabajoRepository = trabajoRepository;
     }
 
     /**
@@ -77,10 +86,20 @@ public class SedeResource {
     @Timed
     public ResponseEntity<Sede> updateSede(@Valid @RequestBody Sede sede) throws URISyntaxException {
         log.debug("REST request to update Sede : {}", sede);
+
         if (sede.getId() == null) {
             return createSede(sede);
         }
-        Sede result = sedeRepository.save(sede);
+        Sede sede1=sedeRepository.findOne(sede.getId());
+        Sede result;
+        /*
+        if (!sede1.isEstado() && sede.isEstado()){
+            userRepository.enableBySede(sede.getId());
+            tatuadorRepository.enableBySede(sede.getId());
+            trabajoRepository.enableBySede(sede.getId());
+        }
+         */
+        result = sedeRepository.save(sede);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, sede.getId().toString()))
             .body(result);
@@ -97,6 +116,22 @@ public class SedeResource {
     public ResponseEntity<List<Sede>> getAllSedes(Pageable pageable) {
         log.debug("REST request to get a page of Sedes");
         Page<Sede> page = sedeRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/sedes");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
+    /**
+     * GET  /sedes : get all the sedes.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of sedes in body
+     */
+    @GetMapping("/sedes/abierta")
+    @Timed
+    public ResponseEntity<List<Sede>> getOpenSedes(Pageable pageable) {
+        log.debug("REST request to get a page of Sedes");
+        Page<Sede> page = sedeRepository.findAllByEstadoIsTrue(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/sedes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -159,7 +194,14 @@ public class SedeResource {
     @Timed
     public ResponseEntity<Void> deleteSede(@PathVariable Long id) {
         log.debug("REST request to delete Sede : {}", id);
-        sedeRepository.delete(id);
+        Sede sede = sedeRepository.findOne(id);
+        sede.setEstado(false);
+
+        //tatuadorRepository.disableBySede(id);
+        //userRepository.disableBySede(id);
+        //trabajoRepository.disableBySede(id);
+        sedeRepository.save(sede);
+        //sedeRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

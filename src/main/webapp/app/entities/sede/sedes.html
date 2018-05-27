@@ -39,6 +39,7 @@
                     <th jh-sort-by="nombre"><span data-translate="medusaTattooApp.sede.nombre">Nombre</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="direccion"><span data-translate="medusaTattooApp.sede.direccion">Direccion</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="telefono"><span data-translate="medusaTattooApp.sede.telefono">Telefono</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="estado"><span data-translate="medusaTattooApp.sede.estado">Estado</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -48,6 +49,7 @@
                     <td>{{sede.nombre}}</td>
                     <td>{{sede.direccion}}</td>
                     <td>{{sede.telefono}}</td>
+                    <td>{{sede.estado?"Abierto":"Cerrado"}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -64,9 +66,10 @@
                             </button>
                             <button type="submit"
                                     ui-sref="sede.delete({id:sede.id})"
-                                    class="btn btn-danger btn-sm">
+                                    class="btn btn-danger btn-sm"
+                                    ng-if="sede.estado && vm.account.sede.id!=sede.id">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                                <span class="hidden-sm-down" data-translate="medusaTattooApp.sede.close.action"></span>
                             </button>
                         </div>
                     </td>

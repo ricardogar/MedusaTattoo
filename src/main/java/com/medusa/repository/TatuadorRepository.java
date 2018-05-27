@@ -27,6 +27,12 @@ public interface TatuadorRepository extends JpaRepository<Tatuador, Long> {
     select tt.apodo,sum(p.valor) from pago p join trabajo t on p.trabajo_id=t.id join tatuador tt on t.tatuador_id=tt.id where p.fecha between :minDate and :maxDate group by tt.id;
      */
 
+    @Query(value = "UPDATE tatuador t SET t.estado=0 WHERE t.sede_id=:id",nativeQuery = true)
+    List<Tatuador> disableBySede(@Param("id") Long idSede);
+
+    @Query(value = "UPDATE tatuador t SET t.estado=1 WHERE t.sede_id=:id",nativeQuery = true)
+    List<Tatuador> enableBySede(@Param("id") Long idSede);
+
     @Query(value = "select tt.id, tt.apodo,s.nombre,sum(p.valor) from pago p " +
         "join trabajo t on p.trabajo_id=t.id " +
         "join tatuador tt on t.tatuador_id=tt.id " +
@@ -47,5 +53,7 @@ public interface TatuadorRepository extends JpaRepository<Tatuador, Long> {
         "group by t.id, p.id) " +
         "group by e.id, e.apodo",nativeQuery = true)
     List<Object[]> WorksBetweenDates(@Param("minDate") Instant minDate, @Param("maxDate") Instant maxDate);
+
+
 
 }

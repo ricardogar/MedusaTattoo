@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('SedeController', SedeController);
 
-    SedeController.$inject = ['Sede', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    SedeController.$inject = ['Sede', 'ParseLinks', 'AlertService', 'paginationConstants','Principal'];
 
-    function SedeController(Sede, ParseLinks, AlertService, paginationConstants) {
+    function SedeController(Sede, ParseLinks, AlertService, paginationConstants,Principal) {
 
         var vm = this;
 
@@ -21,8 +21,17 @@
         vm.predicate = 'id';
         vm.reset = reset;
         vm.reverse = true;
+        getAccount()
 
-        loadAll();
+
+        function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+                console.log(vm.account)
+                loadAll();
+            });
+        }
+        //loadAll();
 
         function loadAll () {
             Sede.query({

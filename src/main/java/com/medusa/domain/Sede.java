@@ -37,6 +37,9 @@ public class Sede implements Serializable {
     @Column(name = "telefono", length = 10, nullable = false)
     private String telefono;
 
+    @Column(name = "estado")
+    private Boolean estado;
+
     @OneToMany(mappedBy = "sede")
     @JsonIgnore
     private Set<Trabajo> trabajos = new HashSet<>();
@@ -95,6 +98,19 @@ public class Sede implements Serializable {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public Boolean isEstado() {
+        return estado;
+    }
+
+    public Sede estado(Boolean estado) {
+        this.estado = estado;
+        return this;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
     public Set<Trabajo> getTrabajos() {
@@ -200,6 +216,7 @@ public class Sede implements Serializable {
             ", nombre='" + getNombre() + "'" +
             ", direccion='" + getDireccion() + "'" +
             ", telefono='" + getTelefono() + "'" +
+            ", estado='" + isEstado() + "'" +
             "}";
     }
 }

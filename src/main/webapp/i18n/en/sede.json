@@ -1,4 +1,3 @@
-
 {
     "medusaTattooApp": {
         "sede" : {
@@ -13,6 +12,11 @@
             "delete": {
                 "question": "Are you sure you want to delete studio {{ id }}?"
             },
+			"close": {
+				"title": "Close Studio",
+				"action": "Close",
+                "question": "Are you sure you want to close studio {{ id }}?"
+            },
             "detail": {
                 "title": "studio"
             },
@@ -21,6 +25,7 @@
             "telefono": "Phone",
             "trabajo": "Work",
             "tatuador": "Tattooist",
+			"estado": "Status",
             "inscripcion": "Inscription"
         }
     }
