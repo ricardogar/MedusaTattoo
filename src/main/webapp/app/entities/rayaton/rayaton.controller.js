@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('RayatonController', RayatonController);
 
-    RayatonController.$inject = ['DataUtils', 'Rayaton', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    RayatonController.$inject = ['DataUtils', 'Rayaton', 'ParseLinks', 'AlertService', 'paginationConstants','TrabajosByRayaton'];
 
-    function RayatonController(DataUtils, Rayaton, ParseLinks, AlertService, paginationConstants) {
+    function RayatonController(DataUtils, Rayaton, ParseLinks, AlertService, paginationConstants,TrabajosByRayaton) {
 
         var vm = this;
 
@@ -23,6 +23,7 @@
         vm.reverse = true;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
+
 
         loadAll();
 

@@ -111,9 +111,7 @@ public class RayatonResource {
     public List<Object[]> moneyBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
                                                         @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
         log.debug("REST request to get a page of Rayatons");
-        List<Object[]> objects = rayatonRepository.moneyBetweenDates(minDate.toInstant(ZoneOffset.UTC),
-                                                                    maxDate.toInstant(ZoneOffset.UTC));
-        return objects;
+        return rayatonRepository.moneyBetweenDates(minDate.toInstant(ZoneOffset.UTC),maxDate.toInstant(ZoneOffset.UTC));
     }
 
     /**

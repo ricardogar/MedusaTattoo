@@ -108,6 +108,7 @@
             "edit": "Edit",
             "open": "Open",
             "save": "Save",
+			"disable": "Disable",
             "view": "View"
         },
         "detail": {

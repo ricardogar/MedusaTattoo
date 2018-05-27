@@ -109,6 +109,39 @@ public class TrabajoResource {
     }
 
 
+    /**
+     * GET  /trabajos/rayaton/:id : get all the trabajos filtered by rayaton.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of trabajos in body
+     */
+    @GetMapping("/trabajos/rayaton/{id}")
+    @Timed
+    public ResponseEntity<List<Trabajo>> getTrabajosByRayaton(Pageable pageable,@PathVariable Long id) {
+        log.debug("REST request to get a page of Trabajos");
+        Page<Trabajo> page = trabajoRepository.findAllByRayaton_Id(pageable,id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/trabajos");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
+    /**
+     * GET  /trabajos/sede/:id : get all the trabajos filtered by sede.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of trabajos in body
+     */
+    @GetMapping("/trabajos/sede/{id}")
+    @Timed
+    public ResponseEntity<List<Trabajo>> getTrabajosBySede(Pageable pageable,@PathVariable Long id) {
+        log.debug("REST request to get a page of Trabajos");
+        Page<Trabajo> page = trabajoRepository.findAllBySede_Id(pageable,id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/trabajos");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
+
 	/**
      * GET  /trabajos/cuenta/:id : get all the trabajos filtered by account.
      *

@@ -13,6 +13,11 @@
             "delete": {
                 "question": "¿Seguro que quiere eliminar la Sede {{ id }}?"
             },
+			"close": {
+				"title": "Cerrar Sede",
+				"action": "Cerrar",
+                "question": "¿Seguro que quiere cerrar la Sede {{ id }}?"
+            },
             "detail": {
                 "title": "Sede"
             },

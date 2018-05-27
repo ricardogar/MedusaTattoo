@@ -47,6 +47,10 @@
             "fieldValidateRulesMinlength": 10,
             "fieldValidateRulesMaxlength": 10,
             "fieldValidateRulesPattern": "^[0-9]*$"
+        },
+		{
+            "fieldName": "estado",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20180516012918",

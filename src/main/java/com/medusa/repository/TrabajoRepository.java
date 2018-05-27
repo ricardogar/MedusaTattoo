@@ -23,6 +23,8 @@ public interface TrabajoRepository extends JpaRepository<Trabajo, Long> {
     Page<Trabajo> findAllByEstadoLike(Pageable pageable, Estado_trabajo estado);
     Page<Trabajo> findAllBySede_IdAndEstadoLike(Pageable pageable, Long id,Estado_trabajo estado);
     List<Trabajo> findAllByTatuador_Id(Long id);
+    Page<Trabajo> findAllByRayaton_Id(Pageable pageable, Long id);
+
 
 
 }
