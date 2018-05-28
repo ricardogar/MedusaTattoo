@@ -1,6 +1,5 @@
 (function() {
     'use strict';
-
     angular
         .module('medusaTattooApp')
         .controller('RayatonReportController', RayatonReportController);
@@ -27,29 +26,61 @@
             'end': moment().endOf('year').endOf('day'),
           }
         ];
-          
-        //vm.rayatons = Rayaton.query();
 
-        vm.rayatons=[];
-		vm.fechasMoney=[];
+		vm.fecha_i = moment($scope.start).format();
+        vm.fecha_f = moment($scope.end).format();
+        vm.fechasMoney=[];
 		vm.fechasWorks=[];
 		vm.money=[];
 		vm.works=[];
 		loadMoney();
 		loadWorks();
-        vm.fecha_i = moment($scope.start).format();
-        vm.fecha_f = moment($scope.end).format();
+        
         $scope.changed = function () {
-          console.log('Cambio la fecha');
+
             vm.fecha_i = moment($scope.start).format();
             vm.fecha_f = moment($scope.end).format();
-            vm.rayatons=[];
+            //console.log(vm.fecha_i);
+            //console.log(vm.fecha_f);
+            
+            //vm.rayatons=[];
             vm.fechasMoney=[];
             vm.fechasWorks=[];
             vm.money=[];
             vm.works=[];
-            loadMoney();
+
             loadWorks();  
+            loadMoney();
+            $scope.configChartMoney = {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Dinero por Rayatón'
+                },
+                xAxis: {
+                    categories: vm.fechasMoney
+                },
+
+                series: [{
+                    data: vm.money
+                }]
+            };
+             $scope.configChartWorks = {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Trabajos finalizados por Rayatón'
+                },
+                xAxis: {
+                    categories: vm.fechasWorks
+                },
+
+                series: [{
+                    data: vm.works
+                }]
+            };
         };
 		function loadMoney () {
 
@@ -57,12 +88,9 @@
             maxDate:vm.fecha_f}, onSuccess, onError);
 
             function onSuccess(data, headers) {
-
                 for (var i = 0; i < data.length; i++) {
-					vm.obje = data[i];
-                    vm.rayatons.push(vm.obje);
-					vm.fechasMoney.push(vm.obje[1]);
-					vm.money.push(vm.obje[2]);
+					vm.fechasMoney.push(data[i][1]);
+					vm.money.push(data[i][2]);
                 }
             }
 
@@ -77,12 +105,12 @@
 
             function onSuccess(data, headers) {
                 for (var i = 0; i < data.length; i++) {
-					vm.obje = data[i];
-					vm.fechasWorks.push(vm.obje[1]);
-					vm.works.push(vm.obje[2]);
+					vm.fechasWorks.push(data[i][1]);
+					vm.works.push(data[i][2]);
                 }
-            }
+            //console.log(vm.fechasWorks);
 
+            }
             function onError(error) {
                 AlertService.error(error.data.message);
             }
@@ -107,17 +135,17 @@
         };
 		 $scope.configChartWorks = {
             chart: {
-                type: 'bar'
+                type: 'column'
             },
             title: {
                 text: 'Trabajos finalizados por Rayatón'
             },
             xAxis: {
-                categories: vm.works
+                categories: vm.fechasWorks
             },
 
             series: [{
-                data: vm.fechasWorks
+                data: vm.works
             }]
         };
 

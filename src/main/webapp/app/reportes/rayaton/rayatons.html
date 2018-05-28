@@ -1,10 +1,6 @@
 <div>
-<h2>Test 1</h2>
-<p>hay que poner los selectores de fecha</p>
+<h2 align="justify">Seleccione las fechas minima y maxima para la consulta.</h2>
 </br>
-<p>Recordar poner datos en la base de datos para probar</p>
-</br>
-<p>La ruta del menu se agrega en /layouts/navbar</p>
 	<date-range
     start="start"
     end="end"
@@ -14,8 +10,10 @@
     on-change-end="changedEnd()"
     on-close="closed()">
   </date-range>
-	<p>Esta ac&aacute</p>
+</br>
+<h2 align="center">REPORTES</h2>
+<h2 align="justify">Dinero obtenido por rayat&oacuten en las fechas seleccionadas.</h2></br>
     <highchart id="chartMoney" config="configChartMoney"></highchart>
-<h2>Test 2</h2>
+<h2 align="justify">Trabajos finalizados por rayat&oacuten en las fechas seleccionadas.</h2></br>
 	<highchart id="chartWorks" config="configChartWorks"></highchart>
 </div>
