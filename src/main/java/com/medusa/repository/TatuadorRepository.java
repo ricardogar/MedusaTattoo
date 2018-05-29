@@ -43,8 +43,8 @@ public interface TatuadorRepository extends JpaRepository<Tatuador, Long> {
         "(select t.id,t.apodo,p.id as tf from trabajo p " +
         "join tatuador t on p.tatuador_id=t.id " +
         "join cita c on c.trabajo_id=p.id " +
-        "where p.estado='FINALIZADO' and c.fecha_y_hora between :minDate and :maxDate" +
-        "group by t.id, p.id) " +
+        "where p.estado='FINALIZADO' and c.fecha_y_hora between :minDate and :maxDate " +
+        "group by t.id, p.id) e " +
         "group by e.id, e.apodo",nativeQuery = true)
     List<Object[]> WorksBetweenDates(@Param("minDate") Instant minDate, @Param("maxDate") Instant maxDate);
 

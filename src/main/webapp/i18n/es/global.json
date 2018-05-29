@@ -22,6 +22,8 @@
 			 "report": {
                 "main": "Reportes",
                 "rayaton": "Rayatónes",
+                "sedes": "Sedes",
+                "tatuadores": "Tatuadores",
                 "password": "Password",
                 "sessions": "Sessions",
                 "login": "Sign in",

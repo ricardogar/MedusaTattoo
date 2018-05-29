@@ -1,0 +1,19 @@
+<div>
+<h2 align="justify">Seleccione las fechas minima y maxima para la consulta.</h2>
+</br>
+	<date-range
+    start="start"
+    end="end"
+    presets="presets"
+    on-change="changed()"
+    on-change-start="changedStart()"
+    on-change-end="changedEnd()"
+    on-close="closed()">
+  </date-range>
+</br>
+<h2 align="center">REPORTES</h2>
+<h2 align="justify">Dinero obtenido por los tatuadores en las fechas seleccionadas.</h2></br>
+    <highchart id="chartMoney" config="configChartMoney"></highchart>
+<h2 align="justify">Trabajos finalizados por cada uno de los tatuadores en las fechas seleccionadas.</h2></br>
+	<highchart id="chartWorks" config="configChartWorks"></highchart>
+</div>

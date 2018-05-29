@@ -161,10 +161,9 @@ public class TatuadorResource {
     public ResponseEntity<List<Object[]>> worksBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
                                                             @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
         log.debug("REST request to get a page of Tatuadors");
-
-
-        List<Object[]> objects= tatuadorRepository.WorksBetweenDates(minDate.toInstant(ZoneOffset.UTC),
-            maxDate.toInstant(ZoneOffset.UTC));
+        List<Object[]> objects;
+        objects = tatuadorRepository.WorksBetweenDates(minDate.toInstant(ZoneOffset.UTC),
+                                                        maxDate.toInstant(ZoneOffset.UTC));
         return new ResponseEntity<>(objects, HttpStatus.OK);
     }
 
