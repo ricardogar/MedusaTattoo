@@ -4,7 +4,7 @@
 
     <groupId>com.medusa</groupId>
     <artifactId>medusa-tattoo</artifactId>
-    <version>0.2.5-ALPHA</version>
+    <version>0.7.5-BETA</version>
     <packaging>war</packaging>
     <name>Medusa Tattoo</name>
 

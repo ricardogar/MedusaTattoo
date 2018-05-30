@@ -13,9 +13,9 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+    <link rel="stylesheet" href="bower_components/angular-datetime-range/dist/datetime-range.min.css">
     <link rel="stylesheet" href="bower_components/highcharts/css/highcharts.css">
     <link rel="stylesheet" href="bower_components/highcharts-ng/dist/highcharts-ng.css">
-    <link rel="stylesheet" href="bower_components/angular-datetime-range/dist/datetime-range.min.css"></script>
     <!-- endinject -->
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
@@ -66,6 +66,8 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/messageformat/messageformat.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/highcharts/highcharts.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -84,18 +86,17 @@
     <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
-    <script src="bower_components/highcharts/highcharts.src.js"></script>
-    <!--script src="bower_components/highcharts/highcharts.js"></script-->
-    <script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
-    <script src="bower_components/angular-datetime-range/dist/datetime-range.min.js"></script>
     <script src="bower_components/angular-scroll-events/dist/scroll-events.min.js"></script>
-    <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+    <script src="bower_components/angular-datetime-range/dist/datetime-range.min.js"></script>
+	<script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 
     <!-- build:js app/app.js  -->
     <!-- inject:js -->
     <script src="app/app.module.js"></script>
+	<script src="app/app.state.js"></script>
+    <script src="app/app.constants.js"></script>
     <script src="app/services/user/user.service.js"></script>
     <script src="app/services/profiles/profile.service.js"></script>
     <script src="app/services/profiles/page-ribbon.directive.js"></script>
@@ -110,9 +111,23 @@
     <script src="app/services/auth/auth.jwt.service.js"></script>
     <script src="app/services/auth/activate.service.js"></script>
     <script src="app/services/auth/account.service.js"></script>
+    <script src="app/reportes/tatuadores/tatuadores.state.js"></script>
+    <script src="app/reportes/tatuadores/tatuadores.service.js"></script>
+    <script src="app/reportes/tatuadores/tatuadores.controller.js"></script>
+    <script src="app/reportes/sedes/sedes.state.js"></script>
+    <script src="app/reportes/sedes/sedes.service.js"></script>
+    <script src="app/reportes/sedes/sedes.controller.js"></script>
+    <script src="app/reportes/rayaton/rayaton.state.js"></script>
+    <script src="app/reportes/rayaton/rayaton.service.js"></script>
+    <script src="app/reportes/rayaton/rayaton.controller.js"></script>
+    <script src="app/registroClientes/cliente.state.js"></script>
+    <script src="app/registroClientes/cliente.controller.js"></script>
     <script src="app/layouts/navbar/navbar.controller.js"></script>
     <script src="app/layouts/navbar/active-menu.directive.js"></script>
     <script src="app/layouts/error/error.state.js"></script>
+    <script src="app/inscripcion/inscripcion.state.js"></script>
+    <script src="app/inscripcion/inscripcion.service.js"></script>
+    <script src="app/inscripcion/inscripcion.controller.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.controller.js"></script>
     <script src="app/entities/trabajo/trabajo-dialog.controller.js"></script>
@@ -176,6 +191,9 @@
     <script src="app/entities/cita/cita.state.js"></script>
     <script src="app/entities/cita/cita.service.js"></script>
     <script src="app/entities/cita/cita.controller.js"></script>
+    <script src="app/consultaCita/cita.state.js"></script>
+    <script src="app/consultaCita/cita.service.js"></script>
+    <script src="app/consultaCita/cita.controller.js"></script>
     <script src="app/components/util/truncate-words.filter.js"></script>
     <script src="app/components/util/truncate-characters.filter.js"></script>
     <script src="app/components/util/sort-by.directive.js"></script>
@@ -215,8 +233,6 @@
     <script src="app/blocks/config/http.config.js"></script>
     <script src="app/blocks/config/compile.config.js"></script>
     <script src="app/blocks/config/alert.config.js"></script>
-    <script src="app/app.state.js"></script>
-    <script src="app/app.constants.js"></script>
     <script src="app/admin/user-management/user-management-dialog.controller.js"></script>
     <script src="app/admin/user-management/user-management-detail.controller.js"></script>
     <script src="app/admin/user-management/user-management-delete-dialog.controller.js"></script>
@@ -255,25 +271,6 @@
     <script src="app/account/activate/activate.state.js"></script>
     <script src="app/account/activate/activate.controller.js"></script>
     <script src="app/account/account.state.js"></script>
-    <script src="app/reportes/rayaton/rayaton.state.js"></script>
-    <script src="app/reportes/rayaton/rayaton.service.js"></script>
-    <script src="app/reportes/rayaton/rayaton.controller.js"></script>
-    <script src="app/reportes/sedes/sedes.state.js"></script>
-    <script src="app/reportes/sedes/sedes.service.js"></script>
-    <script src="app/reportes/sedes/sedes.controller.js"></script>
-    <script src="app/reportes/tatuadores/tatuadores.state.js"></script>
-    <script src="app/reportes/tatuadores/tatuadores.service.js"></script>
-    <script src="app/reportes/tatuadores/tatuadores.controller.js"></script>
-	<script src="app/inscripcion/inscripcion.state.js"></script>
-	<script src="app/inscripcion/inscripcion.service.js"></script>
-	<script src="app/inscripcion/inscripcion.controller.js"></script>
-    <script src="app/consultaCita/cita.state.js"></script>
-    <script src="app/consultaCita/cita.service.js"></script>
-    <script src="app/consultaCita/cita.controller.js"></script>
-    <script src="app/registroClientes/cliente.controller.js"></script>
-	<script src="app/registroClientes/cliente.state.js"></script>
-
-
     <!-- endinject -->
     <!-- endbuild -->
 
