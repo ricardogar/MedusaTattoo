@@ -51,6 +51,7 @@
                         <a ng-if="pago.trabajo.foto" ng-click="vm.openFile(trabajo.fotoContentType, pago.trabajo.foto)">
                             <img data-ng-src="{{'data:' + trabajo.fotoContentType + ';base64,' + pago.trabajo.foto}}" style="max-height: 120px;" alt="trabajo image"/>
                         </a>
+                        <a ui-sref="trabajo-detail({id:pago.trabajo.id})">Ver Trabajo</a>
                     </td>
                     <td class="text-right" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                         <div class="btn-group flex-btn-group-container">

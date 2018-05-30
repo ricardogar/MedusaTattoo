@@ -35,7 +35,7 @@
             parent: 'pago',
             url: '/pago/{id}',
             data: {
-                authorities: ['ROLE_SECRETARIA'],
+                authorities: ['ROLE_SECRETARIA','ROLE_CLIENTE'],
                 pageTitle: 'medusaTattooApp.pago.detail.title'
             },
             views: {

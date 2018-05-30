@@ -50,7 +50,7 @@
                 <tr ng-repeat="cita in vm.citas|filter:vm.currentSearch track by cita.id">
                     <!--td><a ui-sref="cita-detail({id:cita.id})">{{cita.id}}</a></td-->
                     <td>{{cita.fechaYHora | date:'medium'}}</td>
-                    <td>{{cita.duracion}}</td>
+                    <td>{{cita.duracion + ' horas'}}</td>
                     <!--td >
                         <a ui-sref="trabajo-detail({id:cita.trabajo.id})">{{cita.trabajo.id}}</a>
                     </td-->

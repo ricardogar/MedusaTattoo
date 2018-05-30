@@ -4,24 +4,29 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="medusaTattooApp.trabajo.nombre">Nombre</span></dt>
-        <dd>
+        <dt has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA"><span data-translate="medusaTattooApp.trabajo.nombre">Nombre</span></dt>
+        <dd has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
             <span>{{vm.trabajo.nombre}}</span>
         </dd>
         <dt><span data-translate="medusaTattooApp.trabajo.costoTotal">Costo Total</span></dt>
         <dd>
-            <span>{{vm.trabajo.costoTotal}}</span>
+            <span>{{vm.trabajo.costoTotal | currency : '$' : 0}}</span>
         </dd>
         <dt><span data-translate="medusaTattooApp.trabajo.totalPagado">Total Pagado</span></dt>
         <dd>
-            <span>{{vm.trabajo.totalPagado}}</span>
+            <span>{{vm.trabajo.totalPagado | currency : '$' : 0}}</span>
         </dd>
+        <dt><span data-translate="medusaTattooApp.trabajo.porPagar">Por pagar</span></dt>
+        <dd>
+            <span>{{(vm.trabajo.costoTotal-vm.trabajo.totalPagado) | currency : '$' : 0}}</span>
+        </dd>
+
         <dt><span data-translate="medusaTattooApp.trabajo.estado">Estado</span></dt>
         <dd>
             <span data-translate="{{'medusaTattooApp.Estado_trabajo.' + vm.trabajo.estado}}">{{vm.trabajo.estado}}</span>
         </dd>
-        <dt><span data-translate="medusaTattooApp.trabajo.tipo">Tipo</span></dt>
-        <dd>
+        <dt has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA"><span data-translate="medusaTattooApp.trabajo.tipo">Tipo</span></dt>
+        <dd has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
             <span data-translate="{{'medusaTattooApp.Tipo_trabajo.' + vm.trabajo.tipo}}">{{vm.trabajo.tipo}}</span>
         </dd>
         <dt><span data-translate="medusaTattooApp.trabajo.foto">Foto</span></dt>
@@ -33,21 +38,32 @@
                 {{vm.trabajo.fotoContentType}}, {{vm.byteSize(vm.trabajo.foto)}}
             </div>
         </dd>
-        <dt><span data-translate="medusaTattooApp.trabajo.rayaton">Rayaton</span></dt>
-        <dd>
+        <dt has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA"><span data-translate="medusaTattooApp.trabajo.rayaton">Rayaton</span></dt>
+        <dd has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
             <a ui-sref="rayaton-detail({id:vm.trabajo.rayaton.id})">{{vm.trabajo.rayaton.fecha}}</a>
         </dd>
-        <dt><span data-translate="medusaTattooApp.trabajo.tatuador">Tatuador</span></dt>
-        <dd>
+        <dt has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA"><span data-translate="medusaTattooApp.trabajo.tatuador">Tatuador</span></dt>
+        <dd has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
             <a ui-sref="tatuador-detail({id:vm.trabajo.tatuador.id})">{{vm.trabajo.tatuador.apodo}}</a>
         </dd>
-        <dt><span data-translate="medusaTattooApp.trabajo.cliente">Cliente</span></dt>
-        <dd>
+        <dt has-authority="ROLE_CLIENTE"><span data-translate="medusaTattooApp.trabajo.tatuador">Tatuador</span></dt>
+        <dd has-authority="ROLE_CLIENTE">
+            {{vm.trabajo.tatuador.apodo}}
+        </dd>
+
+
+
+        <dt has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA"><span data-translate="medusaTattooApp.trabajo.cliente">Cliente</span></dt>
+        <dd has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
             <a ui-sref="cliente-detail({id:vm.trabajo.cliente.id})">{{vm.trabajo.cliente.documento}}</a>
         </dd>
-        <dt><span data-translate="medusaTattooApp.trabajo.sede">Sede</span></dt>
-        <dd>
+        <dt has-any-authority="ROLE_ADMIN"><span data-translate="medusaTattooApp.trabajo.sede">Sede</span></dt>
+        <dd has-any-authority="ROLE_ADMIN">
             <a ui-sref="sede-detail({id:vm.trabajo.sede.id})">{{vm.trabajo.sede.nombre}}</a>
+        </dd>
+        <dt has-authority="ROLE_CLIENTE"><span data-translate="medusaTattooApp.trabajo.sede">Sede</span></dt>
+        <dd has-authority="ROLE_CLIENTE">
+            {{vm.trabajo.sede.nombre+' ('+vm.trabajo.sede.direccion+')'}}
         </dd>
     </dl>
 
@@ -57,7 +73,7 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button" ui-sref="trabajo-detail.edit({id:vm.trabajo.id})" class="btn btn-primary">
+    <button type="button" ui-sref="trabajo-detail.edit({id:vm.trabajo.id})" class="btn btn-primary" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
     </button>

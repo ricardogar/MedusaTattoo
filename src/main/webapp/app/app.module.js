@@ -17,7 +17,9 @@
             'infinite-scroll',
             'highcharts-ng',
             // jhipster-needle-angularjs-add-module JHipster will add new module here
-            'angular-loading-bar'
+            'angular-loading-bar',
+            'g1b.scroll-events',
+            'g1b.datetime-range'
         ])
         .run(run);
 

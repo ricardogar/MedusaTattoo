@@ -43,10 +43,10 @@
         </dd>
         <dt><span data-translate="medusaTattooApp.tatuador.estado">Estado</span></dt>
         <dd>
-            <span>{{vm.tatuador.estado}}</span>
+            <span>{{vm.tatuador.estado?"activo":"inactivo"}}</span>
         </dd>
-        <dt><span data-translate="medusaTattooApp.tatuador.sede">Sede</span></dt>
-        <dd>
+        <dt has-authority="ROLE_ADMIN"><span data-translate="medusaTattooApp.tatuador.sede">Sede</span></dt>
+        <dd has-authority="ROLE_ADMIN">
             <a ui-sref="sede-detail({id:vm.tatuador.sede.id})">{{vm.tatuador.sede.nombre}}</a>
         </dd>
     </dl>

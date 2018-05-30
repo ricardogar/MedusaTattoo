@@ -37,7 +37,7 @@
             parent: 'trabajo',
             url: '/trabajo/{id}',
             data: {
-                authorities: ['ROLE_SECRETARIA'],
+                authorities: ['ROLE_SECRETARIA','ROLE_CLIENTE'],
                 pageTitle: 'medusaTattooApp.trabajo.detail.title'
             },
             views: {

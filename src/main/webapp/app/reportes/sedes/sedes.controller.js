@@ -2,11 +2,11 @@
     'use strict';
     angular
         .module('medusaTattooApp')
-        .controller('RayatonReportController', RayatonReportController);
+        .controller('SedesReportController', SedesReportController);
 
-    RayatonReportController.$inject = ['$scope','DataUtils', 'Rayaton', 'RayatonMoney','RayatonWorks','ParseLinks', 'AlertService'];
+    SedesReportController.$inject = ['$scope','DataUtils', 'Sedes', 'SedesMoney','SedesWorks','ParseLinks', 'AlertService'];
 
-    function RayatonReportController($scope,DataUtils, Rayaton,RayatonMoney,RayatonWorks,ParseLinks, AlertService) {
+    function SedesReportController($scope,DataUtils, Sedes,SedesMoney,SedesWorks,ParseLinks, AlertService) {
     
         var vm = this;
         setupMoment();
@@ -16,26 +16,26 @@
             init();
         }
 
-		function loadMoney () {
-            RayatonMoney.query({minDate:vm.fecha_i,
+        function loadMoney () {
+            SedesMoney.query({minDate:vm.fecha_i,
             maxDate:vm.fecha_f}, onSuccess, onError);
             function onSuccess(data, headers) {
                 for (var i = 0; i < data.length; i++) {
-					vm.fechasMoney.push(data[i][1]);
-					vm.money.push(data[i][2]);
+                    vm.fechasMoney.push(data[i][1]);
+                    vm.money.push(data[i][2]);
                 }
             }
             function onError(error) {
                 AlertService.error(error.data.message);
             }
         }
-		function loadWorks () {
-            RayatonWorks.query({minDate:vm.fecha_i,
+        function loadWorks () {
+            SedesWorks.query({minDate:vm.fecha_i,
             maxDate:vm.fecha_f}, onSuccess, onError);
             function onSuccess(data, headers) {
                 for (var i = 0; i < data.length; i++) {
-					vm.fechasWorks.push(data[i][1]);
-					vm.works.push(data[i][2]);
+                    vm.fechasWorks.push(data[i][1]);
+                    vm.works.push(data[i][2]);
                 }
             }
             function onError(error) {
@@ -56,7 +56,7 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Dinero por Rayatón'
+                    text: 'Dinero obtenido por sedes'
                 },
                 xAxis: {
                     categories: vm.fechasMoney
@@ -71,7 +71,7 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Trabajos finalizados por Rayatón'
+                    text: 'Trabajos finalizados por sede'
                 },
                 xAxis: {
                     categories: vm.fechasWorks

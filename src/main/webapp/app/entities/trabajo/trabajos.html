@@ -46,7 +46,7 @@
                     <th has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA" jh-sort-by="rayaton.fecha"><span data-translate="medusaTattooApp.trabajo.rayaton">Rayaton</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="tatuador.apodo"><span data-translate="medusaTattooApp.trabajo.tatuador">Tatuador</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA" jh-sort-by="cliente.documento"><span data-translate="medusaTattooApp.trabajo.cliente">Cliente</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sede.nombre"><span data-translate="medusaTattooApp.trabajo.sede">Sede</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th has-any-authority="ROLE_ADMIN,ROLE_CLIENTE" jh-sort-by="sede.nombre"><span data-translate="medusaTattooApp.trabajo.sede">Sede</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA"></th>
                 </tr>
             </thead>
@@ -79,7 +79,7 @@
                     <td has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                         <a ui-sref="cliente-detail({id:trabajo.cliente.id})">{{trabajo.cliente.nombre+' '+trabajo.cliente.apellido+' (' +trabajo.cliente.documento+')'}}</a>
                     </td>
-                    <td has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
+                    <td has-authority="ROLE_ADMIN">
                         <a ui-sref="sede-detail({id:trabajo.sede.id})">{{trabajo.sede.nombre}}</a>
                     </td>
                     <td has-authority="ROLE_CLIENTE">
@@ -100,12 +100,12 @@
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
-                            <button type="submit"
+                            <!--button type="submit"
                                     ui-sref="trabajo.delete({id:trabajo.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
-                            </button>
+                            </button-->
                         </div>
                     </td>
                 </tr>

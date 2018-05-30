@@ -2,11 +2,11 @@
     'use strict';
     angular
         .module('medusaTattooApp')
-        .controller('RayatonReportController', RayatonReportController);
+        .controller('TatuadoresReportController', TatuadoresReportController);
 
-    RayatonReportController.$inject = ['$scope','DataUtils', 'Rayaton', 'RayatonMoney','RayatonWorks','ParseLinks', 'AlertService'];
+    TatuadoresReportController.$inject = ['$scope','DataUtils', 'Tatuadores', 'TatuadoresMoney','TatuadoresWorks','ParseLinks', 'AlertService'];
 
-    function RayatonReportController($scope,DataUtils, Rayaton,RayatonMoney,RayatonWorks,ParseLinks, AlertService) {
+    function TatuadoresReportController($scope,DataUtils, Tatuadores,TatuadoresMoney,TatuadoresWorks,ParseLinks, AlertService) {
     
         var vm = this;
         setupMoment();
@@ -16,26 +16,31 @@
             init();
         }
 
-		function loadMoney () {
-            RayatonMoney.query({minDate:vm.fecha_i,
+        function loadMoney () {
+            TatuadoresMoney.query({minDate:vm.fecha_i,
             maxDate:vm.fecha_f}, onSuccess, onError);
             function onSuccess(data, headers) {
+                console.log(vm.fecha_f);
+                console.log('money');
                 for (var i = 0; i < data.length; i++) {
-					vm.fechasMoney.push(data[i][1]);
-					vm.money.push(data[i][2]);
+                    console.log(data[i]);
+                    vm.fechasMoney.push(data[i][1]);
+                    vm.money.push(data[i][3]);
                 }
             }
             function onError(error) {
                 AlertService.error(error.data.message);
             }
         }
-		function loadWorks () {
-            RayatonWorks.query({minDate:vm.fecha_i,
+        function loadWorks () {
+            TatuadoresWorks.query({minDate:vm.fecha_i,
             maxDate:vm.fecha_f}, onSuccess, onError);
             function onSuccess(data, headers) {
+                console.log('works');
                 for (var i = 0; i < data.length; i++) {
-					vm.fechasWorks.push(data[i][1]);
-					vm.works.push(data[i][2]);
+                    console.log(data[i]);
+                    vm.fechasWorks.push(data[i][1]);
+                    vm.works.push(data[i][2]);
                 }
             }
             function onError(error) {
@@ -56,7 +61,7 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Dinero por Rayatón'
+                    text: 'Dinero obtenido por Tatuadores'
                 },
                 xAxis: {
                     categories: vm.fechasMoney
@@ -71,7 +76,7 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Trabajos finalizados por Rayatón'
+                    text: 'Trabajos finalizados por Tatuadores'
                 },
                 xAxis: {
                     categories: vm.fechasWorks
