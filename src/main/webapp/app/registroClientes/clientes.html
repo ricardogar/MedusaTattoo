@@ -1,0 +1,135 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myClienteLabel" data-translate="medusaTattooApp.cliente.home.createOrEditLabel">Create or edit a Cliente</h4>
+    </div>
+    <div class="modal-body">
+        <h2 id="clientRegisterInfo"></h2>
+        <h3 id="clientRegisterInfo2"></h3>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.cliente.tipodocumento" for="field_tipodocumento">Tipodocumento</label>
+            <select class="form-control" name="tipodocumento" ng-model="vm.cliente.tipodocumento" id="field_tipodocumento" required>
+                <option value="CEDULA" data-translate="medusaTattooApp.Tipo_documento.CEDULA">CEDULA</option>
+                <option value="CEDULA_EXTRANJERIA" data-translate="medusaTattooApp.Tipo_documento.CEDULA_EXTRANJERIA">CEDULA_EXTRANJERIA</option>
+                <option value="TARJETA_IDENTIDAD" data-translate="medusaTattooApp.Tipo_documento.TARJETA_IDENTIDAD">TARJETA_IDENTIDAD</option>
+            </select>
+            <div ng-show="editForm.tipodocumento.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.tipodocumento.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.cliente.documento" for="field_documento">Documento</label>
+            <input type="text" class="form-control" name="documento" id="field_documento"
+                    ng-model="vm.cliente.documento"
+                    required ng-minlength="8" ng-maxlength="10" ng-pattern="/^[1-9][0-9]*$/"/>
+            <div ng-show="editForm.documento.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.documento.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.documento.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="8">
+                    This field is required to be at least 8 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.documento.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="10">
+                    This field cannot be longer than 10 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.documento.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="Documento">
+                    This field should follow pattern for "Documento".
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.cliente.nombre" for="field_nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                    ng-model="vm.cliente.nombre"
+                    required/>
+            <div ng-show="editForm.nombre.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.nombre.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.cliente.apellido" for="field_apellido">Apellido</label>
+            <input type="text" class="form-control" name="apellido" id="field_apellido"
+                    ng-model="vm.cliente.apellido"
+                    required/>
+            <div ng-show="editForm.apellido.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.apellido.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.cliente.telefono" for="field_telefono">Telefono</label>
+            <input type="text" class="form-control" name="telefono" id="field_telefono"
+                    ng-model="vm.cliente.telefono"
+                    required ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]*$/"/>
+            <div ng-show="editForm.telefono.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.telefono.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.telefono.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="10">
+                    This field is required to be at least 10 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.telefono.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="10">
+                    This field cannot be longer than 10 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.telefono.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="Telefono">
+                    This field should follow pattern for "Telefono".
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.cliente.genero" for="field_genero">Genero</label>
+            <select class="form-control" name="genero" ng-model="vm.cliente.genero" id="field_genero" required>
+                <option value="MASCULINO" data-translate="medusaTattooApp.Genero.MASCULINO">MASCULINO</option>
+                <option value="FEMENINO" data-translate="medusaTattooApp.Genero.FEMENINO">FEMENINO</option>
+            </select>
+            <div ng-show="editForm.genero.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.genero.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="medusaTattooApp.cliente.email" for="field_email">Email</label>
+            <input type="email" class="form-control" name="email" id="field_email"
+                    ng-model="vm.cliente.email"
+					required
+                    />
+					<div ng-show="editForm.email.$invalid">
+            <p class="help-block"
+                ng-show="editForm.email.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+            </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

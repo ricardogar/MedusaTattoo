@@ -57,8 +57,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 100, unique = true)
     private String email;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne
     private Sede sede;
 
     @NotNull
@@ -208,6 +207,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public boolean isAdmin(){
         return authorities.stream().anyMatch(e -> e.getName().equals("ROLE_ADMIN"));
     }
+    public boolean isSecretaria(){
+        return authorities.stream().anyMatch(e -> e.getName().equals("ROLE_SECRETARIA"));
+    }
+    public boolean isCliente(){
+        return authorities.stream().anyMatch(e -> e.getName().equals("ROLE_CLIENTE"));
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -234,7 +239,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", sede='" + sede.getNombre() + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +

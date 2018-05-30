@@ -4,6 +4,7 @@ import com.medusa.MedusaTattooApp;
 
 import com.medusa.domain.Inscripcion;
 import com.medusa.repository.InscripcionRepository;
+import com.medusa.repository.RayatonRepository;
 import com.medusa.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -72,11 +73,12 @@ public class InscripcionResourceIntTest {
     private MockMvc restInscripcionMockMvc;
 
     private Inscripcion inscripcion;
+    private RayatonRepository rayatonRepository;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final InscripcionResource inscripcionResource = new InscripcionResource(inscripcionRepository);
+        final InscripcionResource inscripcionResource = new InscripcionResource(inscripcionRepository, rayatonRepository);
         this.restInscripcionMockMvc = MockMvcBuilders.standaloneSetup(inscripcionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

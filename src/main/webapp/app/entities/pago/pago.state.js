@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/pago',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_SECRETARIA','ROLE_CLIENTE'],
                 pageTitle: 'medusaTattooApp.pago.home.title'
             },
             views: {
@@ -35,7 +35,7 @@
             parent: 'pago',
             url: '/pago/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_SECRETARIA'],
                 pageTitle: 'medusaTattooApp.pago.detail.title'
             },
             views: {
@@ -67,7 +67,7 @@
             parent: 'pago-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_SECRETARIA']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -92,7 +92,7 @@
             parent: 'pago',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_SECRETARIA']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -121,7 +121,7 @@
             parent: 'pago',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_SECRETARIA']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -146,7 +146,7 @@
             parent: 'pago',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_SECRETARIA']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

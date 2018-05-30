@@ -32,6 +32,9 @@ public interface TrabajoRepository extends JpaRepository<Trabajo, Long> {
     @Query(value = "UPDATE trabajo t SET t.estado='EN_PROGRESO' WHERE t.sede_id=:id and t.estado='CANCELADO'",nativeQuery = true)
     List<Trabajo> enableBySede(@Param("id") Long idSede);
 
+    Page<Trabajo> findAllByCliente_Email(Pageable pageable, String email);
+
+
 
 
 }

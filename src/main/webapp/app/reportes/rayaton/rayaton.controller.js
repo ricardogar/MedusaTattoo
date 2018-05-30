@@ -13,7 +13,7 @@
         //vm.rayatons = Rayaton.query();
 
         vm.rayatons=[];
-		
+
 		vm.fechasMoney=[];
 		vm.fechasWorks=[];
 		vm.money=[];
@@ -37,7 +37,7 @@
                 AlertService.error(error.data.message);
             }
         }
-		
+
 		function loadWorks () {
             RayatonWorks.query({minDate:"2017-05-27T05:00:00.000Z",
             maxDate:"2019-05-27T05:00:00.000Z"}, onSuccess, onError);
@@ -54,8 +54,8 @@
                 AlertService.error(error.data.message);
             }
         }
-		
-		
+
+
 
         $scope.configChartMoney = {
             chart: {
@@ -74,7 +74,7 @@
         };
 		 $scope.configChartWorks = {
             chart: {
-                type: 'bar'
+                type: 'column'
             },
             title: {
                 text: 'Trabajos finalizados por Rayatón'

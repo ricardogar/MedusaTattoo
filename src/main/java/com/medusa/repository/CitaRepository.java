@@ -37,4 +37,6 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
 
     Page<Cita> findAllByTrabajo_Cliente_Documento(Pageable pageable,String documento);
 
+    Page<Cita> findAllByTrabajo_Cliente_Email(Pageable pageable,String email);
+
 }

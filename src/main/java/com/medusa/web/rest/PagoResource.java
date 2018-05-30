@@ -121,8 +121,10 @@ public class PagoResource {
         Page<Pago> page;
         if (user.isAdmin()){
             page = pagoRepository.findAll(pageable);
+        }else if (user.isSecretaria()){
+            page = pagoRepository.findAllByTrabajo_Sede_Id(pageable,user.getSede().getId());
         }else{
-            page = pagoRepository.findAllByCuenta(pageable,id);
+            page = pagoRepository.findAllByTrabajo_Cliente_Email(pageable,user.getEmail());
         }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/pagos/cuenta");

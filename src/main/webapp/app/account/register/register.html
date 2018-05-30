@@ -2,6 +2,8 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h1 data-translate="register.title">Registration</h1>
+            <h2 id="clientRegisterInfo"></h2>
+            <h3 id="clientRegisterInfo2"></h3>
 
             <div class="alert alert-success" ng-show="vm.success" data-translate="register.messages.success">
                 <strong>Registration saved!</strong> Please check your email for confirmation.
@@ -11,9 +13,9 @@
                 <strong>Registration failed!</strong> Please try again later.
             </div>
 
-            <div class="alert alert-danger" ng-show="vm.errorUserExists" data-translate="register.messages.error.userexists">
+            <!--div class="alert alert-danger" ng-show="vm.errorUserExists" data-translate="register.messages.error.userexists">
                 <strong>Login name already registered!</strong> Please choose another one.
-            </div>
+            </div-->
 
             <div class="alert alert-danger" ng-show="vm.errorEmailExists" data-translate="register.messages.error.emailexists">
                 <strong>Email is already in use!</strong> Please choose another one.
@@ -26,7 +28,7 @@
         <div class="col-md-8 col-md-offset-2">
             <form ng-show="!vm.success" name="form" role="form" novalidate ng-submit="vm.register()" show-validation>
 
-                <div class="form-group">
+                <!--div class="form-group">
                     <label class="control-label" for="login" data-translate="global.form.username">Username</label>
                     <input type="text" class="form-control" id="login" name="login" placeholder="{{'global.form.username.placeholder' | translate}}"
                            ng-model="vm.registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/" required>
@@ -47,6 +49,105 @@
                                ng-show="form.login.$error.pattern" data-translate="register.messages.validate.login.pattern">
                             Your username can only contain letters and digits.
                     </p>
+                    </div>
+                </div-->
+                <div class="form-group">
+                    <label class="control-label" data-translate="medusaTattooApp.cliente.tipodocumento" for="field_tipodocumento">Tipodocumento</label>
+                    <select class="form-control" name="tipodocumento" ng-model="vm.cliente.tipodocumento" id="field_tipodocumento" required>
+                        <option value="CEDULA" data-translate="medusaTattooApp.Tipo_documento.CEDULA">CEDULA</option>
+                        <option value="CEDULA_EXTRANJERIA" data-translate="medusaTattooApp.Tipo_documento.CEDULA_EXTRANJERIA">CEDULA_EXTRANJERIA</option>
+                        <option value="TARJETA_IDENTIDAD" data-translate="medusaTattooApp.Tipo_documento.TARJETA_IDENTIDAD">TARJETA_IDENTIDAD</option>
+                    </select>
+                    <div ng-show="editForm.tipodocumento.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.tipodocumento.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" data-translate="medusaTattooApp.cliente.documento" for="field_documento">Documento</label>
+                    <input type="text" class="form-control" name="documento" id="field_documento"
+                           ng-model="vm.cliente.documento"
+                           required ng-minlength="8" ng-maxlength="10" ng-pattern="/^[1-9][0-9]*$/"/>
+                    <div ng-show="editForm.documento.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.documento.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.documento.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="8">
+                            This field is required to be at least 8 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.documento.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="10">
+                            This field cannot be longer than 10 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.documento.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="Documento">
+                            This field should follow pattern for "Documento".
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" data-translate="medusaTattooApp.cliente.nombre" for="field_nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="field_nombre"
+                           ng-model="vm.cliente.nombre"
+                           required/>
+                    <div ng-show="editForm.nombre.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.nombre.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" data-translate="medusaTattooApp.cliente.apellido" for="field_apellido">Apellido</label>
+                    <input type="text" class="form-control" name="apellido" id="field_apellido"
+                           ng-model="vm.cliente.apellido"
+                           required/>
+                    <div ng-show="editForm.apellido.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.apellido.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" data-translate="medusaTattooApp.cliente.telefono" for="field_telefono">Telefono</label>
+                    <input type="text" class="form-control" name="telefono" id="field_telefono"
+                           ng-model="vm.cliente.telefono"
+                           required ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]*$/"/>
+                    <div ng-show="editForm.telefono.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.telefono.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.telefono.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="10">
+                            This field is required to be at least 10 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.telefono.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="10">
+                            This field cannot be longer than 10 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.telefono.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="Telefono">
+                            This field should follow pattern for "Telefono".
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" data-translate="medusaTattooApp.cliente.genero" for="field_genero">Genero</label>
+                    <select class="form-control" name="genero" ng-model="vm.cliente.genero" id="field_genero" required>
+                        <option value="MASCULINO" data-translate="medusaTattooApp.Genero.MASCULINO">MASCULINO</option>
+                        <option value="FEMENINO" data-translate="medusaTattooApp.Genero.FEMENINO">FEMENINO</option>
+                    </select>
+                    <div ng-show="editForm.genero.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.genero.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
                     </div>
                 </div>
                 <div class="form-group">

@@ -51,6 +51,7 @@ public class ClienteResource {
     @PostMapping("/clientes")
     @Timed
     public ResponseEntity<Cliente> createCliente(@Valid @RequestBody Cliente cliente) throws URISyntaxException {
+        log.debug("set the default value in client");
         log.debug("REST request to save Cliente : {}", cliente);
         if (cliente.getId() != null) {
             throw new BadRequestAlertException("A new cliente cannot already have an ID", ENTITY_NAME, "idexists");

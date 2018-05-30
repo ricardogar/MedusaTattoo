@@ -4,7 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Trabajo;
 
 import com.medusa.domain.User;
-import com.medusa.domain.enumeration.Estado_trabajo;
+import com.medusa.repository.ClienteRepository;
 import com.medusa.repository.TrabajoRepository;
 import com.medusa.repository.UserRepository;
 
@@ -45,10 +45,13 @@ public class TrabajoResource {
 
     private final UserRepository userRepository;
 
+    private final ClienteRepository clienteRepository;
 
-    public TrabajoResource(TrabajoRepository trabajoRepository, UserRepository userRepository) {
+
+    public TrabajoResource(TrabajoRepository trabajoRepository, UserRepository userRepository, ClienteRepository clienteRepository) {
         this.trabajoRepository = trabajoRepository;
         this.userRepository = userRepository;
+        this.clienteRepository = clienteRepository;
     }
 
     /**
@@ -157,8 +160,11 @@ public class TrabajoResource {
         Page<Trabajo> page;
         if (user.isAdmin()){
             page = trabajoRepository.findAll(pageable);
-        }else{
+        }else if (user.isSecretaria()){
             page = trabajoRepository.findAllBySede_Id(pageable,user.getSede().getId());
+        }else {
+
+            page = trabajoRepository.findAllByCliente_Email(pageable,user.getEmail());
         }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/trabajos/cuenta");

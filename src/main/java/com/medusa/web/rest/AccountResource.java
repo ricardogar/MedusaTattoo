@@ -56,9 +56,11 @@ public class AccountResource {
     @Timed
     @ResponseStatus(HttpStatus.CREATED)
     public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+        log.debug("entro en register account");
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
+
         userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());

@@ -10,7 +10,7 @@
     function InscripcionRController ($timeout, $scope, $stateParams, DataUtils, Inscripcion, Rayaton, Sede,Principal) {
         var vm = this;
 
-        vm.inscripcion = null;
+        vm.inscripcion = {};
         vm.clear = clear;
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
@@ -37,7 +37,7 @@
         });
 
         function clear () {
-            
+
         }
 
         function save () {
@@ -45,7 +45,7 @@
 			vm.inscripcion.estado="PRE_INSCRITO";
 			console.log(vm.inscripcion);
                 Inscripcion.save(vm.inscripcion, onSaveSuccess, onSaveError);
-            
+
         }
 
         function onSaveSuccess (result) {

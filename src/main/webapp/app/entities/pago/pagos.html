@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="pago.new" >
+                <button class="btn btn-primary" ui-sref="pago.new" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span  data-translate="medusaTattooApp.pago.home.createLabel">
                         Create new Pago
@@ -35,7 +35,7 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th-->
                     <th jh-sort-by="fecha"><span data-translate="medusaTattooApp.pago.fecha">Fecha</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="valor"><span data-translate="medusaTattooApp.pago.valor">Valor</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="trabajo.id"><span data-translate="medusaTattooApp.pago.trabajo">Trabajo</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -44,13 +44,15 @@
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="pago in vm.pagos|filter:vm.currentSearch track by pago.id">
-                    <td><a ui-sref="pago-detail({id:pago.id})">{{pago.id}}</a></td>
+                    <!--td><a ui-sref="pago-detail({id:pago.id})">{{pago.id}}</a></td-->
                     <td>{{pago.fecha | date:'medium'}}</td>
                     <td>{{pago.valor | currency : "$" : 0}}</td>
                     <td>
-                        <a ui-sref="trabajo-detail({id:pago.trabajo.id})">{{pago.trabajo.id}}</a>
+                        <a ng-if="pago.trabajo.foto" ng-click="vm.openFile(trabajo.fotoContentType, pago.trabajo.foto)">
+                            <img data-ng-src="{{'data:' + trabajo.fotoContentType + ';base64,' + pago.trabajo.foto}}" style="max-height: 120px;" alt="trabajo image"/>
+                        </a>
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="pago-detail({id:pago.id})"

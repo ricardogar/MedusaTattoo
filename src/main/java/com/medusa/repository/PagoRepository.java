@@ -15,6 +15,7 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface PagoRepository extends JpaRepository<Pago, Long> {
 
-    @Query("SELECT p FROM Pago p JOIN p.trabajo t JOIN t.sede s where s.id=(SELECT a.id FROM User u JOIN u.sede a WHERE u.id=?1)")
-    Page<Pago> findAllByCuenta(Pageable pageable, Long id);
+    //@Query("SELECT p FROM Pago p JOIN p.trabajo t JOIN t.sede s where s.id=(SELECT a.id FROM User u JOIN u.sede a WHERE u.id=?1)")
+    Page<Pago> findAllByTrabajo_Sede_Id(Pageable pageable, Long id);
+    Page<Pago> findAllByTrabajo_Cliente_Email(Pageable pageable, String email);
 }

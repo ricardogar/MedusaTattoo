@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/rayaton',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_SECRETARIA'],
                 pageTitle: 'medusaTattooApp.rayaton.home.title'
             },
             views: {
@@ -35,7 +35,7 @@
             parent: 'rayaton',
             url: '/rayaton/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_SECRETARIA'],
                 pageTitle: 'medusaTattooApp.rayaton.detail.title'
             },
             views: {
@@ -67,7 +67,7 @@
             parent: 'rayaton-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_SECRETARIA']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -92,7 +92,7 @@
             parent: 'rayaton',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_SECRETARIA']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -125,7 +125,7 @@
             parent: 'rayaton',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_SECRETARIA']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -150,7 +150,7 @@
             parent: 'rayaton',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_SECRETARIA']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

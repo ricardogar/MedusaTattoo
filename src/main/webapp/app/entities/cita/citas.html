@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="cita.new" >
+                <button class="btn btn-primary" ui-sref="cita.new" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span  data-translate="medusaTattooApp.cita.home.createLabel">
                         Create new Cita
@@ -38,22 +38,30 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th-->
                     <th jh-sort-by="fechaYHora"><span data-translate="medusaTattooApp.cita.fechaYHora">Fecha Y Hora</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="duracion"><span data-translate="medusaTattooApp.cita.duracion">Duracion</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="trabajo.id"><span data-translate="medusaTattooApp.cita.trabajo">Trabajo</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                    <th has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA"></th>
+                    <th has-authority="ROLE_CLIENTE" jh-sort-by="trabajo.sede.id"><span data-translate="medusaTattooApp.cita.sede">Sede</span> <span class="glyphicon glyphicon-sort"></span></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="cita in vm.citas|filter:vm.currentSearch track by cita.id">
-                    <td><a ui-sref="cita-detail({id:cita.id})">{{cita.id}}</a></td>
+                    <!--td><a ui-sref="cita-detail({id:cita.id})">{{cita.id}}</a></td-->
                     <td>{{cita.fechaYHora | date:'medium'}}</td>
                     <td>{{cita.duracion}}</td>
-                    <td>
+                    <!--td >
                         <a ui-sref="trabajo-detail({id:cita.trabajo.id})">{{cita.trabajo.id}}</a>
+                    </td-->
+                    <td>
+                        <a ng-if="cita.trabajo.foto" ng-click="vm.openFile(trabajo.fotoContentType, cita.trabajo.foto)">
+                            <img data-ng-src="{{'data:' + trabajo.fotoContentType + ';base64,' + cita.trabajo.foto}}" style="max-height: 120px;" alt="trabajo image"/>
+                        </a>
+                        <a ui-sref="trabajo-detail({id:cita.trabajo.id})">Ver Trabajo</a>
                     </td>
-                    <td class="text-right">
+                    <td has-authority="ROLE_CLIENTE">{{cita.trabajo.sede.nombre+' ('+cita.trabajo.sede.direccion+')'}}</td>
+                    <td class="text-right" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="cita-detail({id:cita.id})"

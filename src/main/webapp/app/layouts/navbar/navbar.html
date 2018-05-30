@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
+                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA,ROLE_CLIENTE">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
                             <span class="glyphicon glyphicon-th-list"></span>
@@ -38,13 +38,13 @@
                                     <span data-translate="global.menu.entities.sede">Sede</span>
                                 </a>
                             </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                                 <a ui-sref="tatuador" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.tatuador">Tatuador</span>
                                 </a>
                             </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                                 <a ui-sref="cliente" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.cliente">Cliente</span>
@@ -62,7 +62,7 @@
                                     <span data-translate="global.menu.entities.cita">Cita</span>
                                 </a>
                             </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                                 <a ui-sref="foto" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.foto">Foto</span>
@@ -74,7 +74,7 @@
                                     <span data-translate="global.menu.entities.pago">Pago</span>
                                 </a>
                             </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                                 <a ui-sref="palabra-clave" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.palabraClave">Palabra Clave</span>
@@ -86,7 +86,7 @@
                                     <span data-translate="global.menu.entities.rayaton">Rayaton</span>
                                 </a>
                             </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                                 <a ui-sref="inscripcion" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.inscripcion">Inscripcion</span>
@@ -106,19 +106,19 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active" ng-switch-when="true">
+                        <li ui-sref-active="active" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA,ROLE_CLIENTE">
                             <a ui-sref="settings" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-wrench"></span>&nbsp;
                                 <span data-translate="global.menu.account.settings">Settings</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
+                        <li ui-sref-active="active" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA,ROLE_CLIENTE">
                             <a ui-sref="password" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-lock"></span>&nbsp;
                                 <span data-translate="global.menu.account.password">Password</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
+                        <li ui-sref-active="active" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA,ROLE_CLIENTE">
                             <a href="" ng-click="vm.logout()" id="logout">
                                 <span class="glyphicon glyphicon-log-out"></span>&nbsp;
                                 <span data-translate="global.menu.account.logout">Sign out</span>
@@ -130,12 +130,13 @@
                                 <span data-translate="global.menu.account.login">Sign in</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="false" has-authority="ROLE_ADMIN">
+                        <li ui-sref-active="active" ng-switch-when="false">
                             <a ui-sref="register" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
                                 <span data-translate="global.menu.account.register">Register</span>
                             </a>
                         </li>
+
                     </ul>
                 </li>
                 <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">

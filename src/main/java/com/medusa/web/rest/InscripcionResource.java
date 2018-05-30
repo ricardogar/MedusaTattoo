@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Inscripcion;
 
 import com.medusa.repository.InscripcionRepository;
+import com.medusa.repository.RayatonRepository;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
@@ -37,8 +38,11 @@ public class InscripcionResource {
 
     private final InscripcionRepository inscripcionRepository;
 
-    public InscripcionResource(InscripcionRepository inscripcionRepository) {
+    private  final RayatonRepository rayatonRepository;
+
+    public InscripcionResource(InscripcionRepository inscripcionRepository, RayatonRepository rayatonRepository) {
         this.inscripcionRepository = inscripcionRepository;
+        this.rayatonRepository = rayatonRepository;
     }
 
     /**
@@ -55,6 +59,7 @@ public class InscripcionResource {
         if (inscripcion.getId() != null) {
             throw new BadRequestAlertException("A new inscripcion cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        inscripcion.setRayaton(rayatonRepository.getLastRayaton());
         Inscripcion result = inscripcionRepository.save(inscripcion);
         return ResponseEntity.created(new URI("/api/inscripcions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

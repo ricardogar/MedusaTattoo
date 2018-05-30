@@ -34,16 +34,16 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="estado" type="bit">
-                <constraints nullable="true" />
-            </column>
+            <column name="estado" type="boolean" valueBoolean="true"/>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <loadData encoding="UTF-8"
                   file="config/liquibase/sedes.csv"
                   separator=";"
-                  tableName="sede"/>
+                  tableName="sede">
+				  <column name="estado" type="boolean"/>
+		</loadData>
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

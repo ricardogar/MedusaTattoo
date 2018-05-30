@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="trabajo.new" >
+                <button class="btn btn-primary" ui-sref="trabajo.new" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span  data-translate="medusaTattooApp.trabajo.home.createLabel">
                         Create new Trabajo
@@ -35,49 +35,58 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="nombre"><span data-translate="medusaTattooApp.trabajo.nombre">Nombre</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th-->
+                    <th has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA" jh-sort-by="nombre"><span data-translate="medusaTattooApp.trabajo.nombre">Nombre</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="costoTotal"><span data-translate="medusaTattooApp.trabajo.costoTotal">Costo Total</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="totalPagado"><span data-translate="medusaTattooApp.trabajo.totalPagado">Total Pagado</span> <span class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="porPagar"><span data-translate="medusaTattooApp.trabajo.porPagar">Por pagar</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="estado"><span data-translate="medusaTattooApp.trabajo.estado">Estado</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="tipo"><span data-translate="medusaTattooApp.trabajo.tipo">Tipo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA" jh-sort-by="tipo"><span data-translate="medusaTattooApp.trabajo.tipo">Tipo</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="foto"><span data-translate="medusaTattooApp.trabajo.foto">Foto</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="rayaton.fecha"><span data-translate="medusaTattooApp.trabajo.rayaton">Rayaton</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA" jh-sort-by="rayaton.fecha"><span data-translate="medusaTattooApp.trabajo.rayaton">Rayaton</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="tatuador.apodo"><span data-translate="medusaTattooApp.trabajo.tatuador">Tatuador</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="cliente.documento"><span data-translate="medusaTattooApp.trabajo.cliente">Cliente</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA" jh-sort-by="cliente.documento"><span data-translate="medusaTattooApp.trabajo.cliente">Cliente</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="sede.nombre"><span data-translate="medusaTattooApp.trabajo.sede">Sede</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                    <th has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA"></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="trabajo in vm.trabajos|filter:vm.currentSearch track by trabajo.id">
-                    <td><a ui-sref="trabajo-detail({id:trabajo.id})">{{trabajo.id}}</a></td>
-                    <td>{{trabajo.nombre}}</td>
+                    <!--td><a ui-sref="trabajo-detail({id:trabajo.id})">{{trabajo.id}}</a></td-->
+                    <td has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">{{trabajo.nombre}}</td>
                     <td>{{trabajo.costoTotal | currency : "$" : 0}}</td>
-                    <td>{{trabajo.totalPagado | currency : "$" : 0}}</td>
+                    <td>{{(trabajo.totalPagado)?(trabajo.totalPagado | currency : "$" : 0):(0 | currency : "$" : 0)}}</td>
 					<td>{{trabajo.costoTotal-trabajo.totalPagado | currency : "$" : 0}}</td>
                     <td data-translate="{{'medusaTattooApp.Estado_trabajo.' + trabajo.estado}}">{{trabajo.estado}}</td>
-                    <td data-translate="{{'medusaTattooApp.Tipo_trabajo.' + trabajo.tipo}}">{{trabajo.tipo}}</td>
+                    <td has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA" data-translate="{{'medusaTattooApp.Tipo_trabajo.' + trabajo.tipo}}">{{trabajo.tipo}}</td>
                     <td>
                         <a ng-if="trabajo.foto" ng-click="vm.openFile(trabajo.fotoContentType, trabajo.foto)">
-                            <img data-ng-src="{{'data:' + trabajo.fotoContentType + ';base64,' + trabajo.foto}}" style="max-height: 30px;" alt="trabajo image"/>
+                            <img data-ng-src="{{'data:' + trabajo.fotoContentType + ';base64,' + trabajo.foto}}" style="max-height: 90px;" alt="trabajo image"/>
                         </a>
-                        <span ng-if="trabajo.foto">{{trabajo.fotoContentType}}, {{vm.byteSize(trabajo.foto)}}</span>
                     </td>
-                    <td>
+                    <td has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                         <a ui-sref="rayaton-detail({id:trabajo.rayaton.id})">{{trabajo.rayaton.fecha}}</a>
                     </td>
-                    <td>
+                    <td has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                         <a ui-sref="tatuador-detail({id:trabajo.tatuador.id})">{{trabajo.tatuador.apodo}}</a>
                     </td>
-                    <td>
-                        <a ui-sref="cliente-detail({id:trabajo.cliente.id})">{{trabajo.cliente.documento}}</a>
+                    <td has-authority="ROLE_CLIENTE">
+                        <a ng-if="trabajo.tatuador.foto" ng-click="vm.openFile(trabajo.fotoContentType, trabajo.tatuador.foto)">
+                            <img data-ng-src="{{'data:' + trabajo.fotoContentType + ';base64,' + trabajo.tatuador.foto}}" style="max-height: 90px;" alt="trabajo image"/>
+                        </a>
+                        {{trabajo.tatuador.apodo}}
                     </td>
-                    <td>
+                    <td has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
+                        <a ui-sref="cliente-detail({id:trabajo.cliente.id})">{{trabajo.cliente.nombre+' '+trabajo.cliente.apellido+' (' +trabajo.cliente.documento+')'}}</a>
+                    </td>
+                    <td has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                         <a ui-sref="sede-detail({id:trabajo.sede.id})">{{trabajo.sede.nombre}}</a>
                     </td>
-                    <td class="text-right">
+                    <td has-authority="ROLE_CLIENTE">
+                        {{trabajo.sede.nombre + ' ('+ trabajo.sede.direccion+')'}}
+                    </td>
+
+                    <td class="text-right" has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="trabajo-detail({id:trabajo.id})"

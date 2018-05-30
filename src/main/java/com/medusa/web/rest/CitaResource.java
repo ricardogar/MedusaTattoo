@@ -138,8 +138,10 @@ public class CitaResource {
         Page<Cita> page;
         if (user.isAdmin()){
             page = citaRepository.findAll(pageable);
-        }else {
+        }else if (user.isSecretaria()){
             page = citaRepository.findAllByTrabajo_Sede_Id(pageable,user.getSede().getId());
+        }else{
+            page = citaRepository.findAllByTrabajo_Cliente_Email(pageable,user.getEmail());
         }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/citas/cuenta");

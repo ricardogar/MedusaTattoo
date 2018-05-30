@@ -194,7 +194,6 @@ public class UserDTO {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", sede='" + sede.getNombre() + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +

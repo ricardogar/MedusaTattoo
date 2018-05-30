@@ -9,7 +9,7 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('inscripcion_rayaton', {
+        .state('inscripcionRayaton', {
             parent: 'app',
             url: '/inscripcion_rayaton',
             data: {
