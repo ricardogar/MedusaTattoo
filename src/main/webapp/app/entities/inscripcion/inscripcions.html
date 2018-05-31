@@ -29,6 +29,20 @@
                 </form>
             </div>
         </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <label for="select_rayaton" data-translate="medusaTattooApp.inscripcion.rayaton" style="font-size: 16px">Rayatón</label>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <ui-select ng-model="vm.rayaton" theme="bootstrap" style="width: 300px;" id="select_rayaton">
+                    <ui-select-match placeholder="Busque y elija una Rayatón de la lista">{{$select.selected.fecha}}</ui-select-match>
+                    <ui-select-choices repeat="rayaton in vm.rayatons | filter: $select.search">
+                        <span ng-bind-html="rayaton.fecha | highlight: $select.search"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
     </div>
     <br/>
     <div class="table-responsive">
@@ -46,15 +60,14 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="inscripcion in vm.inscripcions|filter:vm.currentSearch track by inscripcion.id">
+                <tr ng-repeat="inscripcion in vm.inscripcions|filter:vm.currentSearch|filter:vm.rayaton.fecha track by inscripcion.id">
                     <td><a ui-sref="inscripcion-detail({id:inscripcion.id})">{{inscripcion.id}}</a></td>
                     <td>{{inscripcion.nombre}}</td>
                     <td>{{inscripcion.telefono}}</td>
                     <td>
                         <a ng-if="inscripcion.imagen" ng-click="vm.openFile(inscripcion.imagenContentType, inscripcion.imagen)">
-                            <img data-ng-src="{{'data:' + inscripcion.imagenContentType + ';base64,' + inscripcion.imagen}}" style="max-height: 30px;" alt="inscripcion image"/>
+                            <img data-ng-src="{{'data:' + inscripcion.imagenContentType + ';base64,' + inscripcion.imagen}}" style="max-height: 120px;" alt="inscripcion image"/>
                         </a>
-                        <span ng-if="inscripcion.imagen">{{inscripcion.imagenContentType}}, {{vm.byteSize(inscripcion.imagen)}}</span>
                     </td>
                     <td data-translate="{{'medusaTattooApp.Estado_inscripcion.' + inscripcion.estado}}">{{inscripcion.estado}}</td>
                     <td>

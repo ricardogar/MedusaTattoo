@@ -5,13 +5,14 @@
         .module('medusaTattooApp')
         .controller('InscripcionController', InscripcionController);
 
-    InscripcionController.$inject = ['DataUtils', 'Inscripcion', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    InscripcionController.$inject = ['DataUtils', 'Inscripcion', 'ParseLinks', 'AlertService', 'paginationConstants','Rayaton'];
 
-    function InscripcionController(DataUtils, Inscripcion, ParseLinks, AlertService, paginationConstants) {
+    function InscripcionController(DataUtils, Inscripcion, ParseLinks, AlertService, paginationConstants,Rayaton) {
 
         var vm = this;
 
         vm.inscripcions = [];
+        vm.rayatons=Rayaton.query();
         vm.loadPage = loadPage;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.page = 0;

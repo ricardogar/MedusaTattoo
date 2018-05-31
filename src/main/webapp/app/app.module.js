@@ -20,6 +20,8 @@
             'angular-loading-bar',
             'g1b.scroll-events',
             'multipleSelect',
+            'ngSanitize',
+            'ui.select',
             'g1b.datetime-range'
         ])
         .run(run);

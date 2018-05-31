@@ -53,9 +53,8 @@
                     <td>{{rayaton.comentario}}</td>
                     <td>
                         <a ng-if="rayaton.imagen" ng-click="vm.openFile(rayaton.imagenContentType, rayaton.imagen)">
-                            <img data-ng-src="{{'data:' + rayaton.imagenContentType + ';base64,' + rayaton.imagen}}" style="max-height: 30px;" alt="rayaton image"/>
+                            <img data-ng-src="{{'data:' + rayaton.imagenContentType + ';base64,' + rayaton.imagen}}" style="max-height: 90px;" alt="rayaton image"/>
                         </a>
-                        <span ng-if="rayaton.imagen">{{rayaton.imagenContentType}}, {{vm.byteSize(rayaton.imagen)}}</span>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
