@@ -8,6 +8,7 @@ import com.medusa.domain.User;
 import com.medusa.repository.TatuadorRepository;
 import com.medusa.repository.TrabajoRepository;
 import com.medusa.repository.UserRepository;
+import com.medusa.security.AuthoritiesConstants;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
@@ -142,8 +143,9 @@ public class TatuadorResource {
      */
     @GetMapping("/tatuadors/money/{minDate}/{maxDate}")
     @Timed
-    public ResponseEntity<List<Object[]>> moneyByTatuadorsBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
-                                                                       @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<List<Object[]>> moneyBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
+                                                            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
         log.debug("REST request to get a page of Tatuadors");
         List<Object[]> objects;
          objects = tatuadorRepository.MoneyBetweenDates(minDate.toInstant(ZoneOffset.UTC),
@@ -156,14 +158,16 @@ public class TatuadorResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of tatuadors in body
      */
-    @GetMapping("/tatuadors/works/{minDate}/{maxDate}")
+    @GetMapping("/tatuadors/works/{minDate}/{maxDate}/{status}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<Object[]>> worksBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
-                                                            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
+                                                            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate,
+                                                            @PathVariable String status) {
         log.debug("REST request to get a page of Tatuadors");
         List<Object[]> objects;
         objects = tatuadorRepository.WorksBetweenDates(minDate.toInstant(ZoneOffset.UTC),
-                                                        maxDate.toInstant(ZoneOffset.UTC));
+                                                        maxDate.toInstant(ZoneOffset.UTC),status);
         return new ResponseEntity<>(objects, HttpStatus.OK);
     }
 
@@ -178,7 +182,6 @@ public class TatuadorResource {
      */
     @GetMapping("/tatuadors/sede/{id}")
     @Timed
-    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<Tatuador>> getAllTatuadorsBySede(Pageable pageable, @PathVariable("id") Long id) {
         log.debug("REST request to get a page of Tatuadors");
         Page<Tatuador> page = tatuadorRepository.findAllBySede_Id(pageable, id);

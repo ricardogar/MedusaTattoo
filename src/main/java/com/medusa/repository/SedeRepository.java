@@ -37,10 +37,10 @@ public interface SedeRepository extends JpaRepository<Sede, Long> {
         "(select s.id,s.nombre,p.id as tf from trabajo p " +
         "join sede s on p.sede_id=s.id " +
         "join cita c on c.trabajo_id=p.id " +
-        "where p.estado='FINALIZADO' and c.fecha_y_hora between :minDate and :maxDate " +
+        "where p.estado= :estado and c.fecha_y_hora between :minDate and :maxDate " +
         "group by s.id, p.id) e " +
         "group by e.id, e.nombre",nativeQuery = true)
-    List<Object[]> worksBetweenDates(@Param("minDate") Instant minDate, @Param("maxDate") Instant maxDate);
+    List<Object[]> worksBetweenDates(@Param("minDate") Instant minDate, @Param("maxDate") Instant maxDate,@Param("estado") String estado);
 
     Page<Sede> findAllByEstadoIsTrue(Pageable pageable);
 }

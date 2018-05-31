@@ -1,12 +1,14 @@
 package com.medusa.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.medusa.config.Constants;
 import com.medusa.domain.Sede;
 
 import com.medusa.repository.SedeRepository;
 import com.medusa.repository.TatuadorRepository;
 import com.medusa.repository.TrabajoRepository;
 import com.medusa.repository.UserRepository;
+import com.medusa.security.AuthoritiesConstants;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
@@ -19,6 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -143,6 +146,7 @@ public class SedeResource {
      */
     @GetMapping("/sedes/money/{minDate}/{maxDate}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<Object[]>> moneyBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
                                                             @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
         log.debug("REST request to get a page of Sedes");
@@ -158,13 +162,15 @@ public class SedeResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of sedes in body
      */
-    @GetMapping("/sedes/works/{minDate}/{maxDate}")
+    @GetMapping("/sedes/works/{minDate}/{maxDate}/{status}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<Object[]>> worksBetweenDates(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDate,
-                                                            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate) {
+                                                            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDate,
+                                                            @PathVariable String status) {
         log.debug("REST request to get a page of Sedes");
         List<Object[]> objects = sedeRepository.worksBetweenDates(minDate.toInstant(ZoneOffset.UTC),
-            maxDate.toInstant(ZoneOffset.UTC));
+            maxDate.toInstant(ZoneOffset.UTC),status);
         return new ResponseEntity<>(objects, HttpStatus.OK);
     }
 

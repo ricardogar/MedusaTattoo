@@ -163,7 +163,6 @@ public class TrabajoResource {
         }else if (user.isSecretaria()){
             page = trabajoRepository.findAllBySede_Id(pageable,user.getSede().getId());
         }else {
-
             page = trabajoRepository.findAllByCliente_Email(pageable,user.getEmail());
         }
 
@@ -195,6 +194,25 @@ public class TrabajoResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/trabajos/cuenta");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    /**
+     * GET  /trabajos/cuenta/:id/estado/:status : get all the trabajos filtered by account and status.
+     *
+     * @param pageable the pagination information
+     * @param id the cuenta identifier
+     * @param status the
+     * @return the ResponseEntity with status 200 (OK) and the list of trabajos in body
+     */
+    @GetMapping("/trabajos/estado/{status}")
+    @Timed
+    public ResponseEntity<List<Trabajo>> getTrabajosByStatus(Pageable pageable, @PathVariable("status") String status) {
+        log.debug("REST request to get a page of Trabajos");
+        Page<Trabajo> page = trabajoRepository.findAllByEstadoLike(pageable,valueOf(status));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/trabajos/cuenta");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
 
     /**
      * GET  /trabajos/:id : get the "id" trabajo.
