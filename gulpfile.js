@@ -170,6 +170,14 @@ gulp.task('build', ['clean'], function (cb) {
     runSequence(['copy', 'inject:vendor', 'ngconstant:prod', 'copy:languages'], 'inject:app', 'inject:troubleshoot', 'assets:prod', 'bundle-sw');
 });
 
+gulp.task('pre:build', ['clean'], function (cb) {
+    runSequence(['copy', 'inject:vendor', 'ngconstant:prod', 'copy:languages'], 'inject:app', 'inject:troubleshoot');
+});
+
+gulp.task('post:build', function (cb) {
+    runSequence('assets:prod', 'bundle-sw');
+});
+
 gulp.task('default', ['serve']);
 
 gulp.task('bundle-sw', () => {

@@ -742,15 +742,6 @@
                                 </configuration>
                             </execution>
                             <execution>
-                                <id>gulp build</id>
-                                <goals>
-                                    <goal>gulp</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>build --no-notification</arguments>
-                                </configuration>
-                            </execution>
-                            <execution>
                                 <id>gulp test</id>
                                 <goals>
                                     <goal>gulp</goal>
