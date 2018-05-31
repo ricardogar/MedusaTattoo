@@ -19,6 +19,7 @@
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar',
             'g1b.scroll-events',
+            'multipleSelect',
             'g1b.datetime-range'
         ])
         .run(run);

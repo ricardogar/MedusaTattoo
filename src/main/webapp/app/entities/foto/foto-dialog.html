@@ -49,7 +49,11 @@
 
         <div class="form-group">
             <label data-translate="medusaTattooApp.foto.palabraClave" for="field_palabraClave">Palabra Clave</label>
-            <select class="form-control" id="field_palabraClave" multiple name="palabraClave" ng-model="vm.foto.palabraClaves" ng-options="palabraClave as palabraClave.palabra for palabraClave in vm.palabraclaves track by palabraClave.id"></select>
+            <multiple-autocomplete id="field_palabraClave"
+                                    ng-model="vm.foto.palabraClaves"
+                                   object-property="palabra"
+                                   suggestions-arr="vm.palabraclaves">
+            </multiple-autocomplete>
         </div>
         <div class="form-group">
             <label data-translate="medusaTattooApp.foto.trabajo" for="field_trabajo">Trabajo</label>

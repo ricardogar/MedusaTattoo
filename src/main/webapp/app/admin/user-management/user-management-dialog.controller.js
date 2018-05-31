@@ -10,7 +10,7 @@
     function UserManagementDialogController ($stateParams, $uibModalInstance, entity, User, JhiLanguageService,Sede) {
         var vm = this;
 
-        vm.authorities = ['ROLE_SECRETARIA', 'ROLE_ADMIN'];
+        vm.authorities = ["ROLE_SECRETARIA", "ROLE_ADMIN","ROLE_CLIENTE"];
         vm.clear = clear;
         vm.languages = null;
         vm.save = save;
@@ -20,8 +20,11 @@
 
         JhiLanguageService.getAll().then(function (languages) {
             vm.languages = languages;
-            console.log(vm.languages);
         });
+
+        vm.setSede = function () {
+            return (vm.user.authorities.includes("ROLE_ADMIN") || vm.user.authorities.includes("ROLE_SECRETARIA"))
+        };
 
         function clear () {
             $uibModalInstance.dismiss('cancel');
