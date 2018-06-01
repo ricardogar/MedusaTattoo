@@ -35,7 +35,6 @@
                 <a ng-click="vm.openFile(vm.trabajo.fotoContentType, vm.trabajo.foto)">
                     <img data-ng-src="{{'data:' + vm.trabajo.fotoContentType + ';base64,' + vm.trabajo.foto}}" style="max-width: 100%;" alt="trabajo image"/>
                 </a>
-                {{vm.trabajo.fotoContentType}}, {{vm.byteSize(vm.trabajo.foto)}}
             </div>
         </dd>
         <dt has-any-authority="ROLE_ADMIN,ROLE_SECRETARIA"><span data-translate="medusaTattooApp.trabajo.rayaton">Rayaton</span></dt>

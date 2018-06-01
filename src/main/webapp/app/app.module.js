@@ -22,6 +22,7 @@
             'multipleSelect',
             'ngSanitize',
             'ui.select',
+			'mwl.calendar',
             'g1b.datetime-range'
         ])
         .run(run);

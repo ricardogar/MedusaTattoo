@@ -21,7 +21,14 @@
             "query": "Type your DNI",
             "consulta": "Look for Appoinments",
             "sede": "Studio",
-            "trabajo": "Work"
+            "trabajo": "Work",
+            "previo":"Previous",
+            "hoy":"Today",
+            "siguiente":"Next",
+            "anio":"Year",
+            "mes":"Month",
+            "semana":"Week",
+            "dia":"Today"
         }
     }
 }

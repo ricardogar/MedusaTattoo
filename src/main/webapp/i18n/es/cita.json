@@ -22,7 +22,14 @@
             "query": "Ingrese su documento",
             "consulta": "Consulta de citas",
             "sede": "Sede",
-            "trabajo": "Trabajo"
+            "trabajo": "Trabajo",
+            "previo":"Previo",
+            "hoy":"Hoy",
+            "siguiente":"Siguiente",
+            "anio":"Año",
+            "mes":"Mes",
+            "semana":"Semana",
+            "dia":"Día"
         }
     }
 }

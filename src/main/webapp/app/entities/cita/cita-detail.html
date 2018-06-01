@@ -14,7 +14,11 @@
         </dd>
         <dt><span data-translate="medusaTattooApp.cita.trabajo">Trabajo</span></dt>
         <dd>
-            <a ui-sref="trabajo-detail({id:vm.cita.trabajo.id})">{{vm.cita.trabajo.id}}</a>
+            <a ng-if="vm.cita.trabajo.foto" ng-click="vm.openFile(trabajo.fotoContentType, vm.cita.trabajo.foto)">
+                <img data-ng-src="{{'data:' + vm.cita.trabajo.fotoContentType + ';base64,' + vm.cita.trabajo.foto}}" style="max-height: 500px;" alt="trabajo image"/>
+            </a>
+            <br>
+            <a ui-sref="trabajo-detail({id:vm.cita.trabajo.id})">Ver trabajo</a>
         </dd>
     </dl>
 

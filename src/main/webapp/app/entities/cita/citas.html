@@ -11,34 +11,93 @@
                     </span>
                 </button>
             </div>
-			<div class="col-xs-8 no-padding-right">
-                <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.currentSearch" placeholder="Buscar...">
-                        <span  class="input-group-btn width-min" >
+        </div>
+    </div>
+    <hr>
+	  <div class="row">
+
+    <div class="col-md-6 text-center">
+      <div class="btn-group">
+
+        <button
+          class="btn btn-primary"
+          mwl-date-modifier
+          date="vm.viewDate"
+          decrement="vm.calendarView"
+          ng-click="vm.cellIsOpen = false">
+          Previo
+        </button>
+        <button
+          class="btn btn-default"
+          mwl-date-modifier
+          date="vm.viewDate"
+          set-to-today
+          ng-click="vm.cellIsOpen = false">
+          Hoy
+        </button>
+        <button
+          class="btn btn-primary"
+          mwl-date-modifier
+          date="vm.viewDate"
+          increment="vm.calendarView"
+          ng-click="vm.cellIsOpen = false">
+          Siguiente
+        </button>
+      </div>
+    </div>
+
+    <br class="visible-xs visible-sm">
+
+    <div class="col-md-6 text-center">
+      <div class="btn-group">
+        <label data-translate="medusaTattooApp.cita.anio" class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'year'" ng-click="vm.cellIsOpen = false">Año</label>
+        <label data-translate="medusaTattooApp.cita.mes" class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'month'" ng-click="vm.cellIsOpen = false">Mes</label>
+        <label data-translate="medusaTattooApp.cita.semana" class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'week'" ng-click="vm.cellIsOpen = false">Semana</label>
+        <label data-translate="medusaTattooApp.cita.dia" class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'day'" ng-click="vm.cellIsOpen = false">Día</label>
+      </div>
+    </div>
+
+  </div>
+
+    <hr>
+
+	<mwl-calendar
+    events="vm.eventsLoad"
+    view="vm.calendarView"
+    view-title="vm.calendarTitle"
+    view-date="vm.viewDate"
+	cell-is-open="vm.cellIsOpen"
+    on-event-click="vm.eventClicked(calendarEvent)"
+    on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart;calendarEvent.endsAt = calendarNewEventEnd"
+    day-view-start="08:00"
+    day-view-end="20:00"
+    >
+  </mwl-calendar>
+    <br/>
+    <div class="row">
+        <div class="col-xs-8 no-padding-right">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group pull-right" >
+                    <input type="text" class="form-control" ng-model="vm.currentSearch" placeholder="Buscar...">
+                    <span  class="input-group-btn width-min" >
                             <button class="btn btn-info">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
-                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                    <span class="input-group-btn width-min" ng-if="vm.currentSearch">
                             <button class="btn btn-info" ng-click="vm.currentSearch=&quot;&quot;">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
                         </span>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
-	<!--div class="row">
-
-	</div-->
-    <br/>
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-                    <!--th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th-->
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="fechaYHora"><span data-translate="medusaTattooApp.cita.fechaYHora">Fecha Y Hora</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="duracion"><span data-translate="medusaTattooApp.cita.duracion">Duracion</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="trabajo.id"><span data-translate="medusaTattooApp.cita.trabajo">Trabajo</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -48,7 +107,7 @@
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="cita in vm.citas|filter:vm.currentSearch track by cita.id">
-                    <!--td><a ui-sref="cita-detail({id:cita.id})">{{cita.id}}</a></td-->
+                    <td><a ui-sref="cita-detail({id:cita.id})">{{cita.id}}</a></td>
                     <td>{{cita.fechaYHora | date:'medium'}}</td>
                     <td>{{cita.duracion + ' horas'}}</td>
                     <!--td >
@@ -87,4 +146,6 @@
             </tbody>
         </table>
     </div>
-</div>
+
+
+	</div>
