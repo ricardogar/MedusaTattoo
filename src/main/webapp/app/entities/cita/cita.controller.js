@@ -126,7 +126,6 @@
                 for (var i = 0; i < data.length; i++) {
                     vm.citas.push(data[i]);
                 }
-                console.log(JSON.stringify(actions[0]));
             }
 
             function onError(error) {
@@ -145,8 +144,8 @@
                 for (var i = 0; i < data.length; i++) {
                     vm.eventos.push(data[i]);
                 }
-                console.log(vm.eventos);
                 vm.loadEvents();
+                console.log(vm.eventos);
             }
 
             function onError(error) {
@@ -180,7 +179,9 @@
             event.endsAt = calendarNewEventEnd;
             vm.viewDate = event.startsAt;
             event.cita.fechaYHora=event.startsAt;
+
             event.cita.duracion=moment.duration(moment(event.endsAt).diff(moment(event.startsAt))).asHours();
+            console.log('duracion cita: '+event.cita.duracion);
             vm.confirm(event);
         };
 

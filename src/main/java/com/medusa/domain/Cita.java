@@ -28,7 +28,7 @@ public class Cita implements Serializable {
     @NotNull
     @Min(value = 1)
     @Column(name = "duracion", nullable = false)
-    private Integer duracion;
+    private Double duracion;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -56,16 +56,16 @@ public class Cita implements Serializable {
         this.fechaYHora = fechaYHora;
     }
 
-    public Integer getDuracion() {
+    public Double getDuracion() {
         return duracion;
     }
 
-    public Cita duracion(Integer duracion) {
+    public Cita duracion(Double duracion) {
         this.duracion = duracion;
         return this;
     }
 
-    public void setDuracion(Integer duracion) {
+    public void setDuracion(Double duracion) {
         this.duracion = duracion;
     }
 

@@ -88,6 +88,7 @@ public class CitaResource {
         if (cita.getId() == null) {
             return createCita(cita);
         }
+
         Cita result = citaRepository.save(cita);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cita.getId().toString()))

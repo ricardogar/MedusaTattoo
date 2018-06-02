@@ -26,7 +26,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="duracion" type="integer">
+            <column name="duracion" type="double">
                 <constraints nullable="false" />
             </column>
 
