@@ -6,7 +6,7 @@
         .config(['calendarConfig', function (calendarConfig) {
             calendarConfig.dateFormatter = 'moment';
             calendarConfig.allDateFormats.moment.date.hour = 'h:mm A';
-            calendarConfig.allDateFormats.moment.title.day = 'ddd D MMM';
+            calendarConfig.allDateFormats.moment.title.day = 'dddd D MMMM';
             calendarConfig.i18nStrings.weekNumber = 'Semana {week}';
             calendarConfig.displayAllMonthEvents = true;
             calendarConfig.showTimesOnWeekView = true;
@@ -18,7 +18,7 @@
     function CitaController(Principal, $scope, CitaByAccount, Cita, ParseLinks, AlertService, paginationConstants, calendarConfig, $state,EventsByAccount,$ngConfirm,moment) {
 
         var vm = this;
-
+        moment.locale('es');
         vm.citas = [];
         vm.eventos = [];
         vm.loadPage = loadPage;
@@ -35,8 +35,8 @@
         vm.calendarView = 'month';
         vm.viewDate = new Date();
         vm.cellIsOpen = true;
-        vm.calendarTitle = "TITULO DEL CALENDARIO";
         vm.eventsLoad = [];
+
 
         var actions = [{
             label: '<i class=\'glyphicon glyphicon-pencil\'></i>',
@@ -145,7 +145,6 @@
                     vm.eventos.push(data[i]);
                 }
                 vm.loadEvents();
-                console.log(vm.eventos);
             }
 
             function onError(error) {
@@ -179,10 +178,25 @@
             event.endsAt = calendarNewEventEnd;
             vm.viewDate = event.startsAt;
             event.cita.fechaYHora=event.startsAt;
-
             event.cita.duracion=moment.duration(moment(event.endsAt).diff(moment(event.startsAt))).asHours();
-            console.log('duracion cita: '+event.cita.duracion);
             vm.confirm(event);
+        };
+
+        vm.rangeSelected = function(startDate, endDate) {
+            if (!vm.isClient) {
+                vm.duracion=moment.duration(moment(endDate).diff(moment(startDate))).asHours();
+                if (startDate>=new Date()) {
+                    if (vm.duracion >= 1) {
+                        $state.go('cita.new.calendar', {
+                            fecha: moment(startDate).toISOString(),
+                            duracion:vm.duracion});
+                    }else {
+                        $ngConfirm('La cita debe durar al menos <strong>una(1) hora</strong>');
+                    }
+                }else{
+                    $ngConfirm('No puedes crear una cita en una <strong>fecha previa</strong>');
+                }
+            }
         };
 
         function reset() {

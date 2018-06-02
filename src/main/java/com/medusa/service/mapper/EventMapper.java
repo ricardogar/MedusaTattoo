@@ -1,6 +1,7 @@
 package com.medusa.service.mapper;
 
 import com.medusa.domain.Cita;
+import com.medusa.domain.enumeration.Estado_trabajo;
 import com.medusa.repository.CalendarColorRepository;
 import com.medusa.service.dto.CalendarColorDTO;
 import com.medusa.service.dto.CalendarEventDTO;
@@ -22,7 +23,11 @@ public class EventMapper {
         for (Cita cita : citas) {
             CalendarEventDTO eventDTO = new CalendarEventDTO();
             eventDTO.setTitle(cita.getTrabajo().getNombre());
-            eventDTO.setColor(cita.getFechaYHora().isBefore(Instant.now())?CalendarColorRepository.CITA_PASADA:CalendarColorRepository.CITA_PRESENTE);
+            if (cita.getFechaYHora().isBefore(Instant.now()) || !cita.getTrabajo().getEstado().equals(Estado_trabajo.EN_PROGRESO) ){
+                eventDTO.setColor(CalendarColorRepository.CITA_PASADA);
+            }else{
+                eventDTO.setColor(CalendarColorRepository.CITA_PRESENTE);
+            }
             eventDTO.setStartsAt(cita.getFechaYHora());
 
             log.debug("conversion de double a int: "+cita.getDuracion().intValue());
@@ -33,7 +38,7 @@ public class EventMapper {
                     .plus(cita.getDuracion().intValue(), ChronoUnit.HOURS)
                     .plus(30,ChronoUnit.MINUTES));
             }
-            if (cita.getFechaYHora().isBefore(Instant.now())){
+            if (cita.getFechaYHora().isBefore(Instant.now()) || !cita.getTrabajo().getEstado().equals(Estado_trabajo.EN_PROGRESO)){
                 eventDTO.setDraggable(false);
                 eventDTO.setResizable(false);
             }else{

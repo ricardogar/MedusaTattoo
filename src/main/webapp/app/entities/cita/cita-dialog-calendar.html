@@ -1,0 +1,35 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myCitaLabel" data-translate="medusaTattooApp.cita.home.createLabel">Create or edit a Cita</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <h4><label>Fecha:  </label>{{vm.formatFecha}}</h4>
+        <h4><label>Desde:  </label>{{vm.formatStart}}</h4>
+        <h4><label>Hasta:  </label>{{vm.formatEnd}}</h4>
+        <h4><label>Duración de la sesión:  </label>{{vm.cita.duracion}} {{vm.formatDuracion}}</h4>
+        <div class="form-group">
+            <label data-translate="medusaTattooApp.cita.trabajo" for="field_trabajo">Trabajo</label>
+            <select class="form-control" id="field_trabajo" name="trabajo" ng-model="vm.cita.trabajo" ng-options="trabajo as trabajo.id +' - '+trabajo.nombre for trabajo in vm.trabajos track by trabajo.id" required>
+            </select>
+        </div>
+        <div ng-show="editForm.trabajo.$invalid">
+            <p class="help-block"
+                ng-show="editForm.trabajo.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

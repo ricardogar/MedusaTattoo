@@ -117,6 +117,35 @@
                 });
             }]
         })
+         .state('cita.new.calendar', {
+                parent: 'cita',
+                url: '/new/{fecha}/{duracion}',
+                data: {
+                    authorities: ['ROLE_SECRETARIA']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/cita/cita-dialog-calendar.html',
+                        controller: 'CitaDialogCalendarController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    fechaYHora: $stateParams.fecha,
+                                    duracion: $stateParams.duracion,
+                                    id: null
+                                };
+                            }
+                        }
+                    }).result.then(function() {
+                        $state.go('cita', null, { reload: 'cita' });
+                    }, function() {
+                        $state.go('cita');
+                    });
+                }]
+            })
         .state('cita.edit', {
             parent: 'cita',
             url: '/{id}/edit',

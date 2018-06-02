@@ -50,7 +50,7 @@
             <label class="control-label" data-translate="medusaTattooApp.cita.duracion" for="field_duracion">Duracion</label>
             <input type="number" class="form-control" name="duracion" id="field_duracion"
                     ng-model="vm.cita.duracion"
-                    required min="1" max="6"/>
+                    required min="1" />
             <div ng-show="editForm.duracion.$invalid">
                 <p class="help-block"
                     ng-show="editForm.duracion.$error.required" data-translate="entity.validation.required">
@@ -61,10 +61,6 @@
                     This field should be at least 1.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.duracion.$error.max" data-translate="entity.validation.max" translate-value-max="6">
-                    This field cannot be more than 6.
-                </p>
-                <p class="help-block"
                     ng-show="editForm.duracion.$error.number" data-translate="entity.validation.number">
                     This field should be a number.
                 </p>
@@ -73,7 +69,7 @@
 
         <div class="form-group">
             <label data-translate="medusaTattooApp.cita.trabajo" for="field_trabajo">Trabajo</label>
-            <select class="form-control" id="field_trabajo" name="trabajo" ng-model="vm.cita.trabajo" ng-options="trabajo as trabajo.id for trabajo in vm.trabajos track by trabajo.id" required>
+            <select class="form-control" id="field_trabajo" name="trabajo" ng-model="vm.cita.trabajo" ng-options="trabajo as trabajo.id + ' - ' + trabajo.nombre for trabajo in vm.trabajos track by trabajo.id" required>
             </select>
         </div>
         <div ng-show="editForm.trabajo.$invalid">
