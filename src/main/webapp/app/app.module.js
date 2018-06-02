@@ -24,6 +24,7 @@
             'ui.select',
             'moment-picker',
 			'mwl.calendar',
+            'cp.ngConfirm',
             'g1b.datetime-range'
         ])
         .run(run);

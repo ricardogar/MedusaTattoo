@@ -27,7 +27,6 @@ public class Cita implements Serializable {
 
     @NotNull
     @Min(value = 1)
-    @Max(value = 6)
     @Column(name = "duracion", nullable = false)
     private Integer duracion;
 

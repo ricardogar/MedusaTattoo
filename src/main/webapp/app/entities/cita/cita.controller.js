@@ -4,10 +4,6 @@
     angular
         .module('medusaTattooApp')
         .config(['calendarConfig', function (calendarConfig) {
-
-            // View all available config
-            console.log(calendarConfig);
-
             calendarConfig.dateFormatter = 'moment';
             calendarConfig.allDateFormats.moment.date.hour = 'h:mm A';
             calendarConfig.allDateFormats.moment.title.day = 'ddd D MMM';
@@ -17,9 +13,9 @@
 
         }]).controller('CitaController', CitaController);
 
-    CitaController.$inject = ['Principal', '$scope', 'CitaByAccount', 'Cita', 'ParseLinks', 'AlertService', 'paginationConstants', 'calendarConfig', '$state','EventsByAccount'];
+    CitaController.$inject = ['Principal', '$scope', 'CitaByAccount', 'Cita', 'ParseLinks', 'AlertService', 'paginationConstants', 'calendarConfig', '$state','EventsByAccount','$ngConfirm','moment'];
 
-    function CitaController(Principal, $scope, CitaByAccount, Cita, ParseLinks, AlertService, paginationConstants, calendarConfig, $state,EventsByAccount) {
+    function CitaController(Principal, $scope, CitaByAccount, Cita, ParseLinks, AlertService, paginationConstants, calendarConfig, $state,EventsByAccount,$ngConfirm,moment) {
 
         var vm = this;
 
@@ -53,6 +49,49 @@
                 $state.go('cita.delete', {id: args.calendarEvent.cita.id});
             }
         }];
+
+        vm.saveCita=function(cita){
+            if (cita.id !== null) {
+                Cita.update(cita, onSaveSuccess, onSaveError);
+            } else {
+                Cita.save(cita, onSaveSuccess, onSaveError);
+            }
+        };
+
+        function onSaveSuccess (result) {
+            $ngConfirm('La cita ha sido <strong>modificada</strong> satisfactoriamente');
+            reset();
+        }
+
+        function onSaveError () {
+            $ngConfirm('La cita no pudo ser <strong>modificada</strong>');
+            reset();
+        }
+
+        vm.confirm = function (event) {
+            $ngConfirm({
+                title: 'Modificar Cita',
+                content: '¿Desea <strong>modificar</strong> esta cita?. <br> Elija una opción',
+                icon: 'fa fa-question-circle',
+                animation: 'scale',
+                closeAnimation: 'scale',
+                opacity: 0.5,
+                buttons: {
+                    'confirm': {
+                        text: 'Si, modificar',
+                        btnClass: 'btn-info',
+                        action: function () {
+                            Cita.update(event.cita, onSaveSuccess, onSaveError);
+                        }
+                    },
+                    'cancel': {
+                        text: 'No',
+                        btnClass: 'btn-warning'
+                    }
+                }
+            })
+        };
+
         getAccount();
 
         function getAccount() {
@@ -135,11 +174,22 @@
             }
         };
 
+        vm.eventTimesChanged = function(event,calendarNewEventStart,calendarNewEventEnd) {
+
+            event.startsAt = calendarNewEventStart;
+            event.endsAt = calendarNewEventEnd;
+            vm.viewDate = event.startsAt;
+            event.cita.fechaYHora=event.startsAt;
+            event.cita.duracion=moment.duration(moment(event.endsAt).diff(moment(event.startsAt))).asHours();
+            vm.confirm(event);
+        };
 
         function reset() {
             vm.page = 0;
             vm.citas = [];
+            vm.eventos=[];
             loadCitas();
+            loadEventos();
         }
 
         function loadPage(page) {

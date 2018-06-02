@@ -68,7 +68,7 @@
     view-date="vm.viewDate"
 	cell-is-open="vm.cellIsOpen"
     on-event-click="vm.eventClicked(calendarEvent)"
-    on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart;calendarEvent.endsAt = calendarNewEventEnd"
+    on-event-times-changed="vm.eventTimesChanged(calendarEvent,calendarNewEventStart,calendarNewEventEnd)"
     day-view-start="08:00"
     day-view-end="20:00"
     >
