@@ -4,12 +4,14 @@
         .module('medusaTattooApp')
         .factory('Cita', Cita)
         .factory('CitaByAccount', CitaByAccount)
+        .factory('EventsByAccount', EventsByAccount)
         .factory('CitaByAccountAfterDate', CitaByAccountAfterDate)
         .factory('CitasByAccountInDate', CitasByAccountInDate)
         .factory('CitasByAccountBetweenDates', CitasByAccountBetweenDates);
 
     Cita.$inject = ['$resource', 'DateUtils'];
     CitaByAccount.$inject = ['$resource'];
+    EventsByAccount.$inject = ['$resource'];
     CitaByAccountAfterDate.$inject = ['$resource'];
     CitasByAccountInDate.$inject = ['$resource'];
     CitasByAccountBetweenDates.$inject = ['$resource'];
@@ -34,6 +36,13 @@
     }
     function CitaByAccount ($resource) {
         var resourceUrl =  'api/citas/cuenta/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true},
+        });
+    }
+    function EventsByAccount ($resource) {
+        var resourceUrl =  'api/citas/evento/cuenta/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},

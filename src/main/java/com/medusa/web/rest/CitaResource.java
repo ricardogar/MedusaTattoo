@@ -6,6 +6,8 @@ import com.medusa.domain.Cita;
 import com.medusa.domain.User;
 import com.medusa.repository.CitaRepository;
 import com.medusa.repository.UserRepository;
+import com.medusa.service.dto.CalendarEventDTO;
+import com.medusa.service.mapper.EventMapper;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
@@ -147,6 +149,33 @@ public class CitaResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/citas/cuenta");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    /**
+     * GET  /citas/cuenta/:id : get all the citas filter by sede.
+     *
+     * @param pageable the pagination information
+     * @param id the cuenta identifier
+     * @return the ResponseEntity with status 200 (OK) and the list of citas in body
+     */
+    @GetMapping("/citas/evento/cuenta/{id}")
+    @Timed
+    public ResponseEntity<List<CalendarEventDTO>> getEventsByAccount(Pageable pageable, @PathVariable Long id) {
+        log.debug("REST request to get a page of Citas filtered by sede");
+        User user = userRepository.findOne(id);
+
+        List<CalendarEventDTO> page;
+        if (user.isAdmin()){
+            page = EventMapper.citaToEventAdmin(citaRepository.findAll(pageable).getContent());
+        }else if (user.isSecretaria()){
+            page = EventMapper.citaToEventAdmin(citaRepository.findAllByTrabajo_Sede_Id(pageable,user.getSede().getId()).getContent());
+        }else{
+            page = EventMapper.citaToEventClient(citaRepository.findAllByTrabajo_Cliente_Email(pageable,user.getEmail()).getContent());
+        }
+        return new ResponseEntity<>(page, HttpStatus.OK);
+    }
+
+
+
 
 
     /**

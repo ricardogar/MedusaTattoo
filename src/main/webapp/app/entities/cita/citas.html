@@ -62,7 +62,7 @@
     <hr>
 
 	<mwl-calendar
-    events="vm.eventsLoad"
+    events="vm.eventos"
     view="vm.calendarView"
     view-title="vm.calendarTitle"
     view-date="vm.viewDate"
@@ -97,7 +97,7 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th-->
                     <th jh-sort-by="fechaYHora"><span data-translate="medusaTattooApp.cita.fechaYHora">Fecha Y Hora</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="duracion"><span data-translate="medusaTattooApp.cita.duracion">Duracion</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="trabajo.id"><span data-translate="medusaTattooApp.cita.trabajo">Trabajo</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -107,7 +107,7 @@
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="cita in vm.citas|filter:vm.currentSearch track by cita.id">
-                    <td><a ui-sref="cita-detail({id:cita.id})">{{cita.id}}</a></td>
+                    <!--td><a ui-sref="cita-detail({id:cita.id})">{{cita.id}}</a></td-->
                     <td>{{cita.fechaYHora | date:'medium'}}</td>
                     <td>{{cita.duracion + ' horas'}}</td>
                     <!--td >

@@ -37,9 +37,7 @@
 
 		function getAccount() {
             Principal.identity().then(function(account) {
-				console.log("==========cita dialog controller=======");
                 vm.account = account;
-				console.log(vm.account);
                 vm.trabajos = TrabajosByAccountAndStatus.query({id:vm.account.id,status:"EN_PROGRESO"});
             });
         }

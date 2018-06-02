@@ -22,6 +22,7 @@
             'multipleSelect',
             'ngSanitize',
             'ui.select',
+            'moment-picker',
 			'mwl.calendar',
             'g1b.datetime-range'
         ])

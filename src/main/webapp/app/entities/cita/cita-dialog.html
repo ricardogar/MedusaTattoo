@@ -17,11 +17,23 @@
         <div class="form-group">
             <label class="control-label" data-translate="medusaTattooApp.cita.fechaYHora" for="field_fechaYHora">Fecha Y Hora</label>
                 <div class="input-group">
-                    <input id="field_fechaYHora" type="text" class="form-control" name="fechaYHora" datetime-picker="{{dateformat}}" ng-model="vm.cita.fechaYHora" is-open="vm.datePickerOpenStatus.fechaYHora" datepicker-options="vm.dateOptions" timepicker-options="vm.timeOptions" minute-step="15"
+                    <!--input id="field_fechaYHora" type="text" class="form-control" name="fechaYHora" datetime-picker="{{dateformat}}" ng-model="vm.cita.fechaYHora" is-open="vm.datePickerOpenStatus.fechaYHora" datepicker-options="vm.dateOptions" timepicker-options="vm.timeOptions" minute-step="15"
                     required/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fechaYHora')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
+                    </span-->
+                    <div moment-picker="vm.cita.fechaYHora"
+                         locale="es"
+                         format="LL LTS"
+                         min-view="year"
+                         max-view="hour"
+                         start-view="month"
+                         keyboard="true"
+                         inline="true"
+                         set-on-select="true"
+                         id="field_fechaYHora">
+                        {{ vm.cita.fechaYHora}}
+                    </div>
                 </div>
             <div ng-show="editForm.fechaYHora.$invalid">
                 <p class="help-block"
