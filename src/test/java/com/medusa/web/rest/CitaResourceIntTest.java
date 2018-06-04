@@ -45,8 +45,8 @@ public class CitaResourceIntTest {
     private static final Instant DEFAULT_FECHA_Y_HORA = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_FECHA_Y_HORA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Integer DEFAULT_DURACION = 1;
-    private static final Integer UPDATED_DURACION = 2;
+    private static final Double DEFAULT_DURACION = 1;
+    private static final Double UPDATED_DURACION = 2;
 
     @Autowired
     private CitaRepository citaRepository;
