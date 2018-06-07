@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('InscripcionDialogController', InscripcionDialogController);
 
-    InscripcionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Inscripcion', 'Rayaton', 'Sede','Principal'];
+    InscripcionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Inscripcion', 'Rayaton', 'Sede','Principal','OpenSedes'];
 
-    function InscripcionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Inscripcion, Rayaton, Sede,Principal) {
+    function InscripcionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Inscripcion, Rayaton, Sede,Principal,OpenSedes) {
         var vm = this;
 
         vm.inscripcion = entity;
@@ -16,30 +16,14 @@
         vm.openFile = DataUtils.openFile;
         vm.save = save;
         vm.rayatons = Rayaton.query();
-        vm.sedes = Sede.query();
-		vm.account = null;
+        vm.sedes = OpenSedes.query();
+		vm.account = {};
 		getAccount();
-        if(vm.inscripcion.estado==null){
-            vm.inscripcion.estado="PRE_INSCRITO";
-        }
 		function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
-                vm.isAdmin=vm.account.authorities.includes("ROLE_ADMIN");
-				if(vm.inscripcion.sede==null && vm.isAdmin){
-					vm.inscripcion.sede=vm.account.sede;
-				}
-				console.log("isAdmin: ");
-				console.log(vm.isAdmin);
             });
         }
-
-		if(vm.inscripcion.sede==null){
-			getAccount();
-			if(vm.account!==null){
-				vm.inscripcion.sede=vm.account.sede;
-			}
-		}
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

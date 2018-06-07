@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="inscripcion.new" >
+                <button class="btn btn-primary" ui-sref="inscripcion.new" ng-disabled="!vm.hasRayatons">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span  data-translate="medusaTattooApp.inscripcion.home.createLabel">
                         Create new Inscripcion
@@ -79,17 +79,34 @@
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="inscripcion-detail({id:inscripcion.id})"
-                                    class="btn btn-info btn-sm">
+                                ng-click="vm.setSede(inscripcion)"
+                                    ng-if="inscripcion.sede==null"
+                                class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                                <span class="hidden-sm-down" data-translate="medusaTattooApp.inscripcion.tomar"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="inscripcion.edit({id:inscripcion.id})"
+                                    ng-click="vm.cleanSede(inscripcion)"
+                                    ng-if="inscripcion.sede!=null"
+                                    class="btn btn-warning btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="medusaTattooApp.inscripcion.dejar"></span>
+                            </button>
+                            <button type="submit"
+                                    ng-click="vm.subscribe(inscripcion)"
+                                    ng-if="inscripcion.estado=='PRE_INSCRITO'"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                                <span class="hidden-sm-down" data-translate="medusaTattooApp.inscripcion.inscribir"></span>
                             </button>
+                            <button type="submit"
+                                    ng-click="vm.unSubscribe(inscripcion)"
+                                    ng-if="inscripcion.estado=='INSCRITO'"
+                                    class="btn btn-warning btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="medusaTattooApp.inscripcion.desinscribir"></span>
+                            </button>
+
                             <button type="submit"
                                     ui-sref="inscripcion.delete({id:inscripcion.id})"
                                     class="btn btn-danger btn-sm">

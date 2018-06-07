@@ -110,7 +110,7 @@
                                 telefono: null,
                                 imagen: null,
                                 imagenContentType: null,
-                                estado: null,
+                                estado: "PRE_INSCRITO",
                                 id: null
                             };
                         }

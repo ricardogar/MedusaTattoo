@@ -21,7 +21,11 @@
             "imagen": "Imagen",
             "estado": "Estado",
             "rayaton": "Rayaton",
-            "sede": "Sede"
+            "sede": "Sede",
+            "tomar":"Tomar trabajo",
+            "dejar":"Dejar trabajo",
+            "inscribir":"Inscribir",
+            "desinscribir":"Desinscribir"
         }
     }
 }

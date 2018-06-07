@@ -21,7 +21,11 @@
             "imagen": "Image",
             "estado": "State",
             "rayaton": "Rayaton",
-            "sede": "Studio"
+            "sede": "Studio",
+            "tomar":"Get Work",
+            "dejar":"Get Out Work",
+            "inscribir":"Enroll",
+            "desinscribir":"Disenroll"
         }
     }
 }

@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('InscripcionController', InscripcionController);
 
-    InscripcionController.$inject = ['DataUtils', 'Inscripcion', 'ParseLinks', 'AlertService', 'paginationConstants','Rayaton'];
+    InscripcionController.$inject = ['DataUtils', 'Inscripcion', 'ParseLinks', 'AlertService', 'paginationConstants','Rayaton','HasRayaton','Principal'];
 
-    function InscripcionController(DataUtils, Inscripcion, ParseLinks, AlertService, paginationConstants,Rayaton) {
+    function InscripcionController(DataUtils, Inscripcion, ParseLinks, AlertService, paginationConstants,Rayaton,HasRayaton,Principal) {
 
         var vm = this;
 
@@ -21,11 +21,51 @@
         };
         vm.predicate = 'id';
         vm.reset = reset;
-        vm.reverse = true;
+        vm.reverse = false;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
-
+        vm.hasRayatons = HasRayaton.get();
+        vm.account = {};
+        getAccount();
+        function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+            });
+        }
         loadAll();
+
+        vm.setSede=function (inscripcion) {
+            inscripcion.sede=vm.account.sede;
+            Inscripcion.update(inscripcion, onSaveSuccess, onSaveError);
+        };
+
+        vm.cleanSede=function (inscripcion) {
+            inscripcion.sede=null;
+            Inscripcion.update(inscripcion, onSaveSuccess, onSaveError);
+        };
+
+        vm.subscribe=function (inscripcion) {
+            inscripcion.sede=vm.account.sede;
+            inscripcion.estado="INSCRITO";
+            Inscripcion.update(inscripcion, onSaveSuccess, onSaveError);
+        };
+        vm.unSubscribe=function (inscripcion) {
+            inscripcion.sede=null;
+            inscripcion.estado="PRE_INSCRITO";
+            Inscripcion.update(inscripcion, onSaveSuccess, onSaveError);
+        };
+
+        function onSaveSuccess (result) {
+            //$scope.$emit('medusaTattooApp:inscripcionUpdate', result);
+            //$uibModalInstance.close(result);
+            console.log("trabajo cambiado");
+            vm.isSaving = false;
+        }
+
+        function onSaveError () {
+            console.log("No se pudo cambiar el trabajo");
+            vm.isSaving = false;
+        }
 
         function loadAll () {
             Inscripcion.query({
