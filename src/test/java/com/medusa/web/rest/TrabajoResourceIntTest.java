@@ -7,6 +7,7 @@ import com.medusa.domain.Tatuador;
 import com.medusa.domain.Cliente;
 import com.medusa.domain.Sede;
 import com.medusa.repository.ClienteRepository;
+import com.medusa.repository.RayatonRepository;
 import com.medusa.repository.TrabajoRepository;
 import com.medusa.repository.UserRepository;
 import com.medusa.web.rest.errors.ExceptionTranslator;
@@ -86,11 +87,12 @@ public class TrabajoResourceIntTest {
     private Trabajo trabajo;
     private UserRepository userRepository;
     private ClienteRepository clienteRepository;
+    private RayatonRepository rayatonRepository;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TrabajoResource trabajoResource = new TrabajoResource(trabajoRepository, userRepository, clienteRepository);
+        final TrabajoResource trabajoResource = new TrabajoResource(trabajoRepository, userRepository, clienteRepository, rayatonRepository);
         this.restTrabajoMockMvc = MockMvcBuilders.standaloneSetup(trabajoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

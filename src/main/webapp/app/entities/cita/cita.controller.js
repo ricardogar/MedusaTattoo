@@ -18,7 +18,9 @@
     function CitaController(Principal, $scope, CitaByAccount, Cita, ParseLinks, AlertService, paginationConstants, calendarConfig, $state,EventsByAccount,$ngConfirm,moment) {
 
         var vm = this;
-        moment.locale('es');
+        moment.locale('es',{week:{
+            dow:1
+            }});
         vm.citas = [];
         vm.eventos = [];
         vm.loadPage = loadPage;

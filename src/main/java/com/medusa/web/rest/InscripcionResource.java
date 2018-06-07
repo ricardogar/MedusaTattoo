@@ -22,6 +22,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +61,7 @@ public class InscripcionResource {
         if (inscripcion.getId() != null) {
             throw new BadRequestAlertException("A new inscripcion cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        inscripcion.setRayaton(rayatonRepository.getLastRayaton());
+        inscripcion.setRayaton(rayatonRepository.getLastRayaton(LocalDate.now()));
         Inscripcion result = inscripcionRepository.save(inscripcion);
         return ResponseEntity.created(new URI("/api/inscripcions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

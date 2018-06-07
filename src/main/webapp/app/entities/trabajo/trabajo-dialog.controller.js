@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('TrabajoDialogController', TrabajoDialogController);
 
-    TrabajoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Trabajo', 'Rayaton', 'Pago', 'Cita', 'Foto', 'Tatuador', 'Cliente', 'Sede','Principal'];
+    TrabajoDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Trabajo',  'Tatuador', 'Cliente','Principal','OpenSedes','HasRayaton'];
 
-    function TrabajoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Trabajo, Rayaton, Pago, Cita, Foto, Tatuador, Cliente, Sede,Principal) {
+    function TrabajoDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Trabajo, Tatuador, Cliente,Principal,OpenSedes,HasRayaton) {
         var vm = this;
 
         vm.trabajo = entity;
@@ -15,26 +15,12 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-        vm.rayatons = Rayaton.query();
-        vm.pagos = Pago.query();
-        vm.citas = Cita.query();
-        vm.fotos = Foto.query();
-        vm.tatuadors = Tatuador.query();
+        vm.hasRayatons = HasRayaton.get();
         vm.clientes = Cliente.query();
-        vm.sedes = Sede.query();
-		vm.account = null;
-		vm.showRayaton=false;
+        vm.sedes = OpenSedes.query();
+		vm.account = {};
+		vm.tatuadors=Tatuador.query();
 		getAccount();
-		if(vm.trabajo.estado==null){
-			vm.trabajo.estado="EN_PROGRESO";
-		}
-		if(vm.trabajo.tipo==null){
-			vm.trabajo.tipo="NORMAL";
-			vm.showRayaton=false;
-		}
-		$scope.change = function() {
-			vm.showRayaton=vm.trabajo.tipo==="RAYATON"
-		};
 
 		function getAccount() {
             Principal.identity().then(function(account) {
@@ -42,19 +28,8 @@
 				if(vm.trabajo.sede==null){
 					vm.trabajo.sede=vm.account.sede;
 				}
-
-				vm.isAdmin=vm.account.authorities.includes("ROLE_ADMIN");
-				console.log("isAdmin: ");
-				console.log(vm.isAdmin);
             });
         }
-
-		if(vm.trabajo.sede==null){
-			getAccount();
-			if(vm.account!==null){
-				vm.trabajo.sede=vm.account.sede;
-			}
-		}
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

@@ -2,10 +2,11 @@
     'use strict';
     angular
         .module('medusaTattooApp')
-        .factory('Rayaton', Rayaton);
+        .factory('Rayaton', Rayaton)
+.factory('HasRayaton', HasRayaton);
 
     Rayaton.$inject = ['$resource', 'DateUtils'];
-
+    HasRayaton.$inject = ['$resource'];
     function Rayaton ($resource, DateUtils) {
         var resourceUrl =  'api/rayatons/:id';
 
@@ -36,6 +37,15 @@
                     copy.fecha = DateUtils.convertLocalDateToServer(copy.fecha);
                     return angular.toJson(copy);
                 }
+            }
+        });
+    }
+    function HasRayaton ($resource) {
+        var resourceUrl =  'api/rayatons/exists';
+
+        return $resource(resourceUrl, {}, {
+            'get': {
+                method: 'GET'
             }
         });
     }

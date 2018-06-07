@@ -17,6 +17,7 @@
             <label class="control-label" data-translate="medusaTattooApp.trabajo.nombre" for="field_nombre">Nombre</label>
             <input type="text" class="form-control" name="nombre" id="field_nombre"
                     ng-model="vm.trabajo.nombre"
+                   placeholder="Ej: Andres tribal hombro"
                     required/>
             <div ng-show="editForm.nombre.$invalid">
                 <p class="help-block"
@@ -29,7 +30,9 @@
             <label class="control-label" data-translate="medusaTattooApp.trabajo.costoTotal" for="field_costoTotal">Costo Total</label>
             <input type="text" class="form-control" name="costoTotal" id="field_costoTotal"
                     ng-model="vm.trabajo.costoTotal"
-                    required ng-minlength="5" ng-pattern="/^[1-9][0-9]*$/"/>
+                    placeholder="Valor del tatuaje"
+                    required ng-minlength="5" ng-pattern="/^[1-9][0-9]*$/"
+                   />
             <div ng-show="editForm.costoTotal.$invalid">
                 <p class="help-block"
                     ng-show="editForm.costoTotal.$error.required" data-translate="entity.validation.required">
@@ -45,19 +48,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="medusaTattooApp.trabajo.totalPagado" for="field_totalPagado">Total Pagado</label>
-            <input type="text" class="form-control" name="totalPagado" id="field_totalPagado"
-                    ng-model="vm.trabajo.totalPagado"
-                    ng-pattern="/^[1-9][0-9]*$/"/>
-            <div ng-show="editForm.totalPagado.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.totalPagado.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="Total Pagado">
-                    This field should follow pattern for "Total Pagado".
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="vm.trabajo.id!==null">
             <label class="control-label" data-translate="medusaTattooApp.trabajo.estado" for="field_estado">Estado</label>
             <select class="form-control" name="estado" ng-model="vm.trabajo.estado" id="field_estado" required>
                 <option value="EN_PROGRESO" data-translate="medusaTattooApp.Estado_trabajo.EN_PROGRESO">EN_PROGRESO</option>
@@ -71,7 +62,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="vm.hasRayatons">
             <label class="control-label" data-translate="medusaTattooApp.trabajo.tipo" for="field_tipo">Tipo</label>
             <select class="form-control" name="tipo" ng-model="vm.trabajo.tipo" ng-change="change()" id="field_tipo" required>
                 <option value="NORMAL" data-translate="medusaTattooApp.Tipo_trabajo.NORMAL">NORMAL</option>
@@ -83,12 +74,6 @@
                     This field is required.
                 </p>
             </div>
-        </div>
-		<div class="form-group" ng-if="vm.showRayaton">
-            <label data-translate="medusaTattooApp.trabajo.rayaton" for="field_rayaton">Rayaton</label>
-            <select class="form-control" id="field_rayaton" name="rayaton" ng-model="vm.trabajo.rayaton" ng-options="rayaton as rayaton.fecha for rayaton in vm.rayatons track by rayaton.id">
-                <option value=""></option>
-            </select>
         </div>
         <div class="form-group" ngf-drop ngf-change="vm.setFoto($file, vm.trabajo)" ngf-pattern="'image/*'">
             <label class="control-label" data-translate="medusaTattooApp.trabajo.foto" for="field_foto">Foto</label>
@@ -112,39 +97,50 @@
             <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType"
                     ng-model="vm.trabajo.fotoContentType" />
         </div>
-
+        <div class="form-group" has-authority="ROLE_ADMIN">
+            <label data-translate="medusaTattooApp.trabajo.sede" for="field_sede">Sede</label>
+            <ui-select ng-model="vm.trabajo.sede" theme="bootstrap" id="field_sede" on-select="vm.trabajo.tatuador={}">
+                <ui-select-match placeholder="Busque y elija una sede de la lista">{{$select.selected.nombre}}</ui-select-match>
+                <ui-select-choices repeat="sede in vm.sedes | filter: $select.search">
+                    <span ng-bind-html="sede.nombre + ' (' + sede.direccion + ')' | highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+            <div ng-show="editForm.sede.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.sede.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
         <div class="form-group">
             <label data-translate="medusaTattooApp.trabajo.tatuador" for="field_tatuador">Tatuador</label>
-            <select class="form-control" id="field_tatuador" name="tatuador" ng-model="vm.trabajo.tatuador" ng-options="tatuador as tatuador.apodo for tatuador in vm.tatuadors track by tatuador.id" required>
-            </select>
-        </div>
-        <div ng-show="editForm.tatuador.$invalid">
-            <p class="help-block"
-                ng-show="editForm.tatuador.$error.required" data-translate="entity.validation.required">
-                This field is required.
-            </p>
+            <ui-select ng-model="vm.trabajo.tatuador" theme="bootstrap" id="field_tatuador">
+                <ui-select-match placeholder="Busque y elija un tatuador de la lista">{{$select.selected.apodo}}</ui-select-match>
+                <ui-select-choices repeat="tatuador in vm.tatuadors |filter:{estado:true} |filter:{sede:{id:vm.trabajo.sede.id}} |filter: $select.search">
+                    <span ng-bind-html="tatuador.nombre + ' ' + tatuador.apellido + ' ('+tatuador.apodo+ ')'| highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+            <div ng-show="editForm.tatuador.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.tatuador.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
         <div class="form-group">
             <label data-translate="medusaTattooApp.trabajo.cliente" for="field_cliente">Cliente</label>
-            <select class="form-control" id="field_cliente" name="cliente" ng-model="vm.trabajo.cliente" ng-options="cliente as cliente.documento for cliente in vm.clientes track by cliente.id" required>
-            </select>
-        </div>
-        <div ng-show="editForm.cliente.$invalid">
-            <p class="help-block"
-                ng-show="editForm.cliente.$error.required" data-translate="entity.validation.required">
-                This field is required.
-            </p>
-        </div>
-        <div class="form-group" ng-if="vm.isAdmin">
-            <label data-translate="medusaTattooApp.trabajo.sede" for="field_sede">Sede</label>
-            <select class="form-control" id="field_sede" name="sede" ng-model="vm.trabajo.sede" ng-options="sede as sede.nombre for sede in vm.sedes track by sede.id" required>
-            </select>
-        </div>
-        <div ng-show="editForm.sede.$invalid">
-            <p class="help-block"
-                ng-show="editForm.sede.$error.required" data-translate="entity.validation.required">
-                This field is required.
-            </p>
+            <ui-select ng-model="vm.trabajo.cliente" theme="bootstrap" id="field_cliente">
+                <ui-select-match placeholder="Busque y elija un cliente de la lista">{{$select.selected.documento}}</ui-select-match>
+                <ui-select-choices repeat="cliente in vm.clientes | filter: $select.search">
+                    <span ng-bind-html="cliente.nombre + ' ' + cliente.apellido + ' (' + cliente.documento + ')' | highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+            <div ng-show="editForm.cliente.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.cliente.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
     </div>
     <div class="modal-footer">

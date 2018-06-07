@@ -22,6 +22,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -99,6 +101,19 @@ public class RayatonResource {
         Page<Rayaton> page = rayatonRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/rayatons");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /rayatons/exists : get all the rayatons.
+     *
+     * @return true if exists at least one
+     */
+    @GetMapping("/rayatons/exists")
+    @Timed
+    public boolean hasRayatons() {
+        log.debug("REST request to get Rayatons quantity");
+        Rayaton rayaton = rayatonRepository.getLastRayaton(LocalDate.now());
+        return rayaton!=null;
     }
 
     /**

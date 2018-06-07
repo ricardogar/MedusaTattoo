@@ -4,7 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Trabajo;
 
 import com.medusa.domain.User;
+import com.medusa.domain.enumeration.Tipo_trabajo;
 import com.medusa.repository.ClienteRepository;
+import com.medusa.repository.RayatonRepository;
 import com.medusa.repository.TrabajoRepository;
 import com.medusa.repository.UserRepository;
 
@@ -25,6 +27,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,11 +51,14 @@ public class TrabajoResource {
 
     private final ClienteRepository clienteRepository;
 
+    private final RayatonRepository rayatonRepository;
 
-    public TrabajoResource(TrabajoRepository trabajoRepository, UserRepository userRepository, ClienteRepository clienteRepository) {
+
+    public TrabajoResource(TrabajoRepository trabajoRepository, UserRepository userRepository, ClienteRepository clienteRepository, RayatonRepository rayatonRepository) {
         this.trabajoRepository = trabajoRepository;
         this.userRepository = userRepository;
         this.clienteRepository = clienteRepository;
+        this.rayatonRepository = rayatonRepository;
     }
 
     /**
@@ -67,6 +74,9 @@ public class TrabajoResource {
         log.debug("REST request to save Trabajo : {}", trabajo);
         if (trabajo.getId() != null) {
             throw new BadRequestAlertException("A new trabajo cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if (trabajo.getTipo().equals(Tipo_trabajo.RAYATON)){
+            trabajo.setRayaton(rayatonRepository.getLastRayaton(LocalDate.now()));
         }
         Trabajo result = trabajoRepository.save(trabajo);
         return ResponseEntity.created(new URI("/api/trabajos/" + result.getId()))

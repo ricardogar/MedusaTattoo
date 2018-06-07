@@ -111,8 +111,8 @@
                                 nombre: null,
                                 costoTotal: null,
                                 totalPagado: null,
-                                estado: null,
-                                tipo: null,
+                                estado: "EN_PROGRESO",
+                                tipo: "NORMAL",
                                 foto: null,
                                 fotoContentType: null,
                                 id: null
