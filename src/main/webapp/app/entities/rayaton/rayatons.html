@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="rayaton.new" >
+                <button class="btn btn-primary" ui-sref="rayaton.new" ng-disabled="vm.hasRayatons">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span  data-translate="medusaTattooApp.rayaton.home.createLabel">
                         Create new Rayaton
@@ -49,7 +49,7 @@
                     <td><a ui-sref="rayaton-detail({id:rayaton.id})">{{rayaton.id}}</a></td>
                         <td>{{rayaton.fecha | date:'mediumDate'}}</td>
                     <td>{{rayaton.cupos}}</td>
-                    <td>{{rayaton.valorCupo}}</td>
+                    <td>{{rayaton.valorCupo | currency : "$":0}}</td>
                     <td>{{rayaton.comentario}}</td>
                     <td>
                         <a ng-if="rayaton.imagen" ng-click="vm.openFile(rayaton.imagenContentType, rayaton.imagen)">
