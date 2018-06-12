@@ -86,7 +86,7 @@ jhipster:
         default-include-pattern: /api/.*
         title: API de MedusaTatto
         description: Documentación de la API de MedusaTattoo
-        version: 0.0.1
+        version: 0.9.1
         terms-of-service-url:
         contact-name:
         contact-url:

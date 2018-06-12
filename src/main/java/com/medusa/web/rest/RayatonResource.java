@@ -104,6 +104,19 @@ public class RayatonResource {
     }
 
     /**
+     * GET  /rayatons : get all the rayatons.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of rayatons in body
+     */
+    @GetMapping("/rayatons/last")
+    @Timed
+    public ResponseEntity<Rayaton> getLastRayaton() {
+        log.debug("REST request to get a page of Rayatons");
+        Rayaton rayaton = rayatonRepository.getLastRayaton();
+        return new ResponseEntity<>(rayaton, HttpStatus.OK);
+    }
+
+    /**
      * GET  /rayatons/exists : get all the rayatons.
      *
      * @return true if exists at least one

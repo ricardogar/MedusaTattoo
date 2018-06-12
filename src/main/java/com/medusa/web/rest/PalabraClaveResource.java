@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -91,11 +92,11 @@ public class PalabraClaveResource {
      */
     @GetMapping("/palabra-claves")
     @Timed
-    public ResponseEntity<List<PalabraClave>> getAllPalabraClaves(Pageable pageable) {
+    public ResponseEntity<List<PalabraClave>> getAllPalabraClaves(@PageableDefault(page = 0,value = 1000,size = 1000) Pageable pageable) {
         log.debug("REST request to get a page of PalabraClaves");
-        Page<PalabraClave> page = palabraClaveRepository.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/palabra-claves");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        List<PalabraClave> page = palabraClaveRepository.findAll();
+        //HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders("/api/paalabra-claves");
+        return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
     /**

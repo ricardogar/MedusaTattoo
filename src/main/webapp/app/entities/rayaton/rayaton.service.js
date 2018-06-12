@@ -3,10 +3,12 @@
     angular
         .module('medusaTattooApp')
         .factory('Rayaton', Rayaton)
-.factory('HasRayaton', HasRayaton);
+        .factory('HasRayaton', HasRayaton)
+        .factory('LastRayaton', LastRayaton);
 
     Rayaton.$inject = ['$resource', 'DateUtils'];
     HasRayaton.$inject = ['$resource'];
+    LastRayaton.$inject = ['$resource'];
     function Rayaton ($resource, DateUtils) {
         var resourceUrl =  'api/rayatons/:id';
 
@@ -42,11 +44,19 @@
     }
     function HasRayaton ($resource) {
         var resourceUrl =  'api/rayatons/exists';
-
         return $resource(resourceUrl, {}, {
             'get': {
                 method: 'GET'
             }
         });
     }
+    function LastRayaton ($resource) {
+        var resourceUrl =  'api/rayatons/last';
+        return $resource(resourceUrl, {}, {
+            'get': {
+                method: 'GET'
+            }
+        });
+    }
+
 })();

@@ -32,6 +32,12 @@
             <column name="imagen_content_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+			<column name="miniatura" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="miniatura_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
 
             <column name="trabajo_id" type="bigint">
                 <constraints nullable="true" />

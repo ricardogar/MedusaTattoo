@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('FotoController', FotoController);
 
-    FotoController.$inject = ['DataUtils', 'Foto', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    FotoController.$inject = ['DataUtils', 'Foto', 'ParseLinks', 'AlertService', 'paginationConstants','Galeria'];
 
-    function FotoController(DataUtils, Foto, ParseLinks, AlertService, paginationConstants) {
+    function FotoController(DataUtils, Foto, ParseLinks, AlertService, paginationConstants,Galeria) {
 
         var vm = this;
 
@@ -23,7 +23,11 @@
         vm.reverse = true;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
+        vm.galeria={};
+        //vm.galeria=Galeria.get();
+        //console.log(vm.galeria);
 
+        loadGaleria();
         loadAll();
 
         function loadAll () {
@@ -53,6 +57,24 @@
             }
         }
 
+        function loadGaleria () {
+            Galeria.get({
+                page: 0,
+                size: 200
+            }, onSuccess, onError);
+
+            function onSuccess(data, headers) {
+                vm.galeria=data;
+                vm.$elasticgr = $("#elastic_grid_demo").elastic_grid(vm.galeria);
+            }
+
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+        }
+
+
+
         function reset () {
             vm.page = 0;
             vm.fotos = [];
@@ -63,5 +85,15 @@
             vm.page = page;
             loadAll();
         }
+
+        /*
+        angular.element(document).ready(function () {
+            console.log("cargado dom");
+            vm.$elasticgr = $("#elastic_grid_demo").elastic_grid(vm.galeria);
+
+        });
+         */
+
+
     }
 })();

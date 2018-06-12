@@ -35,7 +35,7 @@
                 <label for="select_rayaton" data-translate="medusaTattooApp.inscripcion.rayaton" style="font-size: 16px">Rayatón</label>
             </div>
             <div class="col-xs-8 no-padding-right">
-                <ui-select ng-model="vm.rayaton" theme="bootstrap" style="width: 300px;" id="select_rayaton">
+                <ui-select ng-model="vm.rayaton" theme="bootstrap" id="select_rayaton">
                     <ui-select-match placeholder="Busque y elija una Rayatón de la lista">{{$select.selected.fecha}}</ui-select-match>
                     <ui-select-choices repeat="rayaton in vm.rayatons | filter: $select.search">
                         <span ng-bind-html="rayaton.fecha | highlight: $select.search"></span>
@@ -43,6 +43,11 @@
                 </ui-select>
             </div>
         </div>
+        <label class="control-label" for="field_estado">Filtrar</label>
+        <select class="form-control" name="estado" ng-model="vm.filtrar" id="field_estado">
+            <option value="SIN_ELEGIR">SIN ELEGIR</option>
+            <option value="ELEGIDOS">ELEGIDOS</option>
+        </select>
     </div>
     <br/>
     <div class="table-responsive">

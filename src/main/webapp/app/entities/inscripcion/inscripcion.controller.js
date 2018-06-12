@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('InscripcionController', InscripcionController);
 
-    InscripcionController.$inject = ['DataUtils', 'Inscripcion', 'ParseLinks', 'AlertService', 'paginationConstants','Rayaton','HasRayaton','Principal'];
+    InscripcionController.$inject = ['DataUtils', 'Inscripcion', 'ParseLinks', 'AlertService', 'paginationConstants','Rayaton','HasRayaton','Principal','LastRayaton'];
 
-    function InscripcionController(DataUtils, Inscripcion, ParseLinks, AlertService, paginationConstants,Rayaton,HasRayaton,Principal) {
+    function InscripcionController(DataUtils, Inscripcion, ParseLinks, AlertService, paginationConstants,Rayaton,HasRayaton,Principal,LastRayaton) {
 
         var vm = this;
 
@@ -26,6 +26,8 @@
         vm.byteSize = DataUtils.byteSize;
         vm.hasRayatons = HasRayaton.get();
         vm.account = {};
+        vm.rayaton = LastRayaton.get();
+        vm.filtrar="SIN_ELEGIR";
         getAccount();
         function getAccount() {
             Principal.identity().then(function(account) {

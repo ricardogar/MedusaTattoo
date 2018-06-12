@@ -41,4 +41,7 @@ public interface RayatonRepository extends JpaRepository<Rayaton, Long> {
     @Query("SELECT r FROM Rayaton r WHERE r.id=(SELECT MAX(id) from Rayaton) AND r.fecha>= :now")
     Rayaton getLastRayaton(@Param("now") LocalDate now);
 
+    @Query("SELECT r FROM Rayaton r WHERE r.id=(SELECT MAX(id) from Rayaton)")
+    Rayaton getLastRayaton();
+
 }

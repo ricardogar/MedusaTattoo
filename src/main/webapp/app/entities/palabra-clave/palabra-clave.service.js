@@ -10,7 +10,8 @@
         var resourceUrl =  'api/palabra-claves/:id';
 
         return $resource(resourceUrl, {}, {
-            'query': { method: 'GET', isArray: true},
+            'query': { method: 'GET', isArray: true,
+            },
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
