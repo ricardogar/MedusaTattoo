@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('UserManagementDialogController',UserManagementDialogController);
 
-    UserManagementDialogController.$inject = ['$stateParams', '$uibModalInstance', 'entity', 'User', 'JhiLanguageService','Sede'];
+    UserManagementDialogController.$inject = ['$stateParams', '$uibModalInstance', 'entity', 'User', 'JhiLanguageService','Sede','OpenSedes'];
 
-    function UserManagementDialogController ($stateParams, $uibModalInstance, entity, User, JhiLanguageService,Sede) {
+    function UserManagementDialogController ($stateParams, $uibModalInstance, entity, User, JhiLanguageService,Sede,OpenSedes) {
         var vm = this;
 
         vm.authorities = ["ROLE_SECRETARIA", "ROLE_ADMIN","ROLE_CLIENTE"];
@@ -15,7 +15,7 @@
         vm.languages = null;
         vm.save = save;
         vm.user = entity;
-		vm.sedes = Sede.query();
+		vm.sedes = OpenSedes.query();
 
 
         JhiLanguageService.getAll().then(function (languages) {

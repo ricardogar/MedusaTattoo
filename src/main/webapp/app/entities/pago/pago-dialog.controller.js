@@ -24,14 +24,12 @@
 		function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
-				console.log("=================Pago dialog controller====================");
-				console.log(vm.account);
                 vm.trabajos = TrabajosByAccountAndStatus.query({id:vm.account.id,status:"EN_PROGRESO"});
             });
         }
         $scope.setMaxValue = function () {
             vm.maxValue = vm.pago.trabajo.costoTotal - vm.pago.trabajo.totalPagado;
-        }
+        };
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -66,13 +64,5 @@
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }
-
-		/*$scope.sedeFilter = function (item){
-			if(vm.account.authorities.includes("ROLE_ADMIN")){
-				return true;
-			}else{
-				return item.sede.id===vm.account.sede.id
-			}
-		};*/
     }
 })();

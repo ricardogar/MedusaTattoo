@@ -20,7 +20,7 @@
         };
         vm.predicate = 'id';
         vm.reset = reset;
-        vm.reverse = true;
+        vm.reverse = false;
 
         //loadAll();
 		vm.account = null;
@@ -30,8 +30,6 @@
             Principal.identity().then(function(account) {
                 vm.account = account;
                 loadAll();
-				console.log("=================Pago controller====================");
-				console.log(vm.account);
             });
         }
 
@@ -73,13 +71,5 @@
             vm.page = page;
             loadAll();
         }
-
-		/*$scope.sedeFilter = function (item){
-			if(vm.account.authorities.includes("ROLE_ADMIN")){
-				return true;
-			}else{
-				return item.trabajo.sede.id===vm.account.sede.id
-			}
-		};*/
     }
 })();

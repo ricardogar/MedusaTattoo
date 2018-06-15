@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('InscripcionController', InscripcionController);
 
-    InscripcionController.$inject = ['DataUtils', 'Inscripcion', 'ParseLinks', 'AlertService', 'paginationConstants','Rayaton','HasRayaton','Principal','LastRayaton'];
+    InscripcionController.$inject = ['DataUtils', 'Inscripcion', 'ParseLinks', 'AlertService', 'paginationConstants','Rayaton','HasRayaton','Principal','LastRayaton','$scope'];
 
-    function InscripcionController(DataUtils, Inscripcion, ParseLinks, AlertService, paginationConstants,Rayaton,HasRayaton,Principal,LastRayaton) {
+    function InscripcionController(DataUtils, Inscripcion, ParseLinks, AlertService, paginationConstants,Rayaton,HasRayaton,Principal,LastRayaton,$scope) {
 
         var vm = this;
 
@@ -43,6 +43,7 @@
 
         vm.cleanSede=function (inscripcion) {
             inscripcion.sede=null;
+            inscripcion.estado="PRE_INSCRITO";
             Inscripcion.update(inscripcion, onSaveSuccess, onSaveError);
         };
 
@@ -52,7 +53,6 @@
             Inscripcion.update(inscripcion, onSaveSuccess, onSaveError);
         };
         vm.unSubscribe=function (inscripcion) {
-            inscripcion.sede=null;
             inscripcion.estado="PRE_INSCRITO";
             Inscripcion.update(inscripcion, onSaveSuccess, onSaveError);
         };
@@ -106,5 +106,21 @@
             vm.page = page;
             loadAll();
         }
+
+        $scope.statusFilter = function (item){
+			if(vm.filtrar==="SIN_ELEGIR"){
+				return item.sede==null;
+			}else{
+			    if (vm.account.authorities.includes("ROLE_ADMIN")) {
+			        return item.sede!==null;
+                }else {
+			        if (item.sede !== null) {
+                        return item.sede.id===vm.account.sede.id;
+                    }else{
+			            return false;
+                    }
+                }
+			}
+		};
     }
 })();

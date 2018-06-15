@@ -20,6 +20,7 @@
         };
         vm.predicate = 'fecha';
         vm.hasRayatons = HasRayaton.get();
+		console.log(vm.hasRayatons);
         vm.reset = reset;
         vm.reverse = false;
         vm.openFile = DataUtils.openFile;

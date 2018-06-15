@@ -80,17 +80,6 @@
                  </p>
             </div>
         </div>
-        <div class="form-group" ng-if="vm.setSede()">
-            <label data-translate="userManagement.sede" for="field_sede">Sede</label>
-            <select class="form-control" id="field_sede" name="sede" ng-model="vm.user.sede" ng-options="sede as sede.nombre for sede in vm.sedes track by sede.id" required>
-            </select>
-            <div ng-show="editForm.sede.$invalid">
-                <p class="help-block"
-                   ng-show="editForm.sede.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
         <div class="form-group">
             <label for="activated">
                 <input ng-disabled="vm.user.id === null" type="checkbox" id="activated" name="activated" ng-model="vm.user.activated">
@@ -110,11 +99,21 @@
             <multiple-autocomplete ng-model="vm.user.authorities"
                                    suggestions-arr="vm.authorities">
             </multiple-autocomplete>
-
-
-            <!--select class="form-control" multiple name="authority" ng-model="vm.user.authorities"
-                    ng-options="authority for authority in vm.authorities">
-            </select-->
+        </div>
+        <div class="form-group" ng-if="vm.setSede()">
+            <label data-translate="userManagement.sede" for="field_sede">Sede</label>
+            <ui-select ng-model="vm.user.sede" theme="bootstrap" id="field_sede">
+                <ui-select-match placeholder="Busque y elija una sede de la lista">{{$select.selected.nombre}}</ui-select-match>
+                <ui-select-choices repeat="sede in vm.sedes | filter: $select.search">
+                    <span ng-bind-html="sede.nombre + ' (' + sede.direccion + ')' | highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+            <div ng-show="editForm.sede.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.sede.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
     </div>
     <div class="modal-footer">

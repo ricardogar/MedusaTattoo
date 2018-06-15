@@ -92,7 +92,7 @@
         </div>
         <div class="form-group" has-authority="ROLE_ADMIN">
             <label data-translate="medusaTattooApp.inscripcion.sede" for="field_sede">Sede</label>
-            <ui-select ng-model="vm.inscripcion.sede" theme="bootstrap" id="field_sede" ">
+            <ui-select ng-model="vm.inscripcion.sede" theme="bootstrap" id="field_sede">
                 <ui-select-match placeholder="Busque y elija una sede de la lista">{{$select.selected.nombre}}</ui-select-match>
                 <ui-select-choices repeat="sede in vm.sedes | filter: $select.search">
                     <span ng-bind-html="sede.nombre + ' (' + sede.direccion + ')' | highlight: $select.search"></span>
