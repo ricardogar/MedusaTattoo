@@ -372,7 +372,7 @@
 }
 
 .elastislide-wrapper.elastislide-loading {
-	background-image: url(../images/loading.gif);
+	background-image: url(/bower_components/galeria/images/loading.gif);
 	background-repeat: no-repeat;
 	background-position: center center;
 }
@@ -440,7 +440,7 @@
 
 .elastislide-wrapper nav span {
 	position: absolute;
-	background: #1b1b1b url(../images/nav.png) no-repeat 4px 3px;
+	background: #1b1b1b url(/bower_components/galeria/images/nav.png) no-repeat 4px 3px;
 	width: 23px;
 	height: 23px;
 	border-radius: 50%;
