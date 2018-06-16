@@ -256,12 +256,15 @@ $(function() {
                 var thumbURL = item.thumbnail[0];
                 var largeURL = item.large[0];
 
-                var video = parseVideoURL(largeURL);
+                /*
+                    var video = parseVideoURL(largeURL);
                 if(video.provider == 'youtube' || video.provider == 'vimeo'){
                     largeURL = false;
 
                     imgObject.attr('data-video', video.embed);
                 }
+                 */
+
 
                 imgObject.attr('src', thumbURL);
                 imgObject.attr('data-largesrc', largeURL);

@@ -65,8 +65,7 @@
 
             function onSuccess(data, headers) {
                 vm.galeria=data;
-                console.log(data);
-                vm.$elasticgr = $("#elastic_grid_demo").elastic_grid(vm.galeria);
+                vm.$elasticgr = $("#elastic_grid").elastic_grid(vm.galeria);
             }
 
             function onError(error) {
