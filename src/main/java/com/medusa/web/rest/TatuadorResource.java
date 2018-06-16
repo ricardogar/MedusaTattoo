@@ -211,6 +211,21 @@ public class TatuadorResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /tatuadors/cuenta/:id : get all the tatuadors filtering by account and only with active state.
+     *
+     * @param pageable the pagination information
+     * @param id the account identifier
+     * @return the ResponseEntity with status 200 (OK) and the list of tatuadors in body
+     */
+    @GetMapping("/tatuadors/activo")
+    @Timed
+    public ResponseEntity<List<Tatuador>> getAllActiveTatuadors(Pageable pageable) {
+        Page<Tatuador> page = tatuadorRepository.findAllByEstadoIsTrue(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tatuadors");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
 
 
     /**

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -121,12 +122,13 @@ public class RayatonResource {
      *
      * @return true if exists at least one
      */
-    @GetMapping("/rayatons/exists")
+    @GetMapping(value = "/rayatons/exists",produces = MediaType.TEXT_PLAIN_VALUE)
     @Timed
-    public boolean hasRayatons() {
+    public String hasRayatons() {
         log.debug("REST request to get Rayatons quantity");
         Rayaton rayaton = rayatonRepository.getLastRayaton(LocalDate.now());
-        return rayaton!=null;
+        Boolean aBoolean = rayaton!=null;
+        return aBoolean.toString();
     }
 
     /**

@@ -103,7 +103,7 @@
 
         <div class="form-group">
             <label data-translate="medusaTattooApp.rayaton.tatuador" for="field_tatuador">Tatuador</label>
-            <select class="form-control" id="field_tatuador" multiple name="tatuador" ng-model="vm.rayaton.tatuadors" ng-options="tatuador as tatuador.nombre + ' ' tatuador.apellido + ' ('tatuador.apodo+')' for tatuador in vm.tatuadors track by tatuador.id"></select>
+            <select class="form-control" id="field_tatuador" multiple name="tatuador" ng-model="vm.rayaton.tatuadors" ng-options="tatuador as tatuador.nombre + ' ' +tatuador.apellido + ' ('+tatuador.apodo+')' for tatuador in vm.tatuadors track by tatuador.id"></select>
         </div>
     </div>
     <div class="modal-footer">

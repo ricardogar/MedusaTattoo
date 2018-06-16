@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('RayatonDialogController', RayatonDialogController);
 
-    RayatonDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Rayaton', 'Inscripcion', 'Trabajo', 'Tatuador'];
+    RayatonDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Rayaton', 'Inscripcion', 'Trabajo', 'Tatuador','TatuadorActivos'];
 
-    function RayatonDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Rayaton, Inscripcion, Trabajo, Tatuador) {
+    function RayatonDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Rayaton, Inscripcion, Trabajo, Tatuador,TatuadorActivos) {
         var vm = this;
 
         vm.rayaton = entity;
@@ -17,9 +17,7 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-        vm.inscripcions = Inscripcion.query();
-        vm.trabajos = Trabajo.query();
-        vm.tatuadors = Tatuador.query();
+        vm.tatuadors = TatuadorActivos.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

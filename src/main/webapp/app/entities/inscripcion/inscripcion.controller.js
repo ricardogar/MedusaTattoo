@@ -24,7 +24,11 @@
         vm.reverse = false;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
-        vm.hasRayatons = HasRayaton.get();
+        HasRayaton.get(function (data) {
+            vm.hasRayatons=data[0];
+        },function () {
+            console.log("error")
+        });
         vm.account = {};
         vm.rayaton = LastRayaton.get();
         vm.filtrar="SIN_ELEGIR";
