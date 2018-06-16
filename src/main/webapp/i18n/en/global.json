@@ -142,5 +142,26 @@
         "emailexists": "Email is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
     },
-    "footer": "MedusaTattoo"
+    "footer": {
+        "about":{
+            "title":"About us",
+            "content":"We are a young company always looking for new and creative ideas to help you with our products in your everyday work."
+        },
+        "contact":{
+            "title":"Contact",
+            "street":"Carrera 11#14-65 Tunja, Boyaca, Colombia",
+            "phone":"(+57) 320 903 7399",
+            "email":"<a href=\"mailto:medusatattooshop@gmail.com\">medusatattooshop@gmail.com</a>"
+        },
+        "links":{
+            "title":"Links",
+            "home":"Home",
+            "appoinment":"Appoinments",
+            "work":"Works",
+            "plan":"check appointments",
+            "gallery":"Gallery",
+            "inscription":"Sign up for Rayaton"
+        }
+
+    }
 }

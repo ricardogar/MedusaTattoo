@@ -139,5 +139,26 @@
         "emailexists": "Email ya registrado!",
         "idexists": "{{entityName}} no puede ser creado con un ID"
     },
-    "footer": "Medusa Tatto"
+    "footer": {
+        "about":{
+            "title":"Acerca de",
+            "content":"Aquí se supone que se debe agregar una pequeña descripción de la empresa para dar una idea al usuario y ya no se como más rellenar esto"
+        },
+        "contact":{
+            "title":"Contacto",
+            "street":"Carrera 11#14-65 Tunja, Boyaca, Colombia",
+            "phone":"(+57) 320 903 7399",
+            "email":"<a href=\"mailto:medusatattooshop@gmail.com\">medusatattooshop@gmail.com</a>"
+        },
+        "links":{
+            "title":"Enlaces",
+            "home":"Inicio",
+            "appoinment":"Citas",
+            "work":"Trabajos",
+            "plan":"Consultar citas",
+            "gallery":"Galería",
+            "inscription":"Inscribirse a Rayatón"
+        }
+
+    }
 }

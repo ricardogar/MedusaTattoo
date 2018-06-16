@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="bower_components/angular-moment-picker/dist/angular-moment-picker.css">
     <link rel="stylesheet" href="bower_components/angular-confirm/dist/angular-confirm.min.css">
     <link rel="stylesheet" href="bower_components/galeria/elastic_grid.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
 
     <!-- endinject -->
     <!-- endbuild -->
@@ -44,7 +45,54 @@
     </div>
 
     <div class="footer" ng-cloak>
-        <p data-translate="footer">MedusaTattoo</p>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 footer-about wow fadeInUp">
+                        <h3 data-translate="footer.about.title">About us</h3>
+                        <p data-translate="footer.about.content">
+                            We are a young company always looking for new and creative ideas to help you with our products in your everyday work.
+                        </p>
+                        <p>2018 &copy; Medusa Tatto Shop</p>
+                    </div>
+                    <div class="col-md-4 offset-md-1 footer-contact wow fadeInDown">
+                        <h3 data-translate="footer.contact.title">Contact</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> <span data-translate="footer.contact.street">Via Rossini 10, 10136 Turin Italy</span></p>
+                        <p><i class="fas fa-phone"></i> <span data-translate="footer.contact.phone">Phone: (0039) 333 12 68 347</span> </p>
+                        <p><i class="fas fa-envelope"></i> <span data-translate="footer.contact.email">Email: <a href="mailto:hello@domain.com">hello@domain.com</a></span></p>
+                    </div>
+                    <div class="col-md-4 footer-links wow fadeInUp">
+                        <div class="row">
+                            <div class="col">
+                                <h3 data-translate="footer.links.title">Links</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><a class="scroll-link" href="#" data-translate="footer.links.home">Home</a></p>
+                                <p><a href="#/cita" data-translate="footer.links.appoinment">Appoinment</a></p>
+                                <p><a href="#/trabajo" data-translate="footer.links.work">Works</a></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><a href="#/consultaCita" data-translate="footer.links.plan">Our clients</a></p>
+                                <p><a href="#/foto" data-translate="footer.links.gallery">Plans &amp; pricing</a></p>
+                                <p><a href="#/inscripcion_rayaton" data-translate="footer.links.inscription">Affiliates</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <noscript>
