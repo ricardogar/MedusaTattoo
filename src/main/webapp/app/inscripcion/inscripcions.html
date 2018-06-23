@@ -1,83 +1,112 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+<div ng-if="vm.hasRayatons==='f'">
+    <h2 class="text-center">Lo sentimos, aún no hay ninguna rayatón programada</h2>
+</div>
 
-    <div class="modal-header">
-        <h4 class="modal-title" id="myInscripcionLabel" data-translate="medusaTattooApp.inscripcion.detail.title">Create or edit a Inscripcion</h4>
+<div class="text-center" ng-if="vm.finish">
+    <h2 id="labelInfo" style="color:#029700">Inscripción completa!</h2>
+    <h3 id="labelInfo2">Te avisaremos si eres uno de los seleccionados</h3>
+</div>
+
+<div ng-if="vm.hasRayatons==='t' && vm.finish==false">
+    <h2 class="text-center">Participa en esta nueva Rayatón<br>{{vm.rayaton.fecha}}</h2>
+    <img class="img-responsive center-block" data-ng-src="{{'data:' + vm.rayaton.imagenContentType + ';base64,' + vm.rayaton.imagen}}" ng-if="vm.rayaton.imagen" alt="Rayaton image"/>
+    <h2 class="text-center">Artistas</h2>
+    <div class="row">
+        <div ng-repeat="tatuador in vm.rayaton.tatuadors">
+            <a class="col-md-2" ng-if="tatuador.foto">
+                <img class="img-rounded img-Tatuador" data-ng-src="{{'data:' + tatuador.fotoContentType + ';base64,' + tatuador.foto}}" style="max-height: 240px;" alt="Foto de tatuador"/>
+                <h4>{{tatuador.apodo}}</h4>
+            </a>
+        </div>
     </div>
-    <div class="modal-body">
-	<h2 id="labelInfo" style="color:#029700"></h2>
-	<h3 id="labelInfo2"></h3>
-        <div class="form-group">
-            <label class="control-label" data-translate="medusaTattooApp.inscripcion.nombre" for="field_nombre">Nombre</label>
-            <input type="text" class="form-control" name="nombre" id="field_nombre"
-                    ng-model="vm.inscripcion.nombre"
-                    required/>
-            <div ng-show="editForm.nombre.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.nombre.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
+
+    <h3 class="text-center">Cupos limitados ({{vm.rayaton.cupos}}) <br>
+        Aparta tu cupo por solo: {{vm.rayaton.valorCupo | currency:"$":0}}</h3>
+    <hr>
+    <h4> Dinos tu nombre, un número de teléfono y una imagen con la idea del tatuaje que quieres.<br>
+        Si eres uno de los seleccionados te contactaremos para que sepas a que sede acercarte</h4>
+    <hr>
+
+    <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+        <div class="modal-header">
+            <h4 class="modal-title" id="myInscripcionLabel" data-translate="medusaTattooApp.inscripcion.detail.title">Create or edit a Inscripcion</h4>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="medusaTattooApp.inscripcion.telefono" for="field_telefono">Telefono</label>
-            <input type="text" class="form-control" name="telefono" id="field_telefono"
-                    ng-model="vm.inscripcion.telefono"
-                    required ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]*$/"/>
-            <div ng-show="editForm.telefono.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.telefono.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.telefono.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="10">
-                    This field is required to be at least 10 characters.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.telefono.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="10">
-                    This field cannot be longer than 10 characters.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.telefono.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="Telefono">
-                    This field should follow pattern for "Telefono".
-                </p>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="control-label" data-translate="medusaTattooApp.inscripcion.nombre" for="field_nombre">Nombre</label>
+                <input type="text" class="form-control" name="nombre" id="field_nombre"
+                       ng-model="vm.inscripcion.nombre"
+                       required/>
+                <div ng-show="editForm.nombre.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.nombre.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setImagen($file, vm.inscripcion)" ngf-pattern="'image/*'">
-            <label class="control-label" data-translate="medusaTattooApp.inscripcion.imagen" for="field_imagen">Imagen</label>
-            <div>
-                <img data-ng-src="{{'data:' + vm.inscripcion.imagenContentType + ';base64,' + vm.inscripcion.imagen}}" style="max-height: 100px;" ng-if="vm.inscripcion.imagen" alt="inscripcion image"/>
-                <div ng-if="vm.inscripcion.imagen" class="help-block clearfix">
-                    <span class="pull-left">{{vm.inscripcion.imagenContentType}}, {{vm.byteSize(vm.inscripcion.imagen)}}</span>
-                    <button type="button" ng-click="vm.inscripcion.imagen=null;vm.inscripcion.imagenContentType=null;"
-                            class="btn btn-default btn-xs pull-right">
-                        <span class="glyphicon glyphicon-remove"></span>
+            <div class="form-group">
+                <label class="control-label" data-translate="medusaTattooApp.inscripcion.telefono" for="field_telefono">Telefono</label>
+                <input type="text" class="form-control" name="telefono" id="field_telefono"
+                       ng-model="vm.inscripcion.telefono"
+                       required ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]*$/"/>
+                <div ng-show="editForm.telefono.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.telefono.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.telefono.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="10">
+                        This field is required to be at least 10 characters.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.telefono.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="10">
+                        This field cannot be longer than 10 characters.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.telefono.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="Telefono">
+                        This field should follow pattern for "Telefono".
+                    </p>
+                </div>
+            </div>
+            <div class="form-group" ngf-drop ngf-change="vm.setImagen($file, vm.inscripcion)" ngf-pattern="'image/*'">
+                <label class="control-label" data-translate="medusaTattooApp.inscripcion.imagen" for="field_imagen">Imagen</label>
+                <div>
+                    <img data-ng-src="{{'data:' + vm.inscripcion.imagenContentType + ';base64,' + vm.inscripcion.imagen}}" style="max-height: 100px;" ng-if="vm.inscripcion.imagen" alt="inscripcion image"/>
+                    <div ng-if="vm.inscripcion.imagen" class="help-block clearfix">
+                        <span class="pull-left">{{vm.inscripcion.imagenContentType}}, {{vm.byteSize(vm.inscripcion.imagen)}}</span>
+                        <button type="button" ng-click="vm.inscripcion.imagen=null;vm.inscripcion.imagenContentType=null;"
+                                class="btn btn-default btn-xs pull-right">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </div>
+                    <button type="button" ngf-select class="btn btn-default btn-block"
+                            ngf-change="vm.setImagen($file, vm.inscripcion)" accept="image/*" data-translate="entity.action.addimage">
+                        Add image
                     </button>
                 </div>
-                <button type="button" ngf-select class="btn btn-default btn-block"
-                        ngf-change="vm.setImagen($file, vm.inscripcion)" accept="image/*" data-translate="entity.action.addimage">
-                    Add image
-                </button>
-            </div>
-            <input type="hidden" class="form-control" name="imagen" id="field_imagen"
-                    ng-model="vm.inscripcion.imagen"
-                    required/>
-            <input type="hidden" class="form-control" name="imagenContentType" id="field_imagenContentType"
-                    ng-model="vm.inscripcion.imagenContentType" />
-            <div ng-show="editForm.imagen.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.imagen.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
+                <input type="hidden" class="form-control" name="imagen" id="field_imagen"
+                       ng-model="vm.inscripcion.imagen"
+                       required/>
+                <input type="hidden" class="form-control" name="imagenContentType" id="field_imagenContentType"
+                       ng-model="vm.inscripcion.imagenContentType" />
+                <div ng-show="editForm.imagen.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.imagen.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
-        </button>
-    </div>
-</form>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+            </button>
+            <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+                <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+            </button>
+        </div>
+    </form>
+
+</div>
