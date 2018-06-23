@@ -52,7 +52,7 @@ Development Ribbon
 Version number in navbar
 ========================================================================== */
 .navbar-version {
-    font-size: 10px;
+    font-size: 12px;
     color: #444;
 }
 
@@ -109,7 +109,8 @@ Main page styles
     display: inline-block;
     width: 347px;
     height: 497px;
-    background: url("../images/hipster.png") no-repeat center top;
+    margin-top: 100px;
+    background: url("../images/logo_medusa.png") no-repeat center top;
     background-size: contain;
 }
 
