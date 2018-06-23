@@ -29,8 +29,6 @@ public class EventMapper {
                 eventDTO.setColor(CalendarColorRepository.CITA_PRESENTE);
             }
             eventDTO.setStartsAt(cita.getFechaYHora());
-
-            log.debug("conversion de double a int: "+cita.getDuracion().intValue());
             if (cita.getDuracion()%1==0){
                 eventDTO.setEndsAt(cita.getFechaYHora().plus(cita.getDuracion().intValue(), ChronoUnit.HOURS));
             }else{

@@ -36,16 +36,18 @@
             vm.user.activated=true;
             vm.user.langKey="es";
             vm.user.authorities=['ROLE_CLIENTE'];
-            console.log(vm.cliente);console.log(vm.user);
-            Cliente.save(vm.cliente, onSaveSuccess, onSaveError);
-            User.save(vm.user, onSaveSuccess, onSaveError);
 
-
+            User.save(vm.user,function () {
+                Cliente.save(vm.cliente,function () {
+                    $('#clientRegisterInfo').text("Registro completo!");
+                    $('#clientRegisterInfo2').text("Porfavor revisa tu correo elctrónico para activar tu cuenta");
+                    vm.isSaving = false;
+                },onSaveError())
+            },onSaveError());
 
         }
 
         function onSaveSuccess (result) {
-            //$scope.$emit('medusaTattooApp:clienteUpdate', result);
             $('#clientRegisterInfo').text("Registro completo!");
             $('#clientRegisterInfo2').text("Porfavor revisa tu correo elctrónico para activar tu cuenta");
             vm.isSaving = false;

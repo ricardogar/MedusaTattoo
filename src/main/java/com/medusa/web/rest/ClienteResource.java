@@ -5,6 +5,7 @@ import com.medusa.domain.Cliente;
 
 import com.medusa.repository.ClienteRepository;
 import com.medusa.web.rest.errors.BadRequestAlertException;
+import com.medusa.web.rest.errors.EmailAlreadyUsedException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -55,6 +56,11 @@ public class ClienteResource {
         log.debug("REST request to save Cliente : {}", cliente);
         if (cliente.getId() != null) {
             throw new BadRequestAlertException("A new cliente cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if (cliente.getEmail()!=null) {
+            if (clienteRepository.findOneByEmailIgnoreCase(cliente.getEmail()).isPresent()) {
+                throw new EmailAlreadyUsedException();
+            }
         }
         Cliente result = clienteRepository.save(cliente);
         return ResponseEntity.created(new URI("/api/clientes/" + result.getId()))
