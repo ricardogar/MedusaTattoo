@@ -57,10 +57,19 @@
             </multiple-autocomplete>
         </div>
         <div class="form-group">
-            <label data-translate="medusaTattooApp.foto.trabajo" for="field_trabajo">Trabajo</label>
-            <select class="form-control" id="field_trabajo" name="trabajo" ng-model="vm.foto.trabajo" ng-options="trabajo as trabajo.id for trabajo in vm.trabajos track by trabajo.id">
-                <option value=""></option>
-            </select>
+            <label data-translate="medusaTattooApp.foto.trabajo" for="field_trabajo">Cliente</label>
+            <ui-select  ng-model="vm.foto.trabajo" theme="bootstrap" id="field_trabajo">
+                <ui-select-match placeholder="Busque y elija un trabajo de la lista">{{$select.selected.nombre}}</ui-select-match>
+                <ui-select-choices repeat="trabajo in vm.trabajos | filter: $select.search">
+                    <span ng-bind-html="trabajo.id + ' - ' + trabajo.nombre| highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+            <div ng-show="editForm.trabajo.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.trabajo.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
     </div>
     <div class="modal-footer">
