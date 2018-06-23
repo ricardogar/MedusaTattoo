@@ -189,14 +189,18 @@
                 vm.duracion=moment.duration(moment(endDate).diff(moment(startDate))).asHours();
                 if (startDate>=new Date()) {
                     if (vm.duracion >= 1) {
-                        $state.go('cita.new.calendar', {
-                            fecha: moment(startDate).toISOString(),
-                            duracion:vm.duracion});
+                        if (vm.duracion<=12){
+                            $state.go('cita.new.calendar', {
+                                fecha: moment(startDate).toISOString(),
+                                duracion:vm.duracion});
+                        }else{
+                            $ngConfirm('La cita no puede durar mas de <strong>doce(12) horas</strong>');
+                        }
                     }else {
                         $ngConfirm('La cita debe durar al menos <strong>una(1) hora</strong>');
                     }
                 }else{
-                    $ngConfirm('No puedes crear una cita en una <strong>fecha previa</strong>');
+                    $ngConfirm('No puedes crear una cita en una <strong>fecha u hora previa</strong>');
                 }
             }
         };
