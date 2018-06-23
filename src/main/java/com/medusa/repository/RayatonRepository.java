@@ -38,10 +38,10 @@ public interface RayatonRepository extends JpaRepository<Rayaton, Long> {
         "group by e.id, e.fecha",nativeQuery = true)
     List<Object[]> worksBetweenDates(@Param("minDate") Instant minDate, @Param("maxDate") Instant maxDate);
 
-    @Query("SELECT r FROM Rayaton r WHERE r.id=(SELECT MAX(id) from Rayaton) AND r.fecha>= :now")
+    @Query("SELECT r FROM Rayaton r left join fetch r.tatuadors WHERE r.id=(SELECT MAX(id) from Rayaton) AND r.fecha>= :now")
     Rayaton getLastRayaton(@Param("now") LocalDate now);
 
-    @Query("SELECT r FROM Rayaton r WHERE r.id=(SELECT MAX(id) from Rayaton)")
+    @Query("SELECT r FROM Rayaton r left join fetch r.tatuadors WHERE r.id=(SELECT MAX(id) from Rayaton)")
     Rayaton getLastRayaton();
 
 }

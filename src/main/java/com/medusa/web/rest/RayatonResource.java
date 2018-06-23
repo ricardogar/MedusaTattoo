@@ -61,6 +61,9 @@ public class RayatonResource {
         if (rayaton.getId() != null) {
             throw new BadRequestAlertException("A new rayaton cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (rayatonRepository.getLastRayaton(LocalDate.now())!=null){
+            throw new BadRequestAlertException("there is already a scheduled event", ENTITY_NAME, "RayatonExists");
+        }
         Rayaton result = rayatonRepository.save(rayaton);
         return ResponseEntity.created(new URI("/api/rayatons/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -113,7 +116,7 @@ public class RayatonResource {
     @Timed
     public ResponseEntity<Rayaton> getLastRayaton() {
         log.debug("REST request to get a page of Rayatons");
-        Rayaton rayaton = rayatonRepository.getLastRayaton();
+        Rayaton rayaton = rayatonRepository.getLastRayaton(LocalDate.now());
         return new ResponseEntity<>(rayaton, HttpStatus.OK);
     }
 

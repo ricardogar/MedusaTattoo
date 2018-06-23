@@ -2,15 +2,12 @@ package com.medusa.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Foto;
-
 import com.medusa.repository.FotoRepository;
 import com.medusa.service.dto.GalleryDTO;
 import com.medusa.web.rest.errors.BadRequestAlertException;
 import com.medusa.web.rest.util.HeaderUtil;
 import com.medusa.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import net.coobird.thumbnailator.Thumbnailator;
-import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,17 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.imageio.ImageIO;
 import javax.validation.Valid;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -134,8 +123,7 @@ public class FotoResource {
     @Timed
     public ResponseEntity<GalleryDTO> getGallery() {
         log.debug("REST request to get Gallery : {}");
-        GalleryDTO galleryDTO = new GalleryDTO(fotoRepository.findAllWithEagerRelationships());
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(galleryDTO));
+        return new ResponseEntity<>(new GalleryDTO(fotoRepository.findAllWithEagerRelationships()),HttpStatus.OK);
     }
 
 

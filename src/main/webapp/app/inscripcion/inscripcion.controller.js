@@ -5,9 +5,9 @@
         .module('medusaTattooApp')
         .controller('InscripcionRController', InscripcionRController);
 
-    InscripcionRController.$inject = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'Inscripcion', 'Rayaton', 'Sede','Principal'];
+    InscripcionRController.$inject = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'Inscripcion', 'HasRayaton', 'LastRayaton','AlertService'];
 
-    function InscripcionRController ($timeout, $scope, $stateParams, DataUtils, Inscripcion, Rayaton, Sede,Principal) {
+    function InscripcionRController ($timeout, $scope, $stateParams, DataUtils, Inscripcion, HasRayaton, LastRayaton,AlertService) {
         var vm = this;
 
         vm.inscripcion = {};
@@ -15,22 +15,16 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-		vm.account = null;
-		//getAccount();
-        /*if(vm.inscripcion.estado==null){
-            vm.inscripcion.estado="PRE_INSCRITO";
-        }*/
-		function getAccount() {
-            Principal.identity().then(function(account) {
-                vm.account = account;
-                vm.isAdmin=vm.account.authorities.includes("ROLE_ADMIN");
-				if(vm.inscripcion.sede==null && vm.isAdmin){
-					vm.inscripcion.sede=vm.account.sede;
-				}
-				console.log("isAdmin: ");
-				console.log(vm.isAdmin);
-            });
-        }
+        vm.finish=false;
+
+        HasRayaton.get(function (data) {
+            vm.hasRayatons=data[0];
+            if (vm.hasRayatons==='t'){
+                LastRayaton.get(function (info) {
+                    vm.rayaton=info;
+                })
+            }
+        });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -55,9 +49,13 @@
 			$('#labelInfo2').text("Te avisaremos si eres uno de los seleccionados");
 			//alert("Inscripción completa!");
             vm.isSaving = false;
+            vm.finish=true;
         }
 
         function onSaveError () {
+            $('#labelInfo').text("Inscripción fallida!");
+            $('#labelInfo2').text("No pudimos procesar tu inscripción, por favor intentalo mas tarde");
+            vm.finish=true;
             vm.isSaving = false;
         }
 
