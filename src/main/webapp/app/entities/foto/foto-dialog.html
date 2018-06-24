@@ -8,7 +8,7 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.foto.id">
+        <div class="form-group form-short" ng-show="vm.foto.id">
             <label for="id" data-translate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.foto.id" readonly />
@@ -18,7 +18,7 @@
                 <textarea class="form-control" name="descripcion" id="field_descripcion"
                     ng-model="vm.foto.descripcion" ></textarea>
         </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setImagen($file, vm.foto)" ngf-pattern="'image/*'">
+        <div class="form-group form-short-image" ngf-drop ngf-change="vm.setImagen($file, vm.foto)" ngf-pattern="'image/*'">
             <label class="control-label" data-translate="medusaTattooApp.foto.imagen" for="field_imagen">Imagen</label>
             <div>
                 <img data-ng-src="{{'data:' + vm.foto.imagenContentType + ';base64,' + vm.foto.imagen}}" style="max-height: 220px;" ng-if="vm.foto.imagen" alt="foto image" id="miniatura"  taman=""/>
@@ -56,7 +56,7 @@
                                    >
             </multiple-autocomplete>
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label data-translate="medusaTattooApp.foto.trabajo" for="field_trabajo">Cliente</label>
             <ui-select  ng-model="vm.foto.trabajo" theme="bootstrap" id="field_trabajo">
                 <ui-select-match placeholder="Busque y elija un trabajo de la lista">{{$select.selected.nombre}}</ui-select-match>

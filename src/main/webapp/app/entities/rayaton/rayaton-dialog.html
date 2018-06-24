@@ -8,12 +8,12 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.rayaton.id">
+        <div class="form-group form-short" ng-show="vm.rayaton.id">
             <label for="id" data-translate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.rayaton.id" readonly />
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label class="control-label" data-translate="medusaTattooApp.rayaton.fecha" for="field_fecha">Fecha</label>
                 <div class="input-group">
                     <input id="field_fecha" type="text" class="form-control" name="fecha" uib-datepicker-popup="{{dateformat}}" datepicker-options="vm.options" ng-model="vm.rayaton.fecha" is-open="vm.datePickerOpenStatus.fecha"
@@ -29,7 +29,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label class="control-label" data-translate="medusaTattooApp.rayaton.cupos" for="field_cupos">Cupos</label>
             <input type="number" class="form-control" name="cupos" id="field_cupos"
                     ng-model="vm.rayaton.cupos"
@@ -49,7 +49,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label class="control-label" data-translate="medusaTattooApp.rayaton.valorCupo" for="field_valorCupo">Valor Cupo</label>
             <input type="number" class="form-control" name="valorCupo" id="field_valorCupo"
                     ng-model="vm.rayaton.valorCupo"
@@ -78,7 +78,7 @@
                 <textarea class="form-control" name="comentario" id="field_comentario"
                     ng-model="vm.rayaton.comentario" ></textarea>
         </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setImagen($file, vm.rayaton)" ngf-pattern="'image/*'">
+        <div class="form-group form-short-image" ngf-drop ngf-change="vm.setImagen($file, vm.rayaton)" ngf-pattern="'image/*'">
             <label class="control-label" data-translate="medusaTattooApp.rayaton.imagen" for="field_imagen">Imagen</label>
             <div>
                 <img data-ng-src="{{'data:' + vm.rayaton.imagenContentType + ';base64,' + vm.rayaton.imagen}}" style="max-height: 100px;" ng-if="vm.rayaton.imagen" alt="rayaton image"/>

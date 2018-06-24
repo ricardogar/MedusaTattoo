@@ -8,7 +8,7 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.user.id">
+        <div class="form-group form-short" ng-show="vm.user.id">
             <label data-translate="global.field.id">ID</label>
             <input type="text" class="form-control" name="id"
                    ng-model="vm.user.id" readonly>
@@ -87,7 +87,7 @@
             </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-short">
             <label data-translate="userManagement.langKey">Lang Key</label>
             <select class="form-control" name="langKey" ng-model="vm.user.langKey"
                     ng-options="language as language for language in vm.languages track by language">
@@ -100,7 +100,7 @@
                                    suggestions-arr="vm.authorities">
             </multiple-autocomplete>
         </div>
-        <div class="form-group" ng-if="vm.setSede()">
+        <div class="form-group form-short" ng-if="vm.setSede()">
             <label data-translate="userManagement.sede" for="field_sede">Sede</label>
             <ui-select ng-model="vm.user.sede" theme="bootstrap" id="field_sede">
                 <ui-select-match placeholder="Busque y elija una sede de la lista">{{$select.selected.nombre}}</ui-select-match>

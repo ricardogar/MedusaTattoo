@@ -63,6 +63,24 @@ navbar text
     color: #444;
 }
 
+.navbar-nav > .active > a > span , .navbar-nav > .open > a:focus > span,
+.navbar-nav > .active > a:hover > span {
+  color: #000000;
+}
+
+.navbar-nav > li > a:hover > span{
+  color: #000000;
+}
+
+.dropdown-menu > li > a:hover , .dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover{
+  background-color: #000000;
+}
+
+.dropdown-menu > li > a:hover > span, .dropdown-menu > li > a:hover{
+  color: #ffffff;
+}
+
 /* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */
@@ -340,7 +358,7 @@ ui bootstrap tweaks
 
 /***** Footer *****/
 
-.footer-top { padding: 20px 0 20px 0; text-align: left; }
+.footer-top { padding: 20px 0 5px 0 }
 .footer-top h3 { padding-bottom: 10px; }
 
 .footer-contact p { word-wrap: break-word; }
@@ -351,8 +369,6 @@ ui bootstrap tweaks
 .footer-links a { color: #888; border: 0; }
 .footer-links a:hover, .footer-links a:focus { color: #555; margin-left: 3px; }
 
-.footer-bottom { padding: 0 0 30px 0; }
-
 .footer-social a { margin: 0 10px; color: #bbb; border: 0; }
 .footer-social a:hover, .footer-social a:focus { color: #856dc0; border: 0; }
 .footer-social i { font-size: 24px; vertical-align: middle; }
@@ -361,6 +377,120 @@ ui bootstrap tweaks
     -webkit-box-shadow: 0px 14px 45px -14px rgba(0,0,0,0.7);
     -moz-box-shadow: 0px 14px 45px -14px rgba(0,0,0,0.7);
     box-shadow: 0px 14px 45px -14px rgba(0,0,0,0.7);
+}
+
+.footer {
+  font-size: 12px;
+  background-color: #000000;
+}
+
+.footer p , h4{
+  text-align: justify;
+  color: #a1a1a1;
+}
+
+.link1, .link2 {
+  border-left: 1px solid #575E70;
+}
+
+.footer-social {
+  margin-left: 27px;
+}
+
+/** Botones **/
+
+.btn-primary {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.btn-primary:hover, .btn-info:hover {
+    color: #000;
+    background-color: #afafaf;
+    border-color: #000000;
+}
+
+.btn-primary.active {
+  color: #020202;
+  background-color: #fdfdfd;
+  border-color: #000000;
+}
+
+.btn-default {
+  color: #000;
+  background-color: #fff;
+  border-color: #000000;
+}
+
+.btn-info {
+  color: #000;
+  background-color: #ffffff;
+  border-color: #000000;
+}
+
+.form-control {
+  border: 1px solid #000;
+}
+
+mwl-calendar .cal-day-today span[data-cal-date] {
+    color: #ffffff;
+}
+
+mwl-calendar .cal-day-today {
+    background-color: #000000;
+}
+
+.alert-success {
+    color: #ffffff;
+    background-color: #757575;
+    border-color: #000000;
+}
+
+.alert-warning {
+    color: #ffffff;
+    background-color: #757575;
+    border-color: #000000;
+}
+
+.alert-warning .alert-link {
+    color: #ffffff;
+}
+
+.ui-select-bootstrap .ui-select-choices-row.active span {
+    background-color: #000000;
+}
+
+.table tbody tr td {
+  border-top: 1px solid #000;
+}
+
+thead {
+  background-color: #3c3c3c;
+}
+
+.table  thead  tr  th {
+    vertical-align: top;
+    border-bottom: 2px solid #000;
+}
+
+thead span, thead th {
+  color: #bdbdbd;
+}
+
+.table-admin{
+  margin-top: 20px;
+}
+
+/** Campos **/
+
+.form-short {
+  width: 50%;
+}
+
+.form-short-image {
+  text-align: center;
+  width: 50%;
 }
 
 /* jhipster-needle-css-add-main JHipster will add new css style */

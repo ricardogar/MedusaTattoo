@@ -7,10 +7,10 @@
         },
         "problem": "Si tienes problemas para acceder:",
         "suggestion": {
-            "user": "Asegurate de que tu usuario es correcto",
-            "password": "Asegurate de que tu contraseña es correcta ",
+            "user": "Asegúrate de que tu usuario es correcto",
+            "password": "Asegúrate de que tu contraseña es correcta ",
             "mayus": "Revisa que el teclado no se encuentre en mayúsculas",
-            "reset": "Si sigues sin poder ingresar solicita un reinicio de contraeña"
+            "reset": "Si sigues sin poder ingresar, solicita un reinicio de contraseña"
         },
         "like": " ",
         "github": " "

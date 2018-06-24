@@ -8,7 +8,7 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.inscripcion.id">
+        <div class="form-group form-short" ng-show="vm.inscripcion.id">
             <label for="id" data-translate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.inscripcion.id" readonly />
@@ -25,7 +25,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label class="control-label" data-translate="medusaTattooApp.inscripcion.telefono" for="field_telefono">Telefono</label>
             <input type="text" class="form-control" name="telefono" id="field_telefono"
                     ng-model="vm.inscripcion.telefono"
@@ -49,7 +49,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setImagen($file, vm.inscripcion)" ngf-pattern="'image/*'">
+        <div class="form-group form-short-image" ngf-drop ngf-change="vm.setImagen($file, vm.inscripcion)" ngf-pattern="'image/*'">
             <label class="control-label" data-translate="medusaTattooApp.inscripcion.imagen" for="field_imagen">Imagen</label>
             <div>
                 <img data-ng-src="{{'data:' + vm.inscripcion.imagenContentType + ';base64,' + vm.inscripcion.imagen}}" style="max-height: 100px;" ng-if="vm.inscripcion.imagen" alt="inscripcion image"/>
@@ -77,7 +77,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group" has-authority="ROLE_ADMIN">
+        <div class="form-group form-short" has-authority="ROLE_ADMIN">
             <label class="control-label" data-translate="medusaTattooApp.inscripcion.estado" for="field_estado">Estado</label>
             <select class="form-control" name="estado" ng-model="vm.inscripcion.estado" id="field_estado">
                 <option value="PRE_INSCRITO" data-translate="medusaTattooApp.Estado_inscripcion.PRE_INSCRITO">PRE_INSCRITO</option>
@@ -90,7 +90,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group" has-authority="ROLE_ADMIN">
+        <div class="form-group form-short" has-authority="ROLE_ADMIN">
             <label data-translate="medusaTattooApp.inscripcion.sede" for="field_sede">Sede</label>
             <ui-select ng-model="vm.inscripcion.sede" theme="bootstrap" id="field_sede">
                 <ui-select-match placeholder="Busque y elija una sede de la lista">{{$select.selected.nombre}}</ui-select-match>

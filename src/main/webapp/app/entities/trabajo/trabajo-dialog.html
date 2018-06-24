@@ -26,7 +26,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label class="control-label" data-translate="medusaTattooApp.trabajo.costoTotal" for="field_costoTotal">Costo Total</label>
             <input type="text" class="form-control" name="costoTotal" id="field_costoTotal"
                     ng-model="vm.trabajo.costoTotal"
@@ -48,7 +48,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group" ng-if="vm.trabajo.id!==null">
+        <div class="form-group form-short" ng-if="vm.trabajo.id!==null">
             <label class="control-label" data-translate="medusaTattooApp.trabajo.estado" for="field_estado">Estado</label>
             <select class="form-control" name="estado" ng-model="vm.trabajo.estado" id="field_estado" required>
                 <option value="EN_PROGRESO" data-translate="medusaTattooApp.Estado_trabajo.EN_PROGRESO">EN_PROGRESO</option>
@@ -62,7 +62,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group" ng-if="vm.hasRayatons">
+        <div class="form-group form-short" ng-if="vm.hasRayatons">
             <label class="control-label" data-translate="medusaTattooApp.trabajo.tipo" for="field_tipo">Tipo</label>
             <select class="form-control" name="tipo" ng-model="vm.trabajo.tipo" ng-change="change()" id="field_tipo" required>
                 <option value="NORMAL" data-translate="medusaTattooApp.Tipo_trabajo.NORMAL">NORMAL</option>
@@ -75,7 +75,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setFoto($file, vm.trabajo)" ngf-pattern="'image/*'">
+        <div class="form-group form-short-image" ngf-drop ngf-change="vm.setFoto($file, vm.trabajo)" ngf-pattern="'image/*'">
             <label class="control-label" data-translate="medusaTattooApp.trabajo.foto" for="field_foto">Foto</label>
             <div>
                 <img data-ng-src="{{'data:' + vm.trabajo.fotoContentType + ';base64,' + vm.trabajo.foto}}" style="max-height: 100px;" ng-if="vm.trabajo.foto" alt="trabajo image"/>
@@ -97,7 +97,7 @@
             <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType"
                     ng-model="vm.trabajo.fotoContentType" />
         </div>
-        <div class="form-group" has-authority="ROLE_ADMIN">
+        <div class="form-group form-short" has-authority="ROLE_ADMIN">
             <label data-translate="medusaTattooApp.trabajo.sede" for="field_sede">Sede</label>
             <ui-select ng-model="vm.trabajo.sede" theme="bootstrap" id="field_sede" on-select="vm.trabajo.tatuador={}">
                 <ui-select-match placeholder="Busque y elija una sede de la lista">{{$select.selected.nombre}}</ui-select-match>

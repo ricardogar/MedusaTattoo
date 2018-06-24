@@ -8,12 +8,12 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.tatuador.id">
+        <div class="form-group form-short" ng-show="vm.tatuador.id">
             <label for="id" data-translate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.tatuador.id" readonly />
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label class="control-label" data-translate="medusaTattooApp.tatuador.tipodocumento" for="field_tipodocumento">Tipodocumento</label>
             <select class="form-control" name="tipodocumento" ng-model="vm.tatuador.tipodocumento" id="field_tipodocumento" required>
                 <option value="CEDULA" data-translate="medusaTattooApp.Tipo_documento.CEDULA">CEDULA</option>
@@ -27,7 +27,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label class="control-label" data-translate="medusaTattooApp.tatuador.documento" for="field_documento">Documento</label>
             <input type="text" class="form-control" name="documento" id="field_documento"
                     ng-model="vm.tatuador.documento"
@@ -75,7 +75,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label class="control-label" data-translate="medusaTattooApp.tatuador.telefono" for="field_telefono">Telefono</label>
             <input type="text" class="form-control" name="telefono" id="field_telefono"
                     ng-model="vm.tatuador.telefono"
@@ -99,7 +99,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label class="control-label" data-translate="medusaTattooApp.tatuador.genero" for="field_genero">Genero</label>
             <select class="form-control" name="genero" ng-model="vm.tatuador.genero" id="field_genero" required>
                 <option value="MASCULINO" data-translate="medusaTattooApp.Genero.MASCULINO">MASCULINO</option>
@@ -124,7 +124,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setFoto($file, vm.tatuador)" ngf-pattern="'image/*'">
+        <div class="form-group form-short-image" ngf-drop ngf-change="vm.setFoto($file, vm.tatuador)" ngf-pattern="'image/*'">
             <label class="control-label" data-translate="medusaTattooApp.tatuador.foto" for="field_foto">Foto</label>
             <div>
                 <img data-ng-src="{{'data:' + vm.tatuador.fotoContentType + ';base64,' + vm.tatuador.foto}}" style="max-height: 100px;" ng-if="vm.tatuador.foto" alt="tatuador image"/>
@@ -152,7 +152,7 @@
                           ng-model="vm.tatuador.estado"/>
         </div>
 
-        <div class="form-group" ng-if="vm.isAdmin">
+        <div class="form-group form-short" ng-if="vm.isAdmin">
             <label data-translate="medusaTattooApp.tatuador.sede" for="field_sede">Sede</label>
             <ui-select  ng-model="vm.tatuador.sede" theme="bootstrap" id="field_sede">
                 <ui-select-match placeholder="Busque y elija una sede de la lista">{{$select.selected.nombre}}</ui-select-match>

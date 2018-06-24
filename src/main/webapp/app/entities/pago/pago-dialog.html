@@ -45,7 +45,7 @@
             </p>
         </div-->
 
-        <div class="form-group">
+        <div class="form-group form-short">
             <label data-translate="medusaTattooApp.pago.trabajo" for="field_trabajo">Cliente</label>
             <ui-select  ng-change="setMaxValue()" ng-model="vm.pago.trabajo" theme="bootstrap" id="field_trabajo">
                 <ui-select-match placeholder="Busque y elija un trabajo de la lista">{{$select.selected.nombre}}</ui-select-match>
@@ -60,7 +60,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-short">
             <label class="control-label" data-translate="medusaTattooApp.pago.valor" for="field_valor">Valor</label>
             <input type="number" class="form-control" name="valor" id="field_valor"
                     ng-model="vm.pago.valor"
