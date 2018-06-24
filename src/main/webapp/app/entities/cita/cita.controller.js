@@ -41,11 +41,6 @@
 
 
         var actions = [{
-            label: '<i class=\'glyphicon glyphicon-pencil\'></i>',
-            onClick: function (args) {
-                $state.go('cita.edit', {id: args.calendarEvent.cita.id});
-            }
-        }, {
             label: '<i class=\'glyphicon glyphicon-remove\'></i>',
             onClick: function (args) {
                 $state.go('cita.delete', {id: args.calendarEvent.cita.id});
