@@ -20,7 +20,6 @@ import java.util.List;
 @Repository
 public interface TrabajoRepository extends JpaRepository<Trabajo, Long> {
 
-    //@Query("SELECT t FROM Trabajo t JOIN t.sede s where s.id =(SELECT a.id FROM User u JOIN u.sede a WHERE u.id=?1)")
     Page<Trabajo> findAllBySede_Id(Pageable pageable, Long id);
     Page<Trabajo> findAllByEstadoLike(Pageable pageable, Estado_trabajo estado);
     Page<Trabajo> findAllBySede_IdAndEstadoLike(Pageable pageable, Long id,Estado_trabajo estado);

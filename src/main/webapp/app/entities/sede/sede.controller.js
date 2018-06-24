@@ -27,11 +27,9 @@
         function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
-                console.log(vm.account)
                 loadAll();
             });
         }
-        //loadAll();
 
         function loadAll () {
             Sede.query({

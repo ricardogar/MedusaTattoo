@@ -64,12 +64,10 @@
         function onSaveSuccess (result) {
             //$scope.$emit('medusaTattooApp:inscripcionUpdate', result);
             //$uibModalInstance.close(result);
-            console.log("trabajo cambiado");
             vm.isSaving = false;
         }
 
         function onSaveError () {
-            console.log("No se pudo cambiar el trabajo");
             vm.isSaving = false;
         }
 

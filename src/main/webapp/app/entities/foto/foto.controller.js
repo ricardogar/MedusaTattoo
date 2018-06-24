@@ -24,8 +24,6 @@
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
         vm.galeria={};
-        //vm.galeria=Galeria.get();
-        //console.log(vm.galeria);
 
         loadGaleria();
         loadAll();
@@ -85,14 +83,6 @@
             vm.page = page;
             loadAll();
         }
-
-        /*
-        angular.element(document).ready(function () {
-            console.log("cargado dom");
-            vm.$elasticgr = $("#elastic_grid_demo").elastic_grid(vm.galeria);
-
-        });
-         */
 
 
     }

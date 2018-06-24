@@ -21,8 +21,8 @@
         vm.predicate = 'fecha';
         HasRayaton.get(function (data) {
             vm.hasRayatons=data[0];
-        },function () {
-            console.log("error")
+        },function (error) {
+            console.log(error)
         });
         vm.reset = reset;
         vm.reverse = false;

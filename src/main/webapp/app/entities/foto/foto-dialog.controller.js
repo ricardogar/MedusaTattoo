@@ -16,7 +16,6 @@
         vm.openFile = DataUtils.openFile;
         vm.save = save;
         vm.palabraclaves = PalabraClave.query();
-        console.log(vm.palabraclaves);
         vm.trabajos = Trabajo.query();
 
         $timeout(function () {
@@ -55,7 +54,6 @@
 
         vm.getSize = function () {
             vm.thumbWidth = angular.element('#miniatura').width();
-            //console.log(vm.thumbWidth);
         };
 
         vm.getDataUrl= function(origen, tipo) {
@@ -63,12 +61,11 @@
             if (vm.thumbWidth<=0){
                 vm.getSize();
             }
-            console.log(vm.thumbWidth);
             ThumbnailService.generate('data:' + tipo + ';base64,' + origen, {
                 type: tipo,
                 noDistortion: true,
                 width: vm.thumbWidth,
-                height: 300
+                height: 220
             }).then(
                 function success(data) {
                     vm.foto.miniatura = data.split(',')[1];

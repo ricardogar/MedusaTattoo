@@ -22,7 +22,7 @@ public class GalleryItemDTO {
     }
     public GalleryItemDTO(Foto foto) {
         if (foto.getTrabajo()==null){
-            title="";
+            title="Medusa Tattoo";
         }else{
             title=foto.getTrabajo().getTatuador().getApodo();
         }

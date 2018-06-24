@@ -21,7 +21,7 @@
         <div class="form-group" ngf-drop ngf-change="vm.setImagen($file, vm.foto)" ngf-pattern="'image/*'">
             <label class="control-label" data-translate="medusaTattooApp.foto.imagen" for="field_imagen">Imagen</label>
             <div>
-                <img data-ng-src="{{'data:' + vm.foto.imagenContentType + ';base64,' + vm.foto.imagen}}" style="max-height: 300px;" ng-if="vm.foto.imagen" alt="foto image" id="miniatura"  taman=""/>
+                <img data-ng-src="{{'data:' + vm.foto.imagenContentType + ';base64,' + vm.foto.imagen}}" style="max-height: 220px;" ng-if="vm.foto.imagen" alt="foto image" id="miniatura"  taman=""/>
                 <div ng-if="vm.foto.imagen" class="help-block clearfix">
                     <span class="pull-left">{{vm.foto.imagenContentType}}, {{vm.byteSize(vm.foto.imagen)}}</span>
                     <button type="button" ng-click="vm.foto.imagen=null;vm.foto.imagenContentType=null;"

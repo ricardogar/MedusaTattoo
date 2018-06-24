@@ -122,44 +122,6 @@ public class Foto implements Serializable {
         palabraClave.getFotos().remove(this);
         return this;
     }
-/*
-
-    public BufferedImage decodeToImage() {
-        BufferedImage image = null;
-        byte[] imageByte;
-
-        try {
-            System.out.println(Base64.getEncoder().encodeToString(imagen));
-            imageByte = Base64.getDecoder().decode(Base64.getEncoder().encodeToString(imagen));
-            image = ImageIO.read(new ByteArrayInputStream(imageByte));
-        } catch (Exception e) {
-            System.out.println("Falloooooo al convertir string a bufferedimage");
-            e.printStackTrace();
-        }
-        return image;
-    }
-
-    public String imgToBase64String(final RenderedImage img, final String formatName) {
-        final ByteArrayOutputStream os = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(img, formatName, Base64.getEncoder().wrap(os));
-            return os.toString(StandardCharsets.ISO_8859_1.name());
-        } catch (final IOException ioe) {
-            throw new UncheckedIOException(ioe);
-        }
-    }
-
-    public String print(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[ ");
-        for (byte b : bytes) {
-            sb.append(String.format("0x%02X ", b));
-        }
-        sb.append("]");
-        return sb.toString();
-    }
- */
-
 
     public byte[] getMiniatura() {
         return miniatura;

@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.medusa.domain.Trabajo;
 
 import com.medusa.domain.User;
+import com.medusa.domain.enumeration.Estado_trabajo;
 import com.medusa.domain.enumeration.Tipo_trabajo;
 import com.medusa.repository.ClienteRepository;
 import com.medusa.repository.RayatonRepository;
@@ -209,7 +210,6 @@ public class TrabajoResource {
      * GET  /trabajos/cuenta/:id/estado/:status : get all the trabajos filtered by account and status.
      *
      * @param pageable the pagination information
-     * @param id the cuenta identifier
      * @param status the
      * @return the ResponseEntity with status 200 (OK) and the list of trabajos in body
      */
@@ -248,7 +248,9 @@ public class TrabajoResource {
     @Timed
     public ResponseEntity<Void> deleteTrabajo(@PathVariable Long id) {
         log.debug("REST request to delete Trabajo : {}", id);
-        trabajoRepository.delete(id);
+        Trabajo trabajo = trabajoRepository.findOne(id);
+        trabajo.setEstado(Estado_trabajo.CANCELADO);
+        trabajoRepository.save(trabajo);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

@@ -100,12 +100,13 @@
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
-                            <!--button type="submit"
+                            <button type="submit"
                                     ui-sref="trabajo.delete({id:trabajo.id})"
-                                    class="btn btn-danger btn-sm">
+                                    class="btn btn-danger btn-sm"
+                                    ng-disabled="trabajo.estado==='CANCELADO' || trabajo.estado==='FINALIZADO'">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
-                            </button-->
+                                <span class="hidden-sm-down">Cancelar</span>
+                            </button>
                         </div>
                     </td>
                 </tr>

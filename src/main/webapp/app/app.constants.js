@@ -5,6 +5,6 @@
         .module('medusaTattooApp')
         .constant('VERSION', "1.1")
         .constant('DEBUG_INFO_ENABLED', false)
-        .constant('BUILD_TIMESTAMP', 1529804897951)
+        .constant('BUILD_TIMESTAMP', 1529823514134)
 ;
 })();

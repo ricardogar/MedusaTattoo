@@ -20,7 +20,6 @@
         vm.cliente = {};
         vm.success = null;
         vm.clientes = Cliente.query();
-        console.log(vm.clientes);
         vm.registerAccount.login="";
         vm.registerAccount.firstName="";
         vm.registerAccount.lastName="";
@@ -28,7 +27,6 @@
         $timeout(function (){angular.element('#login').focus();});
 
         function register () {
-            console.log("entro a registrar");
             if (vm.registerAccount.password !== vm.confirmPassword) {
                 vm.doNotMatch = 'ERROR';
             } else {
@@ -40,17 +38,12 @@
                 vm.registerAccount.login=vm.registerAccount.email;
                 vm.registerAccount.firstName=vm.cliente.nombre;
                 vm.registerAccount.lastName=vm.cliente.apellido;
-                console.log(vm.registerAccount);
-                console.log("##########################")
-                console.log(vm.cliente);
                 Auth.createAccount(vm.registerAccount).then(function () {
-                    console.log("registro");
                     vm.cliente.email=vm.registerAccount.email;
                     Cliente.save(vm.cliente, onSaveSuccess, onSaveError);
                     vm.success = 'OK';
                 }).catch(function (response) {
                     vm.success = null;
-                    console.log("error al crear cuenta desde vm.registerAccount")
                     if (response.status === 400 && angular.fromJson(response.data).type === errorConstants.LOGIN_ALREADY_USED_TYPE) {
                         vm.errorUserExists = 'ERROR';
                     } else if (response.status === 400 && angular.fromJson(response.data).type === errorConstants.EMAIL_ALREADY_USED_TYPE) {

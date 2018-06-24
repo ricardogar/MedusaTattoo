@@ -93,15 +93,17 @@ public class SedeResource {
         if (sede.getId() == null) {
             return createSede(sede);
         }
+
         Sede sede1=sedeRepository.findOne(sede.getId());
+
         Sede result;
-        /*
+
         if (!sede1.isEstado() && sede.isEstado()){
             userRepository.enableBySede(sede.getId());
             tatuadorRepository.enableBySede(sede.getId());
             trabajoRepository.enableBySede(sede.getId());
         }
-         */
+
         result = sedeRepository.save(sede);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, sede.getId().toString()))
@@ -203,11 +205,10 @@ public class SedeResource {
         Sede sede = sedeRepository.findOne(id);
         sede.setEstado(false);
 
-        //tatuadorRepository.disableBySede(id);
-        //userRepository.disableBySede(id);
-        //trabajoRepository.disableBySede(id);
+        tatuadorRepository.disableBySede(id);
+        userRepository.disableBySede(id);
+        trabajoRepository.disableBySede(id);
         sedeRepository.save(sede);
-        //sedeRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }
