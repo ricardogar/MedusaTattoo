@@ -22,8 +22,6 @@
         vm.maxDate.setFullYear(vm.maxDate.getFullYear()+1);
         vm.maxTime=vm.maxDate;
         vm.maxDate.setHours(18);
-        console.log(vm.minDate);
-        console.log(vm.maxDate.getHours());
         vm.dateOptions={minDate: vm.minDate,
                         maxDate: vm.maxDate
         };

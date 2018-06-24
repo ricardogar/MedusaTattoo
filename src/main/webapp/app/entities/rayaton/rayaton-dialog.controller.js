@@ -18,6 +18,9 @@
         vm.openFile = DataUtils.openFile;
         vm.save = save;
         vm.tatuadors = TatuadorActivos.query();
+        vm.options={
+          minDate:new Date()
+        };
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

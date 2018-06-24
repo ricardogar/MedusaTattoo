@@ -16,7 +16,7 @@
         <div class="form-group">
             <label class="control-label" data-translate="medusaTattooApp.rayaton.fecha" for="field_fecha">Fecha</label>
                 <div class="input-group">
-                    <input id="field_fecha" type="text" class="form-control" name="fecha" uib-datepicker-popup="{{dateformat}}" ng-model="vm.rayaton.fecha" is-open="vm.datePickerOpenStatus.fecha"
+                    <input id="field_fecha" type="text" class="form-control" name="fecha" uib-datepicker-popup="{{dateformat}}" datepicker-options="vm.options" ng-model="vm.rayaton.fecha" is-open="vm.datePickerOpenStatus.fecha"
                     required/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fecha')"><i class="glyphicon glyphicon-calendar"></i></button>

@@ -154,8 +154,12 @@
 
         <div class="form-group" ng-if="vm.isAdmin">
             <label data-translate="medusaTattooApp.tatuador.sede" for="field_sede">Sede</label>
-            <select class="form-control" id="field_sede" name="sede" ng-model="vm.tatuador.sede" ng-options="sede as sede.nombre for sede in vm.sedes track by sede.id" required>
-            </select>
+            <ui-select  ng-model="vm.tatuador.sede" theme="bootstrap" id="field_sede">
+                <ui-select-match placeholder="Busque y elija una sede de la lista">{{$select.selected.nombre}}</ui-select-match>
+                <ui-select-choices repeat="sede in vm.sedes | filter: $select.search">
+                    <span ng-bind-html="sede.nombre + ' (' + sede.direccion + ')' | highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
         </div>
         <div ng-show="editForm.sede.$invalid">
             <p class="help-block"
