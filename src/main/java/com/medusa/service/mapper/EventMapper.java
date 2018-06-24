@@ -22,7 +22,7 @@ public class EventMapper {
         List<CalendarEventDTO> dtoList=new ArrayList<>();
         for (Cita cita : citas) {
             CalendarEventDTO eventDTO = new CalendarEventDTO();
-            eventDTO.setTitle(cita.getTrabajo().getNombre());
+            eventDTO.setTitle(cita.getTrabajo().getNombre()+" - "+cita.getTrabajo().getTatuador().getApodo());
             if (cita.getFechaYHora().isBefore(Instant.now()) || !cita.getTrabajo().getEstado().equals(Estado_trabajo.EN_PROGRESO) ){
                 eventDTO.setColor(CalendarColorRepository.CITA_PASADA);
             }else{
